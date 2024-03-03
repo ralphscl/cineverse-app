@@ -9,5 +9,11 @@ export const requests = {
 };
 
 export const getTvShows = ( page = 1, network, genre ) => {
-  return `/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=vote_average.desc&with_networks=${networkId[network]}`;
+  let parameters = `/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=vote_average.desc`;
+
+  if (network) {
+    parameters += ` &with_networks=${networkId[network]}`;
+  }
+
+  return parameters;
 }

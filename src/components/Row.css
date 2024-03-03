@@ -1,0 +1,21 @@
+.row {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    padding: .4rem;
+}
+
+.row::-webkit-scrollbar {
+   display: none; 
+}
+
+.row .card {
+    flex-shrink: 0;
+    height: 20rem;
+    width: 15rem;
+    margin: .5rem;
+    text-align: center;
+    cursor: pointer;
+}
