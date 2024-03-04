@@ -1,4 +1,5 @@
 import networkId from './networks.js';
+import instance from '../service/tmdb.js';
 
 const ACCESS_TOKEN = '957c783e9cebad9b1f8f8c5cb4dbf044';
 
@@ -16,4 +17,17 @@ export const getTvShows = ( page = 1, network, genre ) => {
   }
 
   return parameters;
+}
+
+export const getGenreNames = async (type, id) => {
+  const parameters = `https://api.themoviedb.org/3/genre/${type}/list?language=en`;
+  
+  try {
+    const response = await instance.get(parameters);
+    const genre = response.data.genres.find(genre => genre.id === id);
+    return genre ? genre.name : 'Unknown';
+  } catch (error) {
+    console.error('Error fetching genre name:', error);
+    return 'Unknown';
+  }
 }
