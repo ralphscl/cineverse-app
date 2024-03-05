@@ -1,4 +1,4 @@
-import Genre from "./Genre.jsx";
+import Genre from "../Genre.jsx";
 import "./ShowCard.css";
 
 const ShowCard = ({ show, cardType }) => {
@@ -21,7 +21,7 @@ const ShowCard = ({ show, cardType }) => {
             {show.title || show.name || show.original_name}
           </h4>
           <p className="summary">{show.overview}</p>
-          <Genre show={show} type="tv" />
+          <Genre show={show} showType="tv" />
         </div>
       </div>
     </div>

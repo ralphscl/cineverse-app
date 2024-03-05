@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { getGenreNames } from "../service/requests.js";
 
-const Genre = ({ show, type }) => {
+const Genre = ({ show, showType }) => {
   const [genres, setGenres] = useState();
 
   useEffect(() => {
     const fetchGenres = async () => {
       const fetchedGenres = await Promise.all(
-        show?.genre_ids.map((id) => getGenreNames("tv", id))
+        show?.genre_ids.map((id) => getGenreNames(showType, id))
       );
       setGenres(fetchedGenres);
     };

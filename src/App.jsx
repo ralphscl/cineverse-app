@@ -4,7 +4,7 @@ import { capitalizeFirstLetter } from "./utils/StringUtils";
 // Service
 import { requests, getTvShows } from "./service/requests";
 // Components
-import Row from "./components/Row";
+import Row from "./components/containers/Row";
 // CSS
 import "./App.css";
 
