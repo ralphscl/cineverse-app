@@ -1,25 +1,40 @@
-import { useState } from 'react';
+import { useState } from "react";
 // Utils
-import { capitalizeFirstLetter } from './utils/StringUtils';
+import { capitalizeFirstLetter } from "./utils/StringUtils";
 // Service
-import { requests, getTvShows } from './service/requests';
+import { requests, getTvShows } from "./service/requests";
 // Components
-import Row from './components/Row'
+import Row from "./components/Row";
 // CSS
-import './App.css'
-
+import "./App.css";
 
 function App() {
-  const [network, setNetwork] = useState('netflix');
+  const [network, setNetwork] = useState("netflix");
 
   return (
     <>
-      <Row title={`${capitalizeFirstLetter(network)} TV Shows`} reqUrl={getTvShows(2, network)} />
-      <Row title="Trending Now" reqUrl={requests.getTrending} />
-      <Row title="Popular Shows" reqUrl={requests.getPopular} />
-      <Row title="Top Rated" reqUrl={requests.getTopRated} />
+      <Row
+        title={`${capitalizeFirstLetter(network)} TV Shows`}
+        reqUrl={getTvShows(2, network)}
+        cardType="poster"
+      />
+      <Row
+        title="Trending Now"
+        reqUrl={requests.getTrending}
+        cardType="backdrop"
+      />
+      <Row
+        title="Popular Shows"
+        reqUrl={requests.getPopular}
+        cardType="backdrop"
+      />
+      <Row
+        title="Top Rated"
+        reqUrl={requests.getTopRated}
+        cardType="backdrop"
+      />
     </>
-  )
+  );
 }
 
-export default App
+export default App;

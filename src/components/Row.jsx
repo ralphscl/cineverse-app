@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
+import ShowCard from "./ShowCard.jsx";
 import instance from "../service/tmdb.js";
-import Genre from "./Genre.jsx";
 import "./Row.css";
 
-const Row = ({ title, reqUrl }) => {
+const Row = ({ title, reqUrl, cardType }) => {
   const [shows, setShows] = useState();
-  const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,25 +23,7 @@ const Row = ({ title, reqUrl }) => {
 
       <div className="row">
         {shows?.map((show) => {
-          return (
-            <div
-              key={show.id}
-              className="card"
-              style={{
-                backgroundImage: `url(${TMDB_ASSET_BASEURL}${show.poster_path})`,
-                backgroundSize: "cover",
-                backgroundPosition: "center center",
-              }}
-            >
-              <div className="overlay">
-                <div className="description">
-                  <p className="title">{show.name}</p>
-                  <p className="summary">{show.overview}</p>
-                  <Genre show={show} type="tv" />
-                </div>
-              </div>
-            </div>
-          );
+          return <ShowCard key={show.id} show={show} cardType={cardType} />;
         })}
       </div>
     </div>
