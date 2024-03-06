@@ -1,10 +1,9 @@
 import ShowCard from "../cards/ShowCard.jsx";
-import { useFetchAPI } from "../../hooks/useFetchApi.jsx";
+import { useFetchApi } from "../../hooks/useFetchApi.jsx";
 import "./Row.css";
 
 const Row = ({ title, reqUrl, cardType }) => {
-  const { isLoading, serverError, apiData } = useFetchAPI(reqUrl);
-
+  const { isLoading, serverError, apiData } = useFetchApi(reqUrl);
   console.table(apiData?.results);
 
   return (
@@ -12,7 +11,7 @@ const Row = ({ title, reqUrl, cardType }) => {
       <h2 className="title">{title}</h2>
 
       <div className="row">
-        {isLoading && <p>Loading.....</p>}
+        {isLoading && <p className="loading">Loading.....</p>}
         {serverError && <p>Error fetching data. Please try again later</p>}
         {apiData?.results?.map((show) => {
           return <ShowCard key={show.id} show={show} cardType={cardType} />;
