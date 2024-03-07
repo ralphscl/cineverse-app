@@ -2,4 +2,7 @@ export const capitalizeFirstLetter = (string) => `${string.charAt(0).toUpperCase
 
 export const convertToSlug = (string) => string.toLowerCase().replace(/[\s/]+/g, '-');
 
-export const splitSlug = (string) => string.split('-');
+export const splitSlug = (string) => {
+    if (!string) return [];
+    return string.split('-');
+  };

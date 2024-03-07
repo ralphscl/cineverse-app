@@ -11,18 +11,99 @@
 .showpage .banner .overlay {
     position: absolute;
     bottom: 0;
-    height: 14rem;
+    height: 60rem;
     width: 100%;
     background-image: linear-gradient(
         180deg, 
         transparent,
-        rgba(37,37,37, 0.61), 
-        #111
+        rgba(20, 20, 20, 0.6), 
+        rgb(18, 18, 18)
     );
 }
 
 .showpage .content {
-    background-color: #111;
-    margin-top: -8rem;
+    background-color: transparent;
+    position: relative;
+    display: block;
+    margin: -24rem auto 4rem;
+    text-align: left;
     height: 40rem;
+    width: 72rem;
+    z-index: 2;
+}
+
+.showpage .content h1 {
+    margin: .5rem 0;
+    font-size: 3.2rem;
+    font-weight: bold;
+}
+
+.showpage .content ul { 
+    list-style: none; 
+    margin: 1rem 0; 
+    padding: 0; 
+}
+
+.showpage .content ul li { 
+    display: inline; 
+    padding: 0rem 1rem;
+    border-left: 1px solid #ffffff40;
+}
+
+
+.showpage .content ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+.showpage .content button {
+    margin: .5rem .5rem .5rem 0;
+    padding: 1.2rem 2.4rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.showpage .content button:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+}
+
+.showpage .content .visit {
+    background-color: #ce3824;
+    color: white;
+    border: 2px solid #ce3824;
+}
+
+.showpage .content .trailer {
+    background: transparent;
+    border: 2px solid white;
+}
+
+.showpage .content .overview {
+    color: #dddddd;
+    font-size: 1.1rem;
+    line-height: 1.8em;
+}
+
+@media (min-width: 640px) { 
+
+}
+
+@media (min-width: 768px) { 
+    
+}
+
+@media (min-width: 1024px) { 
+
+}
+
+@media (min-width: 1280px) { 
+
+}
+
+@media (min-width: 1536px) { 
+
 }

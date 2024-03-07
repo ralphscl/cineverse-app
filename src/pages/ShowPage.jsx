@@ -31,7 +31,30 @@ const ShowPage = () => {
         {serverError && <p>Error fetching data. Please try again later</p>}
         <div className="overlay" />
       </div>
-      <div className="content">{id}</div>
+      <div className="content">
+        <h1>{apiData?.title || apiData?.name || apiData?.original_name}</h1>
+
+        <button
+          className="visit"
+          onClick={() => window.open(apiData.homepage, "_blank")}
+        >
+          Visit
+        </button>
+        <button className="trailer">Trailer</button>
+
+        <ul>
+          <li>{splitSlug(apiData?.first_air_date)[0]}</li>
+          <li>
+            {apiData?.seasons?.length} Season
+            {apiData?.seasons?.length > 1 && "s"}
+          </li>
+          <li>
+            <a href="#leave-a-review">Leave a Review</a>
+          </li>
+        </ul>
+
+        <p className="overview">{apiData?.overview}</p>
+      </div>
     </div>
   );
 };

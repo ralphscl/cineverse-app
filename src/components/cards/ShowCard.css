@@ -3,7 +3,8 @@
     flex-shrink: 0;
     margin: .5rem;
     text-align: left;
-    border-radius: .5rem;
+    border-radius: .6rem;
+    overflow: hidden;
     cursor: pointer;
 }
 
@@ -12,6 +13,7 @@
     bottom: 0;
     height: 14rem;
     width: 100%;
+    border-radius: .4rem;
     background-image: linear-gradient(
         180deg, 
         transparent,
@@ -23,6 +25,7 @@
 .row .card:hover .overlay {
     height: 100%;
     overflow: hidden;
+    border-radius: .4rem;
     background-image: linear-gradient(
         180deg, 
         rgba(19, 19, 19, 0.4), 
