@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Components
 import Layout from "../../Layout";
-import Homepage from "../../pages/Homepage";
+import HomePage from "../../pages/HomePage";
 import ShowPage from "../../pages/ShowPage";
 
 const Router = () => {
@@ -9,8 +9,8 @@ const Router = () => {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/tv" element={<ShowPage />} />
+          <Route index element={<HomePage />} />
+          <Route path="/tv/:slug" element={<ShowPage />} />
         </Route>
       </Routes>
     </BrowserRouter>

@@ -12,12 +12,11 @@
     bottom: 0;
     height: 14rem;
     width: 100%;
-    border-radius: .5rem;
     background-image: linear-gradient(
         180deg, 
         transparent,
-        rgba(37,37,37, 0.61), 
-        #111
+        rgba(37,37,37, 0.60), 
+        rgb(22, 22, 22)
     );
 }
 
@@ -32,6 +31,7 @@
 }
 
 .row .card .overlay .description {
+    color: white;
     position: absolute;
     bottom: 0;
 }

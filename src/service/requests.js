@@ -1,8 +1,6 @@
 import networkId from './networks.js';
 import instance from '../service/tmdb.js';
 
-const ACCESS_TOKEN = '957c783e9cebad9b1f8f8c5cb4dbf044';
-
 export const requests = {
   'getTrending': `/trending/tv/week?language=en-US`,
   'getPopular': `/tv/popular?language=en-US&page=1`,
@@ -17,6 +15,10 @@ export const getTvShows = ( page = 1, network, genre ) => {
   }
 
   return parameters;
+}
+
+export const getTvShow = (id) => {
+  return `/tv/${id}?language=en-US`;
 }
 
 export const getGenreNames = async (type, id) => {
