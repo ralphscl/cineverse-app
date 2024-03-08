@@ -5,7 +5,6 @@ import { useFetchApi } from "../hooks/useFetchApi";
 import { getTvShow } from "../service/requests";
 // Utils
 import { splitSlug } from "../utils/StringUtils";
-import { checkNullOrUndefined } from "../utils/ObjectUtils.js";
 // CSS
 import "./TvShowPage.css";
 
@@ -17,6 +16,7 @@ const TvShowPage = () => {
 
   const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
+  console.log(apiData);
   return (
     <div className="showpage">
       <div
@@ -55,6 +55,17 @@ const TvShowPage = () => {
         </ul>
 
         <p className="overview">{apiData?.overview}</p>
+
+        <p>
+          {apiData?.genres.map((genre, index) => {
+            return (
+              <span>
+                {genre.name}
+                {index < apiData?.genres.length - 1 && ", "}
+              </span>
+            );
+          })}
+        </p>
       </div>
     </div>
   );

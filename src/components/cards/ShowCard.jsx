@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { convertToSlug } from "../../utils/StringUtils.js";
-import { checkNullOrUndefined } from "../../utils/ObjectUtils.js";
 import Genre from "../Genre.jsx";
 import "./ShowCard.css";
 

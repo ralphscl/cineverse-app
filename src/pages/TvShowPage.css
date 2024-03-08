@@ -51,6 +51,12 @@
 }
 
 
+.showpage .content ul li:first-child {
+    padding-left: 0;
+    border: none;
+}
+
+
 .showpage .content ul li a {
     color: white;
     text-decoration: none;
