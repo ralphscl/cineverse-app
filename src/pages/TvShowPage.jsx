@@ -5,10 +5,11 @@ import { useFetchApi } from "../hooks/useFetchApi";
 import { getTvShow } from "../service/requests";
 // Utils
 import { splitSlug } from "../utils/StringUtils";
+import { checkNullOrUndefined } from "../utils/ObjectUtils.js";
 // CSS
-import "./ShowPage.css";
+import "./TvShowPage.css";
 
-const ShowPage = () => {
+const TvShowPage = () => {
   const { slug } = useParams();
   const [id] = splitSlug(slug);
 
@@ -16,13 +17,13 @@ const ShowPage = () => {
 
   const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
-  console.log(apiData);
   return (
     <div className="showpage">
       <div
         className="banner"
         style={{
-          backgroundImage: `url(${TMDB_ASSET_BASEURL}${apiData?.backdrop_path})`,
+          backgroundImage:
+            apiData && `url(${TMDB_ASSET_BASEURL}${apiData?.backdrop_path})`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
         }}
@@ -59,4 +60,4 @@ const ShowPage = () => {
   );
 };
 
-export default ShowPage;
+export default TvShowPage;

@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
-import Genre from "../Genre.jsx";
 import { convertToSlug } from "../../utils/StringUtils.js";
+import { checkNullOrUndefined } from "../../utils/ObjectUtils.js";
+import Genre from "../Genre.jsx";
 import "./ShowCard.css";
 
 const ShowCard = ({ show, cardType }) => {
@@ -15,9 +16,11 @@ const ShowCard = ({ show, cardType }) => {
       <div
         className={`card ${cardType}`}
         style={{
-          backgroundImage: `url(${TMDB_ASSET_BASEURL}${
-            cardType === "poster" ? show.poster_path : show.backdrop_path
-          })`,
+          backgroundImage:
+            show &&
+            `url(${TMDB_ASSET_BASEURL}${
+              cardType === "poster" ? show.poster_path : show.backdrop_path
+            })`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
         }}

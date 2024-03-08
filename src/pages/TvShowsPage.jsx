@@ -6,9 +6,9 @@ import { requests, getTvShows } from "../service/requests";
 // Components
 import Row from "../components/containers/Row";
 // CSS
-import "./ListingPage.css";
+import "./TvShowsPage.css";
 
-const ListingPage = () => {
+const TvShowsPage = () => {
   const [network, setNetwork] = useState("netflix");
 
   return (
@@ -41,4 +41,4 @@ const ListingPage = () => {
   );
 };
 
-export default ListingPage;
+export default TvShowsPage;

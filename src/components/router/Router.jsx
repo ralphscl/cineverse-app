@@ -1,20 +1,25 @@
+import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 // Components
 import Layout from "../../Layout";
-import HomePage from "../../pages/HomePage";
-import ListingPage from "../../pages/ListingPage";
-import ShowPage from "../../pages/ShowPage";
+
+// Lazy-load your pages/components
+const HomePage = lazy(() => import("../../pages/HomePage"));
+const TvShowsPage = lazy(() => import("../../pages/TvShowsPage"));
+const TvShowPage = lazy(() => import("../../pages/TvShowPage"));
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<HomePage />} />
-          <Route path="/tv" element={<ListingPage />} />
-          <Route path="/tv/:slug" element={<ShowPage />} />
-        </Route>
-      </Routes>
+      <Suspense fallback={<div>Loading...</div>}>
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<HomePage />} />
+            <Route path="/tv" element={<TvShowsPage />} />
+            <Route path="/tv/:slug" element={<TvShowPage />} />
+          </Route>
+        </Routes>
+      </Suspense>
     </BrowserRouter>
   );
 };
