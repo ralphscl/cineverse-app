@@ -76,6 +76,19 @@ const TvShowPage = () => {
             );
           })}
         </p>
+
+        <div className="video-container">
+          {trailer?.results && (
+            <iframe
+              width="100%"
+              height="460"
+              src={`https://www.youtube.com/embed/${trailer.results[0]?.key}?si=JCnaD6PZ1xf_D1ch`}
+              title={show?.name || show?.original_name}
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            ></iframe>
+          )}
+        </div>
       </div>
     </div>
   );
