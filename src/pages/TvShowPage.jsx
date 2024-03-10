@@ -1,8 +1,9 @@
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 // Hooks
 import { useFetchApi } from "../hooks/useFetchApi";
 // Service
-import { getTvShow } from "../service/requests";
+import { getTvShow, getTvShowVideo } from "../service/requests";
 // Utils
 import { splitSlug } from "../utils/StringUtils";
 // CSS
@@ -12,56 +13,65 @@ const TvShowPage = () => {
   const { slug } = useParams();
   const [id] = splitSlug(slug);
 
-  const { isLoading, serverError, apiData } = useFetchApi(getTvShow(id));
+  const {
+    isLoading: showLoading,
+    serverError: showError,
+    apiData: show,
+  } = useFetchApi(getTvShow(id));
+
+  const {
+    isLoading: trailerLoading,
+    serverError: trailerError,
+    apiData: trailer,
+  } = useFetchApi(getTvShowVideo(id));
 
   const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
-
-  console.log(apiData);
+  console.log(trailer);
   return (
     <div className="showpage">
       <div
         className="banner"
         style={{
           backgroundImage:
-            apiData && `url(${TMDB_ASSET_BASEURL}${apiData?.backdrop_path})`,
+            show && `url(${TMDB_ASSET_BASEURL}${show?.backdrop_path})`,
           backgroundSize: "cover",
           backgroundPosition: "center center",
         }}
       >
-        {isLoading && <p className="loading">Loading.....</p>}
-        {serverError && <p>Error fetching data. Please try again later</p>}
+        {showLoading && <p className="loading">Loading.....</p>}
+        {showError && <p>Error fetching data. Please try again later</p>}
         <div className="overlay" />
       </div>
       <div className="content">
-        <h1>{apiData?.title || apiData?.name || apiData?.original_name}</h1>
+        <h1>{show?.title || show?.name || show?.original_name}</h1>
 
         <button
           className="visit"
-          onClick={() => window.open(apiData.homepage, "_blank")}
+          onClick={() => window.open(show.homepage, "_blank")}
         >
           Visit
         </button>
         <button className="trailer">Trailer</button>
 
         <ul>
-          <li>{splitSlug(apiData?.first_air_date)[0]}</li>
+          <li>{splitSlug(show?.first_air_date)[0]}</li>
           <li>
-            {apiData?.seasons?.length} Season
-            {apiData?.seasons?.length > 1 && "s"}
+            {show?.seasons?.length} Season
+            {show?.seasons?.length > 1 && "s"}
           </li>
           <li>
             <a href="#leave-a-review">Leave a Review</a>
           </li>
         </ul>
 
-        <p className="overview">{apiData?.overview}</p>
+        <p className="overview">{show?.overview}</p>
 
         <p>
-          {apiData?.genres.map((genre, index) => {
+          {show?.genres.map((genre, index) => {
             return (
-              <span>
+              <span key={genre.name}>
                 {genre.name}
-                {index < apiData?.genres.length - 1 && ", "}
+                {index < show?.genres.length - 1 && ", "}
               </span>
             );
           })}

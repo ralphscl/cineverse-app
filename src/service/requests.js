@@ -21,6 +21,10 @@ export const getTvShow = (id) => {
   return `/tv/${id}?language=en-US`;
 }
 
+export const getTvShowVideo = (id) => {
+  return `/tv/${id}/videos?language=en-US`;
+}
+
 export const getGenreNames = async (type, id) => {
   const parameters = `https://api.themoviedb.org/3/genre/${type}/list?language=en`;
   
