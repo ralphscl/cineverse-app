@@ -25,8 +25,15 @@ const TvShowPage = () => {
     apiData: trailer,
   } = useFetchApi(getTvShowVideo(id));
 
+  const getTrailer = () => {
+    const trailerVideo = trailer?.results.find(
+      (video) => video?.type === "Trailer"
+    );
+    return trailerVideo;
+  };
+
   const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
-  console.log(trailer);
+
   return (
     <div className="showpage">
       <div
@@ -82,7 +89,10 @@ const TvShowPage = () => {
             <iframe
               width="100%"
               height="460"
-              src={`https://www.youtube.com/embed/${trailer.results[0]?.key}?si=JCnaD6PZ1xf_D1ch`}
+              frameBorder="0"
+              src={`https://www.youtube.com/embed/${
+                getTrailer()?.key
+              }?si=JCnaD6PZ1xf_D1ch`}
               title={show?.name || show?.original_name}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
               allowFullScreen
