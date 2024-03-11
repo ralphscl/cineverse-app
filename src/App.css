@@ -1,5 +1,9 @@
 #root {
   text-align: center;
+
+  --fs-header1: clamp(1.8rem, 8vw, 3.2rem);
+  --fs-header1: clamp(1.6rem, 7vw, 3rem);
+  --fs-default: clamp(.8rem, 2vw, 1.1rem);
 }
 
 body {
@@ -8,4 +12,9 @@ body {
 
 .loading {
   text-align: center;
+}
+
+a {
+  color: white;
+  text-decoration: none;
 }

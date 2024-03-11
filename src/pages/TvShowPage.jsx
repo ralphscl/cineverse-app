@@ -34,6 +34,7 @@ const TvShowPage = () => {
 
   const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
+  console.log(show);
   return (
     <div className="showpage">
       <div
@@ -49,16 +50,21 @@ const TvShowPage = () => {
         {showError && <p>Error fetching data. Please try again later</p>}
         <div className="overlay" />
       </div>
+
       <div className="content">
         <h1>{show?.title || show?.name || show?.original_name}</h1>
 
-        <button
-          className="visit"
-          onClick={() => window.open(show.homepage, "_blank")}
+        <a
+          className="btn visit"
+          href={show?.homepage}
+          target="_blank"
+          rel="noopener noreferrer"
         >
           Visit
-        </button>
-        <button className="trailer">Trailer</button>
+        </a>
+        <a href="#trailer" className="btn trailer">
+          Trailer
+        </a>
 
         <ul>
           <li>{splitSlug(show?.first_air_date)[0]}</li>
@@ -67,13 +73,15 @@ const TvShowPage = () => {
             {show?.seasons?.length > 1 && "s"}
           </li>
           <li>
-            <a href="#leave-a-review">Leave a Review</a>
+            <a href="#leave-a-review" className="review">
+              Leave a Review
+            </a>
           </li>
         </ul>
 
         <p className="overview">{show?.overview}</p>
 
-        <p>
+        <p className="genre">
           {show?.genres.map((genre, index) => {
             return (
               <span key={genre.name}>
@@ -84,11 +92,11 @@ const TvShowPage = () => {
           })}
         </p>
 
-        <div className="video-container">
+        <div id="trailer" className="video-container">
           {trailer?.results && (
             <iframe
-              width="100%"
-              height="460"
+              width="90%"
+              height="720"
               frameBorder="0"
               src={`https://www.youtube.com/embed/${
                 getTrailer()?.key

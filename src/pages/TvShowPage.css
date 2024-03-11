@@ -5,7 +5,7 @@
 .showpage .banner {
     position: relative;
     height: 100vh;
-    z-index: 1;
+    z-index: 0;
 }
 
 .showpage .banner .overlay {
@@ -25,45 +25,40 @@
     background-color: transparent;
     position: relative;
     display: block;
-    margin: -24rem auto 4rem;
+    padding: .5rem;
+    margin: -40rem auto 0rem;
     text-align: left;
-    height: 40rem;
-    width: 72rem;
-    z-index: 2;
+    height: auto;
+    width: 100%;
+    z-index: 1;
 }
 
 .showpage .content h1 {
-    margin: .5rem 0;
-    font-size: 3.2rem;
+    margin: 2rem 0;
+    font-size: var(--fs-header1);
     font-weight: bold;
 }
 
 .showpage .content ul { 
     list-style: none; 
-    margin: 1rem 0; 
+    margin: 3rem 0 2rem; 
     padding: 0; 
 }
 
 .showpage .content ul li { 
+    font-size: var(--fs-default);
     display: inline; 
     padding: 0rem 1rem;
     border-left: 1px solid #ffffff40;
 }
-
 
 .showpage .content ul li:first-child {
     padding-left: 0;
     border: none;
 }
 
-
-.showpage .content ul li a {
-    color: white;
-    text-decoration: none;
-}
-
-.showpage .content button {
-    margin: .5rem .5rem .5rem 0;
+.showpage .content .btn {
+    margin: 0 1rem 0rem 0rem;
     padding: 1.2rem 2.4rem;
     font-size: 1rem;
     font-weight: bold;
@@ -71,31 +66,41 @@
     cursor: pointer;
 }
 
-.showpage .content button:hover {
+.showpage .content .btn:hover {
     background-color: white;
     color: black;
     border: 2px solid white;
 }
 
-.showpage .content .visit {
+.showpage .content .btn.visit {
     background-color: #ce3824;
     color: white;
     border: 2px solid #ce3824;
 }
 
-.showpage .content .trailer {
+.showpage .content .btn.trailer {
     background: transparent;
     border: 2px solid white;
 }
 
-.showpage .content .overview {
-    color: #dddddd;
-    font-size: 1.1rem;
+.showpage .content .overview,
+.showpage .content .genre {
+    font-size: var(--fs-default);
     line-height: 1.8em;
+}
+
+.showpage .content .video-container {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
 }
 
 @media (min-width: 640px) { 
 
+    .showpage .content {
+        margin: -24rem auto 4rem;
+        width: 80%;
+    }
 }
 
 @media (min-width: 768px) { 
@@ -103,7 +108,10 @@
 }
 
 @media (min-width: 1024px) { 
-
+    .showpage .content {
+        margin: -24rem auto 4rem;
+        width: 75%;
+    }
 }
 
 @media (min-width: 1280px) { 
