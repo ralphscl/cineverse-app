@@ -89,12 +89,6 @@
     line-height: 1.8em;
 }
 
-.showpage .content .video-container {
-    display: flex;
-    justify-content: center;
-    padding: 1rem 0;
-}
-
 @media (min-width: 640px) { 
 
     .showpage .content {
@@ -109,7 +103,7 @@
 
 @media (min-width: 1024px) { 
     .showpage .content {
-        margin: -24rem auto 4rem;
+        margin: -26rem auto 4rem;
         width: 75%;
     }
 }

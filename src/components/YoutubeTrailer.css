@@ -1,0 +1,10 @@
+.youtube-trailer {
+    display: flex;
+    justify-content: center;
+    padding: 1rem 0;
+}
+
+.youtube-trailer iframe {
+    border: none;
+    border-radius: 1rem;
+}
