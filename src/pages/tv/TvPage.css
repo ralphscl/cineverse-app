@@ -1,14 +1,14 @@
-.showpage {
+.tvpage {
     position: relative;
 }
 
-.showpage .banner {
+.tvpage .banner {
     position: relative;
     height: 100vh;
     z-index: 0;
 }
 
-.showpage .banner .overlay {
+.tvpage .banner .overlay {
     position: absolute;
     bottom: 0;
     height: 60rem;
@@ -21,7 +21,7 @@
     );
 }
 
-.showpage .content {
+.tvpage .content {
     background-color: transparent;
     position: relative;
     display: block;
@@ -33,31 +33,31 @@
     z-index: 1;
 }
 
-.showpage .content h1 {
+.tvpage .content h1 {
     margin: 2rem 0;
     font-size: var(--fs-header1);
     font-weight: bold;
 }
 
-.showpage .content ul { 
+.tvpage .content ul { 
     list-style: none; 
     margin: 3rem 0 2rem; 
     padding: 0; 
 }
 
-.showpage .content ul li { 
+.tvpage .content ul li { 
     font-size: var(--fs-default);
     display: inline; 
     padding: 0rem 1rem;
     border-left: 1px solid #ffffff40;
 }
 
-.showpage .content ul li:first-child {
+.tvpage .content ul li:first-child {
     padding-left: 0;
     border: none;
 }
 
-.showpage .content .btn {
+.tvpage .content .btn {
     margin: 0 1rem 0rem 0rem;
     padding: 1.2rem 2.4rem;
     font-size: 1rem;
@@ -66,33 +66,32 @@
     cursor: pointer;
 }
 
-.showpage .content .btn:hover {
+.tvpage .content .btn:hover {
     background-color: white;
     color: black;
     border: 2px solid white;
 }
 
-.showpage .content .btn.visit {
+.tvpage .content .btn.visit {
     background-color: #ce3824;
     color: white;
     border: 2px solid #ce3824;
 }
 
-.showpage .content .btn.trailer {
+.tvpage .content .btn.trailer {
     background: transparent;
     border: 2px solid white;
 }
 
-.showpage .content .overview,
-.showpage .content .genre {
+.tvpage .content .overview,
+.tvpage .content .genre {
     font-size: var(--fs-default);
     line-height: 1.8em;
 }
 
 @media (min-width: 640px) { 
-
-    .showpage .content {
-        margin: -24rem auto 4rem;
+    .tvpage .content {
+        margin: -24rem auto 1rem;
         width: 80%;
     }
 }
@@ -102,8 +101,8 @@
 }
 
 @media (min-width: 1024px) { 
-    .showpage .content {
-        margin: -26rem auto 4rem;
+    .tvpage .content {
+        margin: -26rem auto 1rem;
         width: 75%;
     }
 }

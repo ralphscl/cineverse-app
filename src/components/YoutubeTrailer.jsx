@@ -24,8 +24,6 @@ const YoutubeTrailer = ({ containerID, tmdbID, title }) => {
     <section id={containerID} className="youtube-trailer">
       {trailer?.results && (
         <iframe
-          width="98%"
-          height="800"
           src={`https://www.youtube.com/embed/${
             getTrailer()?.key
           }?si=JCnaD6PZ1xf_D1ch`}

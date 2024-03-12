@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import EpisodeList from "../components/EpisodeList";
-import YoutubeTrailer from "../components/YoutubeTrailer";
+import EpisodeList from "../../components/EpisodeList";
+import YoutubeTrailer from "../../components/YoutubeTrailer";
 // Hooks
-import { useFetchApi } from "../hooks/useFetchApi";
+import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
-import { getTvShow } from "../service/requests";
+import { getTvShow } from "../../service/requests";
 // Utils
-import { splitSlug } from "../utils/StringUtils";
+import { splitSlug } from "../../utils/StringUtils";
 // CSS
-import "./TvShowPage.css";
+import "./TvPage.css";
 
-const TvShowPage = () => {
+const TvPage = () => {
   const { slug } = useParams();
   const [id] = splitSlug(slug);
 
@@ -25,7 +25,7 @@ const TvShowPage = () => {
 
   console.log(show);
   return (
-    <div className="showpage">
+    <div className="tvpage">
       <section
         className="banner"
         style={{
@@ -95,4 +95,4 @@ const TvShowPage = () => {
   );
 };
 
-export default TvShowPage;
+export default TvPage;

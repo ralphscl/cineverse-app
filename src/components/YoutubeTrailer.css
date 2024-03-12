@@ -7,4 +7,33 @@
 .youtube-trailer iframe {
     border: none;
     border-radius: 1rem;
+    width: 88%;
+    height: 320px;
+}
+
+
+@media (min-width: 640px) { 
+    .youtube-trailer iframe {
+        width: 100%;
+        height: 640px;
+    }
+}
+
+@media (min-width: 768px) { 
+    .youtube-trailer iframe {
+        width: 100%;
+        height: 768px;
+    }
+}
+
+@media (min-width: 1024px) { 
+    
+}
+
+@media (min-width: 1280px) { 
+
+}
+
+@media (min-width: 1536px) { 
+
 }

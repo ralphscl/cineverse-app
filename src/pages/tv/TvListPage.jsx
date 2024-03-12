@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 // Utils
-import { capitalizeFirstLetter } from "../utils/StringUtils";
+import { capitalizeFirstLetter } from "../../utils/StringUtils";
 // Service
-import { requests, getTvShows } from "../service/requests";
+import { requests, getTvShows } from "../../service/requests";
 // Components
-import Row from "../components/containers/Row";
+import Row from "../../components/containers/Row";
 // CSS
-import "./TvShowsPage.css";
+import "./TvListPage.css";
 
 const TvShowsPage = () => {
   const [network, setNetwork] = useState("netflix");

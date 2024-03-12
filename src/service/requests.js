@@ -3,8 +3,8 @@ import instance from '../service/tmdb.js';
 
 export const requests = {
   'getTrending': `/trending/tv/week?language=en-US`,
-  'getPopular': `/tv/popular?language=en-US&page=1`,
-  'getTopRated': `/tv/top_rated?language=en-US&page=1`,
+  'getPopular': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=popularity.desc`,
+  'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
 };
 
 export const getTvShows = ( page = 1, network, genre ) => {

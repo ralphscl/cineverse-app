@@ -5,18 +5,18 @@ import Layout from "../../Layout";
 
 // Lazy-load your pages/components
 const HomePage = lazy(() => import("../../pages/HomePage"));
-const TvShowsPage = lazy(() => import("../../pages/TvShowsPage"));
-const TvShowPage = lazy(() => import("../../pages/TvShowPage"));
+const TvListPage = lazy(() => import("../../pages/tv/TvListPage"));
+const TvPage = lazy(() => import("../../pages/tv/TvPage"));
 
 const Router = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading...</div>}>
+      <Suspense fallback={<div>Loading Components...</div>}>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="/tv" element={<TvShowsPage />} />
-            <Route path="/tv/:slug" element={<TvShowPage />} />
+            <Route path="/tv" element={<TvListPage />} />
+            <Route path="/tv/:slug" element={<TvPage />} />
           </Route>
         </Routes>
       </Suspense>
