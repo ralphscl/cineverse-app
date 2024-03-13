@@ -8,13 +8,13 @@ export const requests = {
 };
 
 export const getTvShows = ( page = 1, network, genre ) => {
-  let parameters = `/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=vote_average.desc`;
+  let params = `/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=vote_average.desc`;
 
   if (network) {
-    parameters += ` &with_networks=${networkId[network]}`;
+    params += ` &with_networks=${networkId[network]}`;
   }
 
-  return parameters;
+  return params;
 }
 
 export const getTvShow = (id) => {
@@ -23,6 +23,21 @@ export const getTvShow = (id) => {
 
 export const getTvShowVideo = (id) => {
   return `/tv/${id}/videos?language=en-US`;
+}
+
+export const getTvSeason = ( id, season = null, episode = null ) => {
+  let params = `/tv/${id}`;
+
+  if(season !== null) { 
+    params += `/season/${season}`;
+  }
+
+  if(episode !== null) {
+    console.log('has ep')
+    params += `/episode/${episode}`;
+  }
+  
+  return params += `?language=en-US'`
 }
 
 export const getGenreNames = async (type, id) => {

@@ -1,16 +1,16 @@
-.episode-list {
+.season-nav {
     padding: .5rem;
     margin: 0rem auto 1rem;
     width: 100%;
     text-align: left;
 }
 
-.episode-list .seasons {
+.season-nav .seasons {
     overflow-x: auto;
     white-space: nowrap;
 }
 
-.episode-list .seasons ul {
+.season-nav .seasons ul {
     display: inline-block;
     list-style: none; 
     padding: 0;
@@ -18,7 +18,7 @@
     border-bottom: 1px solid #ffffff40;
 }
 
-.episode-list .seasons ul li {
+.season-nav .seasons ul li {
     display: inline-block;
     text-align: center;
     font-weight: bold;
@@ -27,12 +27,12 @@
     cursor: pointer;
 }
 
-.episode-list .seasons ul li.active {
+.season-nav .seasons ul li.active {
     border-bottom: 2px solid #ce382480;
 }
 
 @media (min-width: 640px) {
-    .episode-list {
+    .season-nav {
         width: 75%;
     }
 }

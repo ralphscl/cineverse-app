@@ -1,24 +1,32 @@
 import React, { useEffect, useState } from "react";
-import "./EpisodeList.css";
+import EpisodeList from "../episodes/EpisodeList";
+// Requests
+import { getTvSeason } from "../../service/requests";
+// Hooks
+import { useFetchApi } from "../../hooks/useFetchApi";
+import "./SeasonNav.css";
 
-const EpisodeList = ({ containerID, tmdbID, seasons }) => {
+const SeasonNav = ({ containerID, tmdbID, seasons }) => {
   const [curSeason, setCurSeason] = useState();
+  const {
+    isLoading: showLoading,
+    serverError: showError,
+    apiData: seasonDetails,
+  } = useFetchApi(getTvSeason(tmdbID, curSeason));
 
   useEffect(() => {
     if (curSeason === undefined && seasons?.length > 0) {
       setCurSeason(seasons[0].season_number);
     }
-
-    //
   }, [curSeason, seasons]);
 
   return (
-    <section id={containerID} className="episode-list">
+    <section id={containerID} className="season-nav">
       <div className="seasons">
         <ul>
           {seasons?.map((season) => (
             <>
-              {console.log(season)}
+              {/* {console.log(season)} */}
               {season?.air_date !== null && (
                 <li
                   className={`${
@@ -33,8 +41,14 @@ const EpisodeList = ({ containerID, tmdbID, seasons }) => {
           ))}
         </ul>
       </div>
+
+      <EpisodeList
+        containerID={"episodes"}
+        tmdbID={tmdbID}
+        season={curSeason}
+      />
     </section>
   );
 };
 
-export default EpisodeList;
+export default SeasonNav;

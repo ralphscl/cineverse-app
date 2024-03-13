@@ -1,4 +1,4 @@
-import ShowCard from "../cards/ShowCard.jsx";
+import ShowCard from "../cards/showCard/ShowCard.jsx";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi.jsx";
 // CSS

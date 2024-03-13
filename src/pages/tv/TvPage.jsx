@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import EpisodeList from "../../components/EpisodeList";
+import SeasonNav from "../../components/seasons/SeasonNav";
 import YoutubeTrailer from "../../components/YoutubeTrailer";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
@@ -23,7 +23,6 @@ const TvPage = () => {
 
   const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
-  console.log(show);
   return (
     <div className="tvpage">
       <section
@@ -90,7 +89,7 @@ const TvPage = () => {
         />
       </div>
 
-      <EpisodeList containerID="episodes" tmdbID={id} seasons={show?.seasons} />
+      <SeasonNav containerID="seasons" tmdbID={id} seasons={show?.seasons} />
     </div>
   );
 };
