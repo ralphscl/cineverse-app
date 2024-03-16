@@ -27,11 +27,6 @@ const TvShowsPage = () => {
           cardType="backdrop"
         />
         <Row
-          title="Popular Shows"
-          reqUrl={requests.getPopular}
-          cardType="backdrop"
-        />
-        <Row
           title="Top Rated"
           reqUrl={requests.getTopRated}
           cardType="backdrop"

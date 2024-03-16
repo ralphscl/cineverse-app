@@ -1,0 +1,69 @@
+.episode-card {
+    width: 24rem;
+    height: 14rem;
+    position: relative;
+    flex-shrink: 0;
+    text-align: left;
+    border-radius: 0.6rem;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.episode-card img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+
+.episode-card .overlay {
+    position: absolute;
+    bottom: 0;
+    height: 14rem;
+    width: 100%;
+    border-radius: .4rem;
+    background-image: linear-gradient(
+        180deg, 
+        transparent,
+        rgba(37,37,37, 0.60), 
+        rgb(22, 22, 22)
+    );
+}
+
+.episode-card .overlay h4.number {
+    display: inline;
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    padding: 0;
+    margin: 0;
+}
+
+.episode-card .overlay p {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    text-align: center;
+    font-size: .9rem;
+}
+
+.episode-card:hover .overlay .number,
+.episode-card:hover .overlay .title {
+    display: none;
+}
+
+.episode-card .overlay .overview {
+    font-size: .8rem;
+    display: none;
+}
+
+.episode-card:hover .overlay .overview {
+    overflow: hidden;
+    display: -webkit-box;
+    line-clamp: 3; 
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+}

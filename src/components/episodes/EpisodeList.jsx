@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { Suspense, lazy, useEffect } from "react";
 import { getTvSeason } from "../../service/requests";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
-import EpisodeCard from "./EpisodeCard";
 import "./EpisodeList.css";
+
+const EpisodeCard = lazy(() => import("../cards/episodeCard/EpisodeCard"));
 
 const EpisodeList = ({ containerID, tmdbID, season }) => {
   const {
@@ -14,11 +15,16 @@ const EpisodeList = ({ containerID, tmdbID, season }) => {
 
   console.log(seasonDetails);
   return (
-    <section className="episode-list">
-      {seasonDetails?.episodes?.map((episode) => (
-        <EpisodeCard episode={episode} />
-      ))}
-    </section>
+    <Suspense fallback={<div>Loading Components...</div>}>
+      <section key={containerID} className="episode-list">
+        {seasonDetails?.episodes?.map((episode) => (
+          <EpisodeCard
+            episode={episode}
+            defaultImage={seasonDetails?.poster_path}
+          />
+        ))}
+      </section>
+    </Suspense>
   );
 };
 

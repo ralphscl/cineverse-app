@@ -1,18 +1,9 @@
 import React, { useEffect, useState } from "react";
 import EpisodeList from "../episodes/EpisodeList";
-// Requests
-import { getTvSeason } from "../../service/requests";
-// Hooks
-import { useFetchApi } from "../../hooks/useFetchApi";
 import "./SeasonNav.css";
 
 const SeasonNav = ({ containerID, tmdbID, seasons }) => {
   const [curSeason, setCurSeason] = useState();
-  const {
-    isLoading: showLoading,
-    serverError: showError,
-    apiData: seasonDetails,
-  } = useFetchApi(getTvSeason(tmdbID, curSeason));
 
   useEffect(() => {
     if (curSeason === undefined && seasons?.length > 0) {
