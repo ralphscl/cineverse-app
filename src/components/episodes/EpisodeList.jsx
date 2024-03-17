@@ -13,17 +13,16 @@ const EpisodeList = ({ containerID, tmdbID, season }) => {
     apiData: seasonDetails,
   } = useFetchApi(getTvSeason(tmdbID, season));
 
-  console.log(seasonDetails);
   return (
     <Suspense fallback={<div>Loading Components...</div>}>
-      <section key={containerID} className="episode-list">
+      <div key={containerID} className="episode-list">
         {seasonDetails?.episodes?.map((episode) => (
           <EpisodeCard
             episode={episode}
             defaultImage={seasonDetails?.poster_path}
           />
         ))}
-      </section>
+      </div>
     </Suspense>
   );
 };

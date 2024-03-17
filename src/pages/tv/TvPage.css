@@ -2,23 +2,8 @@
     position: relative;
 }
 
-.tvpage .banner {
-    position: relative;
-    height: 100vh;
-    z-index: 0;
-}
-
-.tvpage .banner .overlay {
-    position: absolute;
-    bottom: 0;
-    height: 60rem;
+.tvpage section {
     width: 100%;
-    background-image: linear-gradient(
-        180deg, 
-        transparent,
-        rgba(20, 20, 20, 0.6), 
-        rgb(18, 18, 18)
-    );
 }
 
 .tvpage .content {
@@ -29,7 +14,6 @@
     margin: -40rem auto 0rem;
     text-align: left;
     height: auto;
-    width: 100%;
     z-index: 1;
 }
 
@@ -92,18 +76,18 @@
 @media (min-width: 640px) { 
     .tvpage .content {
         margin: -24rem auto 1rem;
-        width: 75%;
     }
 }
 
 @media (min-width: 768px) { 
-    
+    .tvpage section {
+        width: 70%;
+    }
 }
 
 @media (min-width: 1024px) { 
     .tvpage .content {
         margin: -26rem auto 1rem;
-        width: 60%;
     }
 }
 

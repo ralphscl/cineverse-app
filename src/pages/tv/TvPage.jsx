@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import SeasonNav from "../../components/seasons/SeasonNav";
+import ShowBanner from "../../components/banner/ShowBanner";
+import ShowDetails from "../../components/ShowDetails";
 import YoutubeTrailer from "../../components/YoutubeTrailer";
+import SeasonNav from "../../components/seasons/SeasonNav";
+import Credits from "../../components/credits/Credits";
+import Recommended from "../../components/Recommended";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
@@ -20,76 +24,26 @@ const TvPage = () => {
     serverError: showError,
     apiData: show,
   } = useFetchApi(getTvShow(id));
-
-  const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
-
+  console.log(show);
   return (
     <div className="tvpage">
-      <section
-        className="banner"
-        style={{
-          backgroundImage:
-            show && `url(${TMDB_ASSET_BASEURL}${show?.backdrop_path})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center center",
-        }}
-      >
-        {showLoading && <p className="loading">Loading.....</p>}
-        {showError && <p>Error fetching data. Please try again later</p>}
-        <div className="overlay" />
-      </section>
+      {showLoading && <p className="loading">Loading.....</p>}
+      {showError && <p>Error fetching data. Please try again later</p>}
+      <ShowBanner imageUrl={show?.backdrop_path} />
 
-      <div className="content">
-        <section>
-          <h1>{show?.title || show?.name || show?.original_name}</h1>
+      <ShowDetails show={show} />
 
-          <a
-            className="btn visit"
-            href={show?.homepage}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Visit
-          </a>
-          <a href="#trailer" className="btn trailer">
-            Trailer
-          </a>
+      <YoutubeTrailer
+        containerID="trailer"
+        tmdbID={id}
+        title={show?.name || show?.original_name}
+      />
 
-          <ul>
-            <li>{splitSlug(show?.first_air_date)[0]}</li>
-            <li>
-              {show?.seasons?.length} Season
-              {show?.seasons?.length > 1 && "s"}
-            </li>
-            <li>
-              <a href="#leave-a-review" className="review">
-                Leave a Review
-              </a>
-            </li>
-          </ul>
+      <SeasonNav tmdbID={id} seasons={show?.seasons} />
 
-          <p className="overview">{show?.overview}</p>
+      <Credits tmdbID={id} />
 
-          <p className="genre">
-            {show?.genres.map((genre, index) => {
-              return (
-                <span key={genre.name}>
-                  {genre.name}
-                  {index < show?.genres.length - 1 && ", "}
-                </span>
-              );
-            })}
-          </p>
-        </section>
-
-        <YoutubeTrailer
-          containerID="trailer"
-          tmdbID={id}
-          title={show?.name || show?.original_name}
-        />
-      </div>
-
-      <SeasonNav containerID="seasons" tmdbID={id} seasons={show?.seasons} />
+      <Recommended tmbdID={id} type={"tv"} />
     </div>
   );
 };

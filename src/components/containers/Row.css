@@ -1,11 +1,12 @@
 .row {
-    width: 100%;
+    width: 70%;
     display: flex;
     flex-direction: row;
     gap: 1rem;
     overflow-y: hidden;
     overflow-x: scroll;
     padding: .4rem;
+    margin: 1rem auto;
 }
 
 .row::-webkit-scrollbar {

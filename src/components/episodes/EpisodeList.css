@@ -1,11 +1,12 @@
 .episode-list {
-    width: 100%;
+    padding: .4rem;
     display: flex;
     flex-direction: row;
     gap: 1rem;
     overflow-y: hidden;
     overflow-x: scroll;
-    padding: .4rem;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
 }
 
 .episode-list::-webkit-scrollbar {

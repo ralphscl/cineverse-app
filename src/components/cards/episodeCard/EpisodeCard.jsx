@@ -13,8 +13,6 @@ const EpisodeCard = ({ episode, defaultImage }) => {
       : TMDB_ASSET_BASEURL + episodeCover;
   };
 
-  console.log(getCoverUrl());
-
   return (
     <div
       key={episode.episode_number}

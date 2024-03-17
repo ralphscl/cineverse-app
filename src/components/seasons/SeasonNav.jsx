@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import EpisodeList from "../episodes/EpisodeList";
 import "./SeasonNav.css";
 
-const SeasonNav = ({ containerID, tmdbID, seasons }) => {
+const SeasonNav = ({ tmdbID, seasons }) => {
   const [curSeason, setCurSeason] = useState();
 
   useEffect(() => {
@@ -12,12 +12,11 @@ const SeasonNav = ({ containerID, tmdbID, seasons }) => {
   }, [curSeason, seasons]);
 
   return (
-    <section id={containerID} className="season-nav">
+    <section className="season-nav">
       <div className="seasons">
         <ul>
           {seasons?.map((season) => (
             <>
-              {/* {console.log(season)} */}
               {season?.air_date !== null && (
                 <li
                   className={`${
