@@ -43,10 +43,13 @@ export const getCredits = (id) => {
   return `/tv/${id}/aggregate_credits?language=en-US`;
 }
 
+export const getCast = (id) => {
+  return `/person/${id}?language=en-US'`;
+}
+
 export const getRecommended = (type, id) => {
   return `/${type}/${id}/recommendations?language=en-US&page=1`;
 }
-
 
 export const getGenreNames = async (type, id) => {
   const parameters = `https://api.themoviedb.org/3/genre/${type}/list?language=en`;

@@ -1,0 +1,22 @@
+.cast {
+    width: 12rem;
+    height: auto;
+    position: relative;
+    flex-shrink: 0;
+    text-align: center;
+    border-radius: 0.6rem;
+    overflow: hidden;
+}
+
+.cast img {
+    height: 10rem;
+    width: 10rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.cast p {
+    padding: 0;
+    margin: 0;
+
+}

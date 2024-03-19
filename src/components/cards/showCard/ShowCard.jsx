@@ -3,9 +3,9 @@ import { convertToSlug } from "../../../utils/StringUtils.js";
 import Genre from "../../Genre.jsx";
 import "./ShowCard.css";
 
-const ShowCard = ({ show, cardType }) => {
-  const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
+const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
+const ShowCard = ({ show, cardType }) => {
   return (
     <Link
       to={`/tv/${show.id}-${convertToSlug(

@@ -1,4 +1,4 @@
-.row .card {
+.card {
     position: relative;
     flex-shrink: 0;
     text-align: left;
@@ -7,7 +7,7 @@
     cursor: pointer;
 }
 
-.row .card .overlay {
+.card .overlay {
     position: absolute;
     bottom: 0;
     height: 14rem;
@@ -21,7 +21,7 @@
     );
 }
 
-.row .card:hover .overlay {
+.card:hover .overlay {
     height: 100%;
     overflow: hidden;
     border-radius: .4rem;
@@ -32,65 +32,65 @@
     );
 }
 
-.row .card .overlay .description {
+.card .overlay .description {
     color: white;
     position: absolute;
     bottom: 0;
 }
 
-.row .card.poster,
-.row .card:hover.poster .overlay {
+.card.poster,
+.card:hover.poster .overlay {
     height: 22rem;
     width: 14rem;
 }
 
-.row .card.backdrop,
-.row .card:hover.backdrop .overlay {
+.card.backdrop,
+.card:hover.backdrop .overlay {
     height: 14rem;
     width: 24rem;
 }
 
 /* ----- START POSTER CARDS ----- */
-.row .card.poster .overlay .description{
+.card.poster .overlay .description{
     display: none;
 }
 
-.row .card:hover.poster .overlay .description {
+.card:hover.poster .overlay .description {
     display: block;
 }
 /* ----- END POSTER CARDS ----- */
 
 /* ----- START BACKDROP CARD ----- */
-.row .card.backdrop .overlay .description h4.title {
+.card.backdrop .overlay .description h4.title {
     display: block;
 }
 
-.row .card:hover.backdrop .overlay .description h4.title {
+.card:hover.backdrop .overlay .description h4.title {
     display: none;
 }
 
-.row .card.backdrop .overlay .description p {
+.card.backdrop .overlay .description p {
     display: none;
 }
 
-.row .card:hover.backdrop .overlay .description p {
+.card:hover.backdrop .overlay .description p {
     display: block;
 }
 /* ----- END BACKDROP CARD ----- */
 
 
-.row .card .overlay .description h4 {
+.card .overlay .description h4 {
     margin: .5rem 1rem;
     padding: 0;
 }
 
-.row .card:hover .overlay .description p {
+.card:hover .overlay .description p {
     font-size: .8rem;
     margin: .5rem 1rem;
     padding: 0;
 }
 
-.row .card:hover .overlay .description p.summary {
+.card:hover .overlay .description p.summary {
     overflow: hidden;
     display: -webkit-box;
     line-clamp: 3; 

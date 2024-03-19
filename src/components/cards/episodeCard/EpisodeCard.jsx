@@ -2,9 +2,9 @@ import React from "react";
 import NoImagePlaceholder from "../../../assets/no_image_placeholder.png";
 import "./EpisodeCard.css";
 
-const EpisodeCard = ({ episode, defaultImage }) => {
-  const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
+const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
+const EpisodeCard = ({ episode, defaultImage }) => {
   const getCoverUrl = () => {
     const episodeCover =
       episode.still_path !== "" ? episode.still_path : defaultImage;

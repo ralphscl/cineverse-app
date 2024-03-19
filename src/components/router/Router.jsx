@@ -14,8 +14,9 @@ const Router = () => {
       <Suspense fallback={<div>Loading Components...</div>}>
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route index element={<HomePage />} />
-            <Route path="/tv" element={<TvListPage />} />
+            {/* <Route index element={<HomePage />} /> */}
+            {/* <Route path="/tv" element={<TvListPage />} /> */}
+            <Route index element={<TvListPage />} />
             <Route path="/tv/:slug" element={<TvPage />} />
           </Route>
         </Routes>
