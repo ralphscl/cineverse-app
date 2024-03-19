@@ -1,13 +1,13 @@
 import React from "react";
+import CastCard from "../cards/castCard/CastCard";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 import { getCredits } from "../../service/requests";
 import "./Credits.css";
-import CastCard from "../cards/castCard/CastCard";
 
 const Credits = ({ tmdbID }) => {
-  const { isLoading, serverError, apiData } = useFetchApi(getCredits(tmdbID));
-  console.log(apiData);
+  const { isLoading, hasError, apiData } = useFetchApi(getCredits(tmdbID));
+
   return (
     <section className="credits">
       <h2>Casts</h2>

@@ -18,3 +18,32 @@ a {
   color: white;
   text-decoration: none;
 }
+
+.tvlist section,
+.tvpage section {
+  width: 100%;
+  margin-bottom: 4rem;
+}
+
+@media (min-width: 640px) { 
+    
+}
+
+@media (min-width: 768px) { 
+  .tvlist section,
+  .tvpage section {
+      width: 70%;
+  }
+}
+
+@media (min-width: 1024px) { 
+    
+}
+
+@media (min-width: 1280px) { 
+
+}
+
+@media (min-width: 1536px) { 
+
+}

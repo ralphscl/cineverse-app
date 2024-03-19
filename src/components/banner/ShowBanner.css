@@ -1,6 +1,13 @@
 .banner {
     position: relative;
-    height: 100vh;
     z-index: 0;
     width: 100% !important;
+}
+
+.banner.sm {
+    height: 75vh;
+}
+
+.banner.lg {
+    height: 100vh;
 }

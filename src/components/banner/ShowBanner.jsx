@@ -4,10 +4,10 @@ import "./ShowBanner.css";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
-const ShowBanner = ({ imageUrl }) => {
+const ShowBanner = ({ imageUrl, size }) => {
   return (
     <section
-      className="banner"
+      className={`banner ${size}`}
       style={{
         backgroundImage: imageUrl && `url(${TMDB_ASSET_BASEURL}${imageUrl})`,
         backgroundSize: "cover",

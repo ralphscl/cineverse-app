@@ -19,17 +19,13 @@ const TvPage = () => {
   const { slug } = useParams();
   const [id] = splitSlug(slug);
 
-  const {
-    isLoading: showLoading,
-    serverError: showError,
-    apiData: show,
-  } = useFetchApi(getTvShow(id));
-  console.log(show);
+  const { isLoading, hasError, apiData: show } = useFetchApi(getTvShow(id));
+
   return (
     <div className="tvpage">
-      {showLoading && <p className="loading">Loading.....</p>}
-      {showError && <p>Error fetching data. Please try again later</p>}
-      <ShowBanner imageUrl={show?.backdrop_path} />
+      {isLoading && <p className="loading">Loading.....</p>}
+      {hasError && <p>Error fetching data. Please try again later</p>}
+      <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
 
       <ShowDetails show={show} />
 
@@ -41,7 +37,9 @@ const TvPage = () => {
 
       <SeasonNav tmdbID={id} seasons={show?.seasons} />
 
-      <Credits tmdbID={id} />
+      <div style={{ backgroundColor: "rgba(255,255,255,3%)" }}>
+        <Credits tmdbID={id} />
+      </div>
 
       <Recommended tmbdID={id} type={"tv"} />
     </div>

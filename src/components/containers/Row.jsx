@@ -5,16 +5,16 @@ import { useFetchApi } from "../../hooks/useFetchApi.jsx";
 import "./Row.css";
 
 const Row = ({ title, reqUrl, cardType }) => {
-  const { isLoading, serverError, apiData } = useFetchApi(reqUrl);
+  const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl);
 
   return (
     <div>
       <h2 className="title">{title}</h2>
 
       <div className="row">
-        {isLoading && <div className="loading">Loading.....</div>}
-        {serverError && <p>Error fetching data. Please try again later</p>}
-        {apiData?.results?.map((show) => {
+        {isLoading && <section className="loading">Loading.....</section>}
+        {hasError && <p>Error fetching data. Please try again later</p>}
+        {shows?.results?.map((show) => {
           return <ShowCard key={show.id} show={show} cardType={cardType} />;
         })}
       </div>

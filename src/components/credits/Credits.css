@@ -1,6 +1,7 @@
 .credits {
     padding: 0.5rem;
-    margin: 0rem auto 1rem;
+    margin-left: auto;
+    margin-right: auto;
     text-align: left;
 }
 

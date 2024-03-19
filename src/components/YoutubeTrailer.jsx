@@ -8,8 +8,8 @@ import "./YoutubeTrailer.css";
 
 const YoutubeTrailer = ({ containerID, tmdbID, title }) => {
   const {
-    isLoading: trailerLoading,
-    serverError: trailerError,
+    isLoading,
+    hasError,
     apiData: trailer,
   } = useFetchApi(getTvShowVideo(tmdbID));
 

@@ -3,8 +3,8 @@ import instance from "../service/tmdb";
 
 export const useFetchApi = (url) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(null);
   const [apiData, setApiData] = useState(null);
-  const [serverError, setServerError] = useState(null);
 
   useEffect(() => {
     setIsLoading(true);
@@ -17,7 +17,7 @@ export const useFetchApi = (url) => {
         setApiData(data);
         setIsLoading(false);
       } catch (error) {
-        setServerError(error);
+        setHasError(error);
         setIsLoading(false);
       }
     };
@@ -25,5 +25,5 @@ export const useFetchApi = (url) => {
     fetchData();
   }, [url]);
 
-  return { isLoading, apiData, serverError };
+  return { isLoading, apiData, hasError };
 };

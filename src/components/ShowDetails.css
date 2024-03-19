@@ -1,0 +1,90 @@
+.content {
+    background-color: transparent;
+    position: relative;
+    display: block;
+    padding: .5rem;
+    margin: -40rem auto 0rem;
+    text-align: left;
+    height: auto;
+    z-index: 1;
+}
+
+.content h1 {
+    margin: 2rem 0;
+    font-size: var(--fs-header1);
+    font-weight: bold;
+}
+
+.content ul { 
+    list-style: none; 
+    margin: 3rem 0 2rem; 
+    padding: 0; 
+}
+
+.content ul li { 
+    font-size: var(--fs-default);
+    display: inline; 
+    padding: 0rem 1rem;
+    border-left: 1px solid #ffffff40;
+}
+
+.content ul li:first-child {
+    padding-left: 0;
+    border: none;
+}
+
+.content .btn {
+    margin: 0 1rem 0rem 0rem;
+    padding: 1rem 2.6rem;
+    font-size: .85rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.content .btn.visit {
+    background-color: #ce3824;
+    color: white;
+    border: 2px solid #ce3824;
+}
+
+.content .btn.trailer {
+    background: transparent;
+    border: 2px solid white;
+}
+
+.content .btn:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+}
+
+.content .overview,
+.content .genre {
+    font-size: var(--fs-default);
+    line-height: 1.8em;
+}
+
+@media (min-width: 640px) { 
+    .content {
+        margin: -24rem auto 1rem;
+    }
+}
+
+@media (min-width: 768px) { 
+    
+}
+
+@media (min-width: 1024px) { 
+    .content {
+        margin: -26rem auto 1rem;
+    }
+}
+
+@media (min-width: 1280px) { 
+
+}
+
+@media (min-width: 1536px) { 
+
+}

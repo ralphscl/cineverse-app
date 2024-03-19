@@ -36,7 +36,7 @@ const ShowDetails = ({ show }) => {
       <p className="overview">{show?.overview}</p>
 
       <p className="genre">
-        {show?.genres.map((genre, index) => {
+        {show?.genres?.map((genre, index) => {
           return (
             <span key={genre.name}>
               {genre.name}

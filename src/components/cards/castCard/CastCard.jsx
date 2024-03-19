@@ -7,14 +7,8 @@ import "./CastCard.css";
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
 const CastCard = ({ tmdbID, castCharacter }) => {
-  const {
-    isLaoding,
-    serverError,
-    apiData: cast,
-  } = useFetchApi(getCast(tmdbID));
+  const { isLaoding, hasError, apiData: cast } = useFetchApi(getCast(tmdbID));
 
-  console.log(cast);
-  console.log(cast?.profile_path ? cast?.profile_path : NoImagePlaceholder);
   return (
     <div key={tmdbID} className="cast">
       <img

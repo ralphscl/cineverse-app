@@ -7,11 +7,19 @@ export const requests = {
   'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
 };
 
-export const getTvShows = ( page = 1, network, genre ) => {
-  let params = `/discover/tv?include_adult=false&include_null_first_air_dates=false&language=en-US&page=${page}&sort_by=vote_average.desc`;
+export const getTvShows = ( page = 1, network='netflix', sortBy='vote_average', sortOrder='desc' ) => {
+  const includeAdult = false;
+  const includeNullFirstAirDates = false;
+  const language = 'en-US';
+
+  let params = `/discover/tv?include_adult=${includeAdult}&include_null_first_air_dates=${includeNullFirstAirDates}&language=${language}&page=${page}`;
+
+  if (sortBy && sortOrder) {
+    params += `&sort_by=${sortBy}.${sortOrder}`
+  }
 
   if (network) {
-    params += ` &with_networks=${networkId[network]}`;
+    params += `&with_networks=${networkId[network]}`;
   }
 
   return params;

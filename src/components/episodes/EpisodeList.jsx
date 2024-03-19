@@ -8,8 +8,8 @@ const EpisodeCard = lazy(() => import("../cards/episodeCard/EpisodeCard"));
 
 const EpisodeList = ({ containerID, tmdbID, season }) => {
   const {
-    isLoading: showLoading,
-    serverError: showError,
+    isLoading,
+    hasError,
     apiData: seasonDetails,
   } = useFetchApi(getTvSeason(tmdbID, season));
 
