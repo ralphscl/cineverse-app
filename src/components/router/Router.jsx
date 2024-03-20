@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../../Layout";
 
 // Lazy-load your pages/components
-const HomePage = lazy(() => import("../../pages/HomePage"));
+// const HomePage = lazy(() => import("../../pages/HomePage"));
 const TvListPage = lazy(() => import("../../pages/tv/TvListPage"));
 const TvPage = lazy(() => import("../../pages/tv/TvPage"));
 
