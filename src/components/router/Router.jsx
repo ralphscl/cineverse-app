@@ -11,7 +11,7 @@ const TvPage = lazy(() => import("../../pages/tv/TvPage"));
 const Router = () => {
   return (
     <BrowserRouter>
-      <Suspense fallback={<div>Loading Components...</div>}>
+      <Suspense fallback={<section>Loading Components...</section>}>
         <Routes>
           <Route path="/" element={<Layout />}>
             {/* <Route index element={<HomePage />} /> */}
