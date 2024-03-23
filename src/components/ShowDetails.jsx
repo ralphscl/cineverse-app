@@ -1,9 +1,22 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 // Utils
 import { splitSlug } from "../utils/StringUtils";
 import "./ShowDetails.css";
+import { getContentRating } from "../service/requests";
 
 const ShowDetails = ({ show }) => {
+  const [contentRating, setContentRating] = useState(null);
+
+  useEffect(() => {
+    const fetchContentRating = async () => {
+      const fetchedContentRating = await getContentRating(show?.id);
+      setContentRating(fetchedContentRating);
+    };
+
+    fetchContentRating();
+  }, [show]);
+  console.log(contentRating);
+
   return (
     <section className="content">
       <h1>{show?.title || show?.name || show?.original_name}</h1>
@@ -21,6 +34,9 @@ const ShowDetails = ({ show }) => {
       </a>
 
       <ul>
+        <li>
+          <span>{contentRating}</span>
+        </li>
         <li>{splitSlug(show?.first_air_date)[0]}</li>
         <li>
           {show?.seasons?.length} Season

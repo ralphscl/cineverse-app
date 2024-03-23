@@ -29,11 +29,11 @@ const TvPage = () => {
 
       <ShowDetails show={show} />
 
-      <YoutubeTrailer
+      {/* <YoutubeTrailer
         containerID="trailer"
         tmdbID={id}
         title={show?.name || show?.original_name}
-      />
+      /> */}
 
       <SeasonNav tmdbID={id} seasons={show?.seasons} />
 

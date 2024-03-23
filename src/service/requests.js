@@ -71,3 +71,16 @@ export const getGenreNames = async (type, id) => {
     return 'Unknown';
   }
 }
+
+export const getContentRating = async (id) => {
+  const parameters = `https://api.themoviedb.org/3/tv/${id}/content_ratings`;
+  
+  try {
+    const response = await instance.get(parameters);
+    const usIso = response.data.results.find(rating => rating.iso_3166_1 === "US");
+    return usIso ? usIso.rating : null;
+  } catch (error) {
+    console.error('Error fetching content rating:', error);
+    return 'Unknown';
+  }
+}

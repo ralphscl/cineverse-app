@@ -19,9 +19,10 @@ a {
   text-decoration: none;
 }
 
+.row,
 .tvlist section,
 .tvpage section {
-  width: 90%;
+  width: 96%;
   margin-bottom: 4rem;
 }
 
@@ -47,10 +48,15 @@ a {
 }
 
 @media (min-width: 640px) { 
-    
+  .row,
+  .tvlist section,
+  .tvpage section {
+      width: 80%;
+  }
 }
 
 @media (min-width: 768px) { 
+  .row,
   .tvlist section,
   .tvpage section {
       width: 70%;

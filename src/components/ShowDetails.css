@@ -15,6 +15,10 @@
     font-weight: bold;
 }
 
+.content .overview {
+    width: 90%;
+}
+
 .content ul { 
     list-style: none; 
     margin: 3rem 0 2rem; 
@@ -31,6 +35,12 @@
 .content ul li:first-child {
     padding-left: 0;
     border: none;
+}
+
+.content ul li span {
+    font-size: .8rem;
+    border: 2px solid white;
+    padding: 4px 8px;
 }
 
 .content .btn {
