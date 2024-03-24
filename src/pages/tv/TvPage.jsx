@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ShowBanner from "../../components/banner/ShowBanner";
 import ShowDetails from "../../components/ShowDetails";
-import YoutubeTrailer from "../../components/YoutubeTrailer";
 import SeasonNav from "../../components/seasons/SeasonNav";
 import Credits from "../../components/credits/Credits";
 import Recommended from "../../components/Recommended";
@@ -28,12 +27,6 @@ const TvPage = () => {
       <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
 
       <ShowDetails show={show} />
-
-      {/* <YoutubeTrailer
-        containerID="trailer"
-        tmdbID={id}
-        title={show?.name || show?.original_name}
-      /> */}
 
       <SeasonNav tmdbID={id} seasons={show?.seasons} />
 

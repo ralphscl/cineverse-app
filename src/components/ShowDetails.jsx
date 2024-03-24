@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import YoutubeTrailer from "../components/YoutubeTrailer";
 // Utils
 import { splitSlug } from "../utils/StringUtils";
 import "./ShowDetails.css";
-import { getContentRating } from "../service/requests";
 
 const ShowDetails = ({ show }) => {
   const [contentRating, setContentRating] = useState(null);
@@ -18,7 +18,7 @@ const ShowDetails = ({ show }) => {
   console.log(contentRating);
 
   return (
-    <section className="content">
+    <section className="show-details">
       <h1>{show?.title || show?.name || show?.original_name}</h1>
 
       <a
@@ -29,14 +29,18 @@ const ShowDetails = ({ show }) => {
       >
         Visit
       </a>
-      <a href="#trailer" className="btn trailer">
-        Trailer
-      </a>
+      <YoutubeTrailer
+        containerID="trailer"
+        tmdbID={show?.id}
+        title={show?.name || show?.original_name}
+      />
 
       <ul>
-        <li>
-          <span>{contentRating}</span>
-        </li>
+        {contentRating && (
+          <li>
+            <span>{contentRating}</span>
+          </li>
+        )}
         <li>{splitSlug(show?.first_air_date)[0]}</li>
         <li>
           {show?.seasons?.length} Season

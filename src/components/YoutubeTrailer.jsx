@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 // Hooks
 import { useFetchApi } from "../hooks/useFetchApi";
 // Service
@@ -7,6 +7,8 @@ import { getTvShowVideo } from "../service/requests";
 import "./YoutubeTrailer.css";
 
 const YoutubeTrailer = ({ containerID, tmdbID, title }) => {
+  const [showTrailer, setShowTrailer] = useState(false);
+
   const {
     isLoading,
     hasError,
@@ -21,18 +23,35 @@ const YoutubeTrailer = ({ containerID, tmdbID, title }) => {
   };
 
   return (
-    <section id={containerID} className="youtube-trailer">
-      {trailer?.results && (
-        <iframe
-          src={`https://www.youtube.com/embed/${
-            getTrailer()?.key
-          }?si=JCnaD6PZ1xf_D1ch`}
-          title={title}
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowFullScreen
-        ></iframe>
+    <>
+      <a
+        className="btn btn-trailer"
+        onClick={() => setShowTrailer(!showTrailer)}
+      >
+        Trailer
+      </a>
+
+      {showTrailer && (
+        <div
+          id={containerID}
+          className="trailer"
+          onClick={() => setShowTrailer(false)}
+        >
+          <div className="container">
+            {trailer?.results && (
+              <iframe
+                src={`https://www.youtube.com/embed/${
+                  getTrailer()?.key
+                }?si=JCnaD6PZ1xf_D1ch?autoplay=1`}
+                title={title}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share autoplay"
+                allowFullScreen
+              ></iframe>
+            )}
+          </div>
+        </div>
       )}
-    </section>
+    </>
   );
 };
 

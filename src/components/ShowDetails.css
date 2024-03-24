@@ -1,4 +1,4 @@
-.content {
+.show-details {
     background-color: transparent;
     position: relative;
     display: block;
@@ -9,41 +9,41 @@
     z-index: 1;
 }
 
-.content h1 {
+.show-details h1 {
     margin: 2rem 0;
     font-size: var(--fs-header1);
     font-weight: bold;
 }
 
-.content .overview {
+.show-details .overview {
     width: 90%;
 }
 
-.content ul { 
+.show-details ul { 
     list-style: none; 
     margin: 3rem 0 2rem; 
     padding: 0; 
 }
 
-.content ul li { 
+.show-details ul li { 
     font-size: var(--fs-default);
     display: inline; 
     padding: 0rem 1rem;
     border-left: 1px solid #ffffff40;
 }
 
-.content ul li:first-child {
+.show-details ul li:first-child {
     padding-left: 0;
     border: none;
 }
 
-.content ul li span {
+.show-details ul li span {
     font-size: .8rem;
     border: 2px solid white;
     padding: 4px 8px;
 }
 
-.content .btn {
+.show-details .btn {
     margin: 0 1rem 0rem 0rem;
     padding: 1rem 2.6rem;
     font-size: .85rem;
@@ -52,31 +52,20 @@
     cursor: pointer;
 }
 
-.content .btn.visit {
+.show-details .btn.visit {
     background-color: #ce3824;
     color: white;
     border: 2px solid #ce3824;
 }
 
-.content .btn.trailer {
-    background: transparent;
-    border: 2px solid white;
-}
-
-.content .btn:hover {
-    background-color: white;
-    color: black;
-    border: 2px solid white;
-}
-
-.content .overview,
-.content .genre {
+.show-details .overview,
+.show-details .genre {
     font-size: var(--fs-default);
     line-height: 1.8em;
 }
 
 @media (min-width: 640px) { 
-    .content {
+    .show-details {
         margin: -24rem auto 1rem;
     }
 }
@@ -86,7 +75,7 @@
 }
 
 @media (min-width: 1024px) { 
-    .content {
+    .show-details {
         margin: -26rem auto 1rem;
     }
 }
