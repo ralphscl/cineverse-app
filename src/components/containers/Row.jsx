@@ -3,9 +3,16 @@ import ShowCard from "../cards/showCard/ShowCard.jsx";
 import { useFetchApi } from "../../hooks/useFetchApi.jsx";
 // CSS
 import "./Row.css";
+import { useEffect } from "react";
 
-const Row = ({ title, reqUrl, cardType }) => {
+const Row = ({ title, reqUrl, cardType, hasApiResult }) => {
   const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl);
+
+  useEffect(() => {
+    if (hasApiResult && shows?.results.length === 0) {
+      hasApiResult(false);
+    }
+  }, [shows]);
 
   return (
     <div>

@@ -19,6 +19,7 @@ const TvPage = () => {
   const [id] = splitSlug(slug);
 
   const { isLoading, hasError, apiData: show } = useFetchApi(getTvShow(id));
+  const [recommended, hasRecommended] = useState(true);
 
   return (
     <div className="tvpage">
@@ -34,7 +35,9 @@ const TvPage = () => {
         <Credits tmdbID={id} />
       </div>
 
-      <Recommended tmbdID={id} type={"tv"} />
+      {recommended && (
+        <Recommended tmbdID={id} type={"tv"} hasApiResult={hasRecommended} />
+      )}
     </div>
   );
 };

@@ -15,7 +15,7 @@ const ShowDetails = ({ show }) => {
 
     fetchContentRating();
   }, [show]);
-  console.log(contentRating);
+  // console.log(contentRating);
 
   return (
     <section className="show-details">
