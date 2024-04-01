@@ -3,13 +3,15 @@ import EpisodeList from "../episodes/EpisodeList";
 import "./SeasonNav.css";
 
 const SeasonNav = ({ tmdbID, seasons }) => {
-  const [curSeason, setCurSeason] = useState();
+  const [curSeason, setCurSeason] = useState(0);
 
   useEffect(() => {
     if (curSeason === undefined && seasons?.length > 0) {
       setCurSeason(seasons[0].season_number);
     }
   }, [curSeason, seasons]);
+
+  useEffect(() => setCurSeason(0), [tmdbID]);
 
   return (
     <section className="season-nav">

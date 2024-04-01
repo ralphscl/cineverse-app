@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import YoutubeTrailer from "../components/YoutubeTrailer";
+import { getContentRating } from "../service/requests";
 // Utils
 import { splitSlug } from "../utils/StringUtils";
 import "./ShowDetails.css";
