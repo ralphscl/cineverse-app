@@ -21,6 +21,8 @@ const TvPage = () => {
   const { isLoading, hasError, apiData: show } = useFetchApi(getTvShow(id));
   const [recommended, hasRecommended] = useState(true);
 
+  useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), [id]);
+
   return (
     <div className="tvpage">
       {isLoading && <p className="loading">Loading.....</p>}
