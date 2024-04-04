@@ -1,12 +1,15 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import YoutubeTrailer from "../components/YoutubeTrailer";
 import { getContentRating } from "../service/requests";
 // Utils
-import { splitSlug } from "../utils/StringUtils";
+import { splitSlug, convertToSlug } from "../utils/StringUtils";
 import "./ShowDetails.css";
 
-const ShowDetails = ({ show }) => {
+const ShowDetails = ({ show, allowLinkTitle = null }) => {
   const [contentRating, setContentRating] = useState(null);
+
+  const showTitle = show?.title || show?.name || show?.original_name;
 
   useEffect(() => {
     const fetchContentRating = async () => {
@@ -20,7 +23,9 @@ const ShowDetails = ({ show }) => {
 
   return (
     <section className="show-details">
-      <h1>{show?.title || show?.name || show?.original_name}</h1>
+      <Link to={`/tv/${show?.id}-${convertToSlug(showTitle)}`}>
+        <h1>{showTitle}</h1>
+      </Link>
 
       <a
         className="btn visit"

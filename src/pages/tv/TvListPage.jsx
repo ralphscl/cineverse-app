@@ -31,9 +31,13 @@ const TvShowsPage = () => {
 
   return (
     <div className="tvlist">
-      <ShowBanner imageUrl={bannerShow?.backdrop_path} size="sm" />
+      <ShowBanner
+        imageUrl={bannerShow?.backdrop_path}
+        size="sm"
+        allowLinkTitle={true}
+      />
 
-      <ShowDetails show={bannerShow} />
+      <ShowDetails show={bannerShow} allowLinkTitle={true} />
 
       <div className="listing">
         <Row

@@ -11,7 +11,7 @@ const ShowBanner = ({ imageUrl, size }) => {
       style={{
         backgroundImage: imageUrl && `url(${TMDB_ASSET_BASEURL}${imageUrl})`,
         backgroundSize: "cover",
-        backgroundPosition: "center center",
+        backgroundPosition: size === "sm" ? "top center" : "center center",
       }}
     >
       <Overlay />
