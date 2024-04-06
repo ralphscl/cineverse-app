@@ -13,6 +13,7 @@ import { getTvShow } from "../../service/requests";
 import { splitSlug } from "../../utils/StringUtils";
 // CSS
 import "./TvPage.css";
+import Comments from "../../components/comments/Comments";
 
 const TvPage = () => {
   const { slug } = useParams();
@@ -27,6 +28,7 @@ const TvPage = () => {
     <div className="tvpage">
       {isLoading && <p className="loading">Loading.....</p>}
       {hasError && <p>Error fetching data. Please try again later</p>}
+
       <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
 
       <ShowDetails show={show} />
@@ -40,6 +42,8 @@ const TvPage = () => {
       {recommended && (
         <Recommended tmbdID={id} type={"tv"} hasApiResult={hasRecommended} />
       )}
+
+      <Comments tmbdID={id} />
     </div>
   );
 };

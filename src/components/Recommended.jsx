@@ -5,14 +5,14 @@ import "./Recommended.css";
 
 const Recommended = ({ type, tmbdID, hasApiResult = null }) => {
   return (
-    <div className="recommended">
+    <section className="recommended">
       <Row
         title="More like this"
         reqUrl={getRecommended(type, tmbdID)}
         cardType="poster"
         hasApiResult={hasApiResult}
       />
-    </div>
+    </section>
   );
 };
 

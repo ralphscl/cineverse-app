@@ -6,7 +6,7 @@ const SeasonNav = ({ tmdbID, seasons }) => {
   const [curSeason, setCurSeason] = useState(0);
 
   useEffect(() => {
-    if (curSeason === undefined && seasons?.length > 0) {
+    if (curSeason !== undefined && seasons?.length > 0) {
       setCurSeason(seasons[0].season_number);
     }
   }, [curSeason, seasons]);
