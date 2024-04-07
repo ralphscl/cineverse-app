@@ -8,6 +8,7 @@
 
 body {
   margin: 0;
+  min-width: 400px;
 }
 
 .loading {
@@ -20,7 +21,8 @@ a {
 }
 
 .tvlist section,
-.tvpage section {
+.tvpage section,
+.footer section .wrapper {
   width: 96%;
 }
 
@@ -47,15 +49,17 @@ a {
 
 @media (min-width: 640px) { 
   .tvlist section,
-  .tvpage section {
-      width: 80%;
+  .tvpage section,
+  .footer section .wrapper  {
+      width: 90%;
   }
 }
 
 @media (min-width: 768px) { 
   .tvlist section,
-  .tvpage section {
-      width: 70%;
+  .tvpage section,
+  .footer section .wrapper  {
+      width: 80%;
   }
 }
 

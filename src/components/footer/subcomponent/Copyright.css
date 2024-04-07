@@ -1,0 +1,40 @@
+.copyright {
+    background: #0000001a;
+    padding: 1.6rem 0;
+    border-top: 1px solid #ffffff0d;
+}
+
+.copyright .wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content:space-between;
+    margin: 0 auto;
+}
+
+.copyright .wrapper p {
+    font-size: .8rem;
+    margin: 0;
+}
+
+
+@media (min-width: 640px) { 
+    .copyright .wrapper {
+        flex-direction: row;
+    }
+}
+
+@media (min-width: 768px) { 
+
+}
+
+@media (min-width: 1024px) { 
+
+}
+
+@media (min-width: 1280px) { 
+
+}
+
+@media (min-width: 1536px) { 
+
+}

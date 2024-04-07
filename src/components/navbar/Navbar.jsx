@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import CineverseLogo from "../../assets/cineverse-hd-logo-transparent.png";
 import "./Navbar.css";
-import { Link } from "react-router-dom";
 
 const Navbar = () => {
   const [navbarClass, setNavbarClass] = useState(false);
