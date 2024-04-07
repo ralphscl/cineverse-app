@@ -3,15 +3,15 @@ import React, { useEffect, useState } from "react";
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
 // Service
 import { requests, getTvShows } from "../../service/requests";
+import { useFetchApi } from "../../hooks/useFetchApi";
 // Components
 import ShowBanner from "../../components/banner/ShowBanner";
-import ShowDetails from "../../components/ShowDetails";
+import ShowDetails from "../../components/showDetails/ShowDetails";
 import Row from "../../components/containers/Row";
 // CSS
-import "./TvListPage.css";
-import { useFetchApi } from "../../hooks/useFetchApi";
+import "./SeriesList.css";
 
-const TvShowsPage = () => {
+const SeriesList = () => {
   const [network, setNetwork] = useState("disney+");
   const [bannerShow, setBannerShow] = useState(null);
 
@@ -30,7 +30,7 @@ const TvShowsPage = () => {
   }, [trendingData]);
 
   return (
-    <div className="tvlist">
+    <div className="series-list">
       <ShowBanner
         imageUrl={bannerShow?.backdrop_path}
         size="sm"
@@ -60,4 +60,4 @@ const TvShowsPage = () => {
   );
 };
 
-export default TvShowsPage;
+export default SeriesList;

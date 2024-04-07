@@ -1,10 +1,10 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import { getTvSeason } from "../../service/requests";
+import { getTvSeason } from "../../../service/requests";
 // Hooks
-import { useFetchApi } from "../../hooks/useFetchApi";
+import { useFetchApi } from "../../../hooks/useFetchApi";
 import "./EpisodeList.css";
 
-const EpisodeCard = lazy(() => import("../cards/episodeCard/EpisodeCard"));
+const EpisodeCard = lazy(() => import("../../cards/episodeCard/EpisodeCard"));
 const EpisodeList = ({ containerID, tmdbID, season }) => {
   const {
     isLoading,

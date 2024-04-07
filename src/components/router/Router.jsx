@@ -4,10 +4,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "../../Layout";
 
 // Lazy-load your pages/components
-// const HomePage = lazy(() => import("../../pages/HomePage"));
-const TvListPage = lazy(() => import("../../pages/tv/TvListPage"));
-const TvPage = lazy(() => import("../../pages/tv/TvPage"));
-const HomePage = lazy(() => import("../../pages/HomePage"));
+const SeriesList = lazy(() => import("../../pages/series/SeriesList"));
+const TvPage = lazy(() => import("../../pages/series/TvPage"));
+const HomePage = lazy(() => import("../../pages/homepage/HomePage"));
 
 const Router = () => {
   return (
@@ -16,7 +15,7 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
-            <Route path="/tv" element={<TvListPage />} />
+            <Route path="/tv" element={<SeriesList />} />
             <Route path="/tv/:slug" element={<TvPage />} />
           </Route>
         </Routes>

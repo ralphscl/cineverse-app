@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import EpisodeList from "../episodes/EpisodeList";
-import "./SeasonNav.css";
+import "./SeasonList.css";
 
-const SeasonNav = ({ tmdbID, seasons }) => {
+const SeasonList = ({ tmdbID, seasons }) => {
   const [curSeason, setCurSeason] = useState(0);
 
   useEffect(() => {
@@ -14,7 +14,7 @@ const SeasonNav = ({ tmdbID, seasons }) => {
   useEffect(() => setCurSeason(0), [tmdbID]);
 
   return (
-    <section className="season-nav">
+    <section className="season-list">
       <div className="seasons">
         <ul>
           {seasons?.map((season) => (
@@ -43,4 +43,4 @@ const SeasonNav = ({ tmdbID, seasons }) => {
   );
 };
 
-export default SeasonNav;
+export default SeasonList;

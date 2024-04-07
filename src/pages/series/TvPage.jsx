@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import ShowBanner from "../../components/banner/ShowBanner";
-import ShowDetails from "../../components/ShowDetails";
-import SeasonNav from "../../components/seasons/SeasonNav";
+import ShowDetails from "../../components/showDetails/ShowDetails";
+import SeasonList from "../../components/series/seasons/SeasonList";
 import Credits from "../../components/credits/Credits";
-import Recommended from "../../components/Recommended";
+import Recommended from "../../components/recommended/Recommended";
+import Comments from "../../components/comments/Comments";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
@@ -13,7 +14,6 @@ import { getTvShow } from "../../service/requests";
 import { splitSlug } from "../../utils/StringUtils";
 // CSS
 import "./TvPage.css";
-import Comments from "../../components/comments/Comments";
 
 const TvPage = () => {
   const { slug } = useParams();
@@ -33,7 +33,7 @@ const TvPage = () => {
 
       <ShowDetails show={show} />
 
-      <SeasonNav tmdbID={id} seasons={show?.seasons} />
+      <SeasonList tmdbID={id} seasons={show?.seasons} />
 
       <div style={{ backgroundColor: "rgba(255,255,255,3%)" }}>
         <Credits tmdbID={id} />

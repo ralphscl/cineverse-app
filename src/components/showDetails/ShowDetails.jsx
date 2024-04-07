@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import YoutubeTrailer from "../components/YoutubeTrailer";
-import { getContentRating } from "../service/requests";
+import YoutubeTrailer from "../youtubeTrailer/YoutubeTrailer";
+import { getContentRating } from "../../service/requests";
 // Utils
-import { splitSlug, convertToSlug } from "../utils/StringUtils";
+import { splitSlug, convertToSlug } from "../../utils/StringUtils";
 import "./ShowDetails.css";
 
 const ShowDetails = ({ show, allowLinkTitle = null }) => {

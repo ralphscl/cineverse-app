@@ -1,8 +1,8 @@
 import { useState } from "react";
 // Hooks
-import { useFetchApi } from "../hooks/useFetchApi";
+import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
-import { getTvShowVideo } from "../service/requests";
+import { getTvShowVideo } from "../../service/requests";
 // CSS
 import "./YoutubeTrailer.css";
 

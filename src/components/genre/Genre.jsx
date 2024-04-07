@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getGenreNames } from "../service/requests.js";
+import { getGenreNames } from "../../service/requests.js";
 
 const Genre = ({ show, showType }) => {
   const [genres, setGenres] = useState();

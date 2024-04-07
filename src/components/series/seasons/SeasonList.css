@@ -1,4 +1,4 @@
-.season-nav {
+.season-list {
     position: relative;
     padding: 3rem 0.5rem;
     margin-left: auto;
@@ -6,25 +6,25 @@
     text-align: left;
 }
 
-.season-nav .seasons {
+.season-list .seasons {
     overflow-x: auto;
     white-space: nowrap;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
 }
 
-.season-nav .seasons::-webkit-scrollbar {
+.season-list .seasons::-webkit-scrollbar {
     display: none; 
  }
 
-.season-nav .seasons ul {
+.season-list .seasons ul {
     display: inline-block;
     list-style: none; 
     padding: 0;
     width: 100%;
 }
 
-.season-nav .seasons ul li {
+.season-list .seasons ul li {
     display: inline-block;
     text-align: center;
     font-weight: bold;
@@ -35,6 +35,6 @@
     scroll-snap-align: start;
 }
 
-.season-nav .seasons ul li.active {
+.season-list .seasons ul li.active {
     border-bottom: 2px solid #ce382480;
 }

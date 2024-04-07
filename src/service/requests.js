@@ -1,5 +1,5 @@
 import networkId from './networks.js';
-import instance from '../service/tmdb.js';
+import instance from './tmdb.js';
 
 export const requests = {
   'getTrending': `/trending/tv/week?language=en-US`,
