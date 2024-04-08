@@ -1,0 +1,23 @@
+.backToTop {
+    display: none;
+    position: fixed;
+    right: 2rem;
+    bottom: 4rem;
+
+    z-index: 10;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.backToTop.visible {
+    display: block;
+}
+
+.backToTop svg {
+    width: 3rem;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.backToTop svg:hover {
+    background-color: #ffffff60;
+}
