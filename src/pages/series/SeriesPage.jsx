@@ -9,7 +9,7 @@ import Comments from "../../components/comments/Comments";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
-import { getTvShow } from "../../service/requests";
+import { getSeriesDetails } from "../../service/requests";
 // Utils
 import { splitSlug } from "../../utils/StringUtils";
 // CSS
@@ -19,7 +19,11 @@ const SeriesPage = () => {
   const { slug } = useParams();
   const [id] = splitSlug(slug);
 
-  const { isLoading, hasError, apiData: show } = useFetchApi(getTvShow(id));
+  const {
+    isLoading,
+    hasError,
+    apiData: show,
+  } = useFetchApi(getSeriesDetails(id));
   const [recommended, hasRecommended] = useState(true);
 
   useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), [id]);

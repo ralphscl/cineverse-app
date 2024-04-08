@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // Utils
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
 // Service
-import { requests, getTvShows } from "../../service/requests";
+import { requests, getSeriesList } from "../../service/requests";
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Components
 import ShowBanner from "../../components/banner/ShowBanner";
@@ -19,7 +19,7 @@ const SeriesList = () => {
     isLoading,
     hasError,
     apiData: trendingData,
-  } = useFetchApi(getTvShows(1, network, "popularity", "desc"));
+  } = useFetchApi(getSeriesList(1, network, "popularity", "desc"));
 
   useEffect(() => {
     setBannerShow(
@@ -42,7 +42,7 @@ const SeriesList = () => {
       <div className="listing">
         <Row
           title={`${capitalizeFirstLetter(network)} TV Shows`}
-          reqUrl={getTvShows(2, network)}
+          reqUrl={getSeriesList(2, network)}
           cardType="poster"
         />
         <Row

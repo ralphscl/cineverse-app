@@ -7,7 +7,7 @@ export const requests = {
   'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
 };
 
-export const getTvShows = ( page = 1, network='netflix', sortBy='vote_average', sortOrder='desc' ) => {
+export const getSeriesList = ( page = 1, network='netflix', sortBy='vote_average', sortOrder='desc' ) => {
   const includeAdult = false;
   const includeNullFirstAirDates = false;
   const language = 'en-US';
@@ -25,15 +25,15 @@ export const getTvShows = ( page = 1, network='netflix', sortBy='vote_average', 
   return params;
 }
 
-export const getTvShow = (id) => {
+export const getSeriesDetails = (id) => {
   return `/tv/${id}?language=en-US`;
 }
 
-export const getTvShowVideo = (id) => {
+export const getSeriesTrailers = (id) => {
   return `/tv/${id}/videos?language=en-US`;
 }
 
-export const getTvSeason = ( id, season, episode = null ) => {
+export const getSeriesSeasons = ( id, season, episode = null ) => {
   let params = `/tv/${id}/season/${season}`;
 
   if(episode !== null) {
@@ -55,19 +55,6 @@ export const getRecommended = (type, id) => {
   return `/${type}/${id}/recommendations?language=en-US&page=1`;
 }
 
-export const getGenreNames = async (type, id) => {
-  const parameters = `https://api.themoviedb.org/3/genre/${type}/list?language=en`;
-  
-  try {
-    const response = await instance.get(parameters);
-    const genre = response.data.genres.find(genre => genre.id === id);
-    return genre ? genre.name : 'Unknown';
-  } catch (error) {
-    console.error('Error fetching genre name:', error);
-    return 'Unknown';
-  }
-}
-
 export const getContentRating = async (id) => {
   const parameters = `https://api.themoviedb.org/3/tv/${id}/content_ratings`;
   
@@ -77,6 +64,19 @@ export const getContentRating = async (id) => {
     return usIso ? usIso.rating : null;
   } catch (error) {
     console.error('Error fetching content rating:', error);
+    return 'Unknown';
+  }
+}
+
+export const getGenreNames = async (type, id) => {
+  const parameters = `https://api.themoviedb.org/3/genre/${type}/list?language=en`;
+  
+  try {
+    const response = await instance.get(parameters);
+    const genre = response.data.genres.find(genre => genre.id === id);
+    return genre ? genre.name : 'Unknown';
+  } catch (error) {
+    console.error('Error fetching genre name:', error);
     return 'Unknown';
   }
 }

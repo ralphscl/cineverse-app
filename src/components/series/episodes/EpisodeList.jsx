@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import { getTvSeason } from "../../../service/requests";
+import { getSeriesSeasons } from "../../../service/requests";
 // Hooks
 import { useFetchApi } from "../../../hooks/useFetchApi";
 import "./EpisodeList.css";
@@ -10,7 +10,7 @@ const EpisodeList = ({ containerID, tmdbID, season }) => {
     isLoading,
     hasError,
     apiData: seasonDetails,
-  } = useFetchApi(getTvSeason(tmdbID, season));
+  } = useFetchApi(getSeriesSeasons(tmdbID, season));
 
   return (
     <Suspense fallback={<div>Loading Components...</div>}>

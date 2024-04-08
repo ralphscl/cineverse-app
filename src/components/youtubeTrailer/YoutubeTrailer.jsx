@@ -2,7 +2,7 @@ import { useState } from "react";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
-import { getTvShowVideo } from "../../service/requests";
+import { getSeriesTrailers } from "../../service/requests";
 // CSS
 import "./YoutubeTrailer.css";
 
@@ -13,7 +13,7 @@ const YoutubeTrailer = ({ containerID, tmdbID, title }) => {
     isLoading,
     hasError,
     apiData: trailer,
-  } = useFetchApi(getTvShowVideo(tmdbID));
+  } = useFetchApi(getSeriesTrailers(tmdbID));
 
   const getTrailer = () => {
     const trailerVideo = trailer?.results.find(
