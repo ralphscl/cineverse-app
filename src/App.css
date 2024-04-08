@@ -20,6 +20,7 @@ a {
   text-decoration: none;
 }
 
+.series-list .row,
 .series-list section,
 .series-page section,
 .footer section .wrapper {
@@ -48,6 +49,7 @@ a {
 }
 
 @media (min-width: 640px) { 
+  .series-list .row,
   .series-list section,
   .series-page section,
   .footer section .wrapper  {
@@ -56,6 +58,7 @@ a {
 }
 
 @media (min-width: 768px) { 
+  .series-list .row,
   .series-list section,
   .series-page section,
   .footer section .wrapper  {

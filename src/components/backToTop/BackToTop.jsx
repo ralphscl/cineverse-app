@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import ArrowUp from "../../assets/arrow-up-square.svg?react";
+import ArrowUp from "../../assets/svg/arrow-up-square.svg?react";
 import "./BackToTop.css";
 
 const BackToTop = () => {

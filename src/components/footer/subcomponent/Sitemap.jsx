@@ -1,7 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import StripedBackground from "../../../assets/freepik-footer-dark-bg-striped.jpg";
-import CineverseLogo from "../../../assets/cineverse-hd-logo-transparent.png";
+import CineverseLogo from "../../../assets/png/cineverse-hd-logo-transparent.png";
 import "./Sitemap.css";
 
 const Sitemap = () => {

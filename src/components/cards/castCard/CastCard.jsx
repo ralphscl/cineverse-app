@@ -1,7 +1,7 @@
 import React from "react";
 import { useFetchApi } from "../../../hooks/useFetchApi";
 import { getCast } from "../../../service/requests";
-import NoImagePlaceholder from "../../../assets/no_image_placeholder.png";
+import NoImagePlaceholder from "../../../assets/png/no_image_placeholder.png";
 import "./CastCard.css";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;

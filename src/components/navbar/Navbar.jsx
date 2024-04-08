@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import CineverseLogo from "../../assets/cineverse-hd-logo-transparent.png";
+import CineverseLogo from "../../assets/png/cineverse-hd-logo-transparent.png";
 import "./Navbar.css";
 
 const Navbar = () => {
