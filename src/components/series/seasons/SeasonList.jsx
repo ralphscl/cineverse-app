@@ -6,10 +6,11 @@ const SeasonList = ({ tmdbID, seasons }) => {
   const [curSeason, setCurSeason] = useState(0);
 
   useEffect(() => {
-    if (curSeason !== undefined && seasons?.length > 0) {
-      setCurSeason(seasons[curSeason].season_number);
+    // Update the current season when seasons is not empty
+    if (seasons?.length > 0) {
+      setCurSeason(seasons[0]?.season_number);
     }
-  }, [curSeason, seasons]);
+  }, [seasons]);
 
   useEffect(() => setCurSeason(0), [tmdbID]);
 

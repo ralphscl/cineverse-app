@@ -18,7 +18,7 @@ const Row = ({ title, reqUrl, cardType, hasApiResult }) => {
     <div>
       <h2 className="title">{title}</h2>
 
-      <div className="row">
+      <div className={`row ${cardType === "poster" ? "poster" : "backdrop"}`}>
         {isLoading && <section className="loading">Loading.....</section>}
         {hasError && <p>Error fetching data. Please try again later</p>}
         {shows?.results?.map((show) => {
