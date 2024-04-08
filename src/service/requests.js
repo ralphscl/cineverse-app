@@ -33,12 +33,8 @@ export const getTvShowVideo = (id) => {
   return `/tv/${id}/videos?language=en-US`;
 }
 
-export const getTvSeason = ( id, season = null, episode = null ) => {
-  let params = `/tv/${id}`;
-
-  if(season !== null) { 
-    params += `/season/${season}`;
-  }
+export const getTvSeason = ( id, season, episode = null ) => {
+  let params = `/tv/${id}/season/${season}`;
 
   if(episode !== null) {
     params += `/episode/${episode}`;

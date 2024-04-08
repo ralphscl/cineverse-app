@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import EpisodeList from "../episodes/EpisodeList";
 import "./SeasonList.css";
 
@@ -7,7 +7,7 @@ const SeasonList = ({ tmdbID, seasons }) => {
 
   useEffect(() => {
     if (curSeason !== undefined && seasons?.length > 0) {
-      setCurSeason(seasons[0].season_number);
+      setCurSeason(seasons[curSeason].season_number);
     }
   }, [curSeason, seasons]);
 
