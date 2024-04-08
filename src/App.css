@@ -20,8 +20,8 @@ a {
   text-decoration: none;
 }
 
-.tvlist section,
-.tvpage section,
+.series-list section,
+.series-page section,
 .footer section .wrapper {
   width: 96%;
 }
@@ -48,16 +48,16 @@ a {
 }
 
 @media (min-width: 640px) { 
-  .tvlist section,
-  .tvpage section,
+  .series-list section,
+  .series-page section,
   .footer section .wrapper  {
       width: 90%;
   }
 }
 
 @media (min-width: 768px) { 
-  .tvlist section,
-  .tvpage section,
+  .series-list section,
+  .series-page section,
   .footer section .wrapper  {
       width: 80%;
   }

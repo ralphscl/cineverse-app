@@ -13,9 +13,9 @@ import { getTvShow } from "../../service/requests";
 // Utils
 import { splitSlug } from "../../utils/StringUtils";
 // CSS
-import "./TvPage.css";
+import "./SeriesPage.css";
 
-const TvPage = () => {
+const SeriesPage = () => {
   const { slug } = useParams();
   const [id] = splitSlug(slug);
 
@@ -25,7 +25,7 @@ const TvPage = () => {
   useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), [id]);
 
   return (
-    <div className="tvpage">
+    <div className="series-page">
       {isLoading && <p className="loading">Loading.....</p>}
       {hasError && <p>Error fetching data. Please try again later</p>}
 
@@ -48,4 +48,4 @@ const TvPage = () => {
   );
 };
 
-export default TvPage;
+export default SeriesPage;
