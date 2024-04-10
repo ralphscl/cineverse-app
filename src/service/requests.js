@@ -1,4 +1,4 @@
-import networkId from './networks.js';
+import networks from './networks.js';
 import instance from './tmdb.js';
 
 export const requests = {
@@ -19,7 +19,7 @@ export const getSeriesList = ( page = 1, network='netflix', sortBy='vote_average
   }
 
   if (network) {
-    params += `&with_networks=${networkId[network]}`;
+    params += `&with_networks=${networks[network]}`;
   }
 
   return params;
@@ -49,6 +49,10 @@ export const getCredits = (id) => {
 
 export const getCast = (id) => {
   return `/person/${id}?language=en-US'`;
+}
+
+export const getNetworkDetails = (id) => {
+  return `/network/${id}`;
 }
 
 export const getRecommended = (type, id) => {

@@ -35,7 +35,7 @@ const Sitemap = () => {
               <Link>Movies</Link>
             </li>
             <li>
-              <Link to={"/tv"}>Series</Link>
+              <Link to={"/series"}>Series</Link>
             </li>
             <li>
               <Link>Blogs</Link>

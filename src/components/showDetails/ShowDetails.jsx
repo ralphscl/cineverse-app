@@ -23,7 +23,7 @@ const ShowDetails = ({ show, allowLinkTitle = null }) => {
 
   return (
     <section className="show-details">
-      <Link to={`/tv/${show?.id}-${convertToSlug(showTitle)}`}>
+      <Link to={`/series/${show?.id}-${convertToSlug(showTitle)}`}>
         <h1>{showTitle}</h1>
       </Link>
 

@@ -1,6 +1,6 @@
 import React from "react";
-import Copyright from "./subcomponent/Copyright";
-import Sitemap from "./subcomponent/Sitemap";
+import Copyright from "./sub/Copyright";
+import Sitemap from "./sub/Sitemap";
 import "./Footer.css";
 
 const Footer = () => {

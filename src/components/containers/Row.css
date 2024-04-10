@@ -19,7 +19,11 @@
     height: 240px;
 }
 
-
 .row::-webkit-scrollbar {
    display: none; 
+}
+
+.row-title {
+    position: relative;
+    z-index: 10;
 }

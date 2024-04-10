@@ -8,7 +8,7 @@ const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 const ShowCard = ({ show, cardType }) => {
   return (
     <Link
-      to={`/tv/${show.id}-${convertToSlug(
+      to={`/series/${show.id}-${convertToSlug(
         show.title || show.name || show.original_name
       )}`}
     >

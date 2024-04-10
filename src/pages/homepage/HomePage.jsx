@@ -7,7 +7,7 @@ const HomePage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    navigate("/tv");
+    navigate("/series");
   }, [navigate]);
 
   return null;
