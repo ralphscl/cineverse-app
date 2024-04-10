@@ -5,6 +5,7 @@ import { useFetchApi } from "../../../hooks/useFetchApi";
 import "./EpisodeList.css";
 
 const EpisodeCard = lazy(() => import("../../cards/episodeCard/EpisodeCard"));
+
 const EpisodeList = ({ containerID, tmdbID, season }) => {
   const {
     isLoading,

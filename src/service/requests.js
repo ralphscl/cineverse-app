@@ -41,7 +41,7 @@ export const getSeriesSeasons = ( id, season, episode = null ) => {
     params += `/episode/${episode}`;
   }
   
-  return params += `?language=en-US'`
+  return params += `?language=en-US`
 }
 
 // Others

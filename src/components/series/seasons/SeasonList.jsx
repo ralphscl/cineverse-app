@@ -35,11 +35,13 @@ const SeasonList = ({ tmdbID, seasons }) => {
         </ul>
       </div>
 
-      <EpisodeList
-        containerID={"episodes"}
-        tmdbID={tmdbID}
-        season={curSeason}
-      />
+      {curSeason && (
+        <EpisodeList
+          containerID={"episodes"}
+          tmdbID={tmdbID}
+          season={curSeason}
+        />
+      )}
     </section>
   );
 };
