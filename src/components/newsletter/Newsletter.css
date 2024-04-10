@@ -1,0 +1,39 @@
+.newsletter {
+    background-color: #ce3824;
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.newsletter h2,
+.newsletter p,
+.newsletter input,
+.newsletter button {
+    padding: 0;
+    margin: 0;
+}
+
+
+.newsletter input {
+    background-color: white;
+    color: #161616;
+    margin: 1rem 0;
+    padding: 0rem 0.6rem;
+    height: 2.2rem;
+    width: 40%;
+    border-radius: 2px;
+    border: none;
+    outline: none;
+}
+
+.newsletter button {
+    margin: 0 1rem 0rem 0rem;
+    padding: 1rem 2.6rem;
+    font-size: .85rem;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 0;
+}

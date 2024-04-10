@@ -12,7 +12,7 @@ import Row from "../../components/containers/Row";
 import "./SeriesList.css";
 
 const SeriesList = () => {
-  const [network, setNetwork] = useState("disney+");
+  const [network, setNetwork] = useState("netflix");
   const [bannerShow, setBannerShow] = useState(null);
 
   const {
