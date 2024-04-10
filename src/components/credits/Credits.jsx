@@ -14,6 +14,7 @@ const Credits = ({ tmdbID }) => {
       <div className="casts">
         {apiData?.cast?.slice(0, 15).map((cast) => (
           <CastCard
+            key={cast?.id}
             tmdbID={cast?.id}
             castCharacter={cast?.roles[0].character}
           />

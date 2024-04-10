@@ -7,6 +7,7 @@ export const requests = {
   'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
 };
 
+// Series
 export const getSeriesList = ( page = 1, network='netflix', sortBy='vote_average', sortOrder='desc' ) => {
   const includeAdult = false;
   const includeNullFirstAirDates = false;
@@ -43,6 +44,8 @@ export const getSeriesSeasons = ( id, season, episode = null ) => {
   return params += `?language=en-US'`
 }
 
+// Others
+
 export const getCredits = (id) => {
   return `/tv/${id}/aggregate_credits?language=en-US`;
 }
@@ -60,6 +63,11 @@ export const getRecommended = (type, id) => {
 }
 
 export const getContentRating = async (id) => {
+
+  if(!id) {
+    return;
+  }
+
   const parameters = `https://api.themoviedb.org/3/tv/${id}/content_ratings`;
   
   try {
@@ -73,6 +81,11 @@ export const getContentRating = async (id) => {
 }
 
 export const getGenreNames = async (type, id) => {
+
+  if(!id) {
+    return;
+  }
+
   const parameters = `https://api.themoviedb.org/3/genre/${type}/list?language=en`;
   
   try {

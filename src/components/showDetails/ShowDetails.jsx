@@ -35,11 +35,14 @@ const ShowDetails = ({ show, allowLinkTitle = null }) => {
       >
         Visit
       </a>
-      <YoutubeTrailer
-        containerID="trailer"
-        tmdbID={show?.id}
-        title={show?.name || show?.original_name}
-      />
+
+      {show && (
+        <YoutubeTrailer
+          containerID="trailer"
+          tmdbID={show?.id}
+          title={show?.name || show?.original_name}
+        />
+      )}
 
       <ul>
         {contentRating && (

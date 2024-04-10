@@ -18,10 +18,11 @@ const SeasonList = ({ tmdbID, seasons }) => {
     <section className="season-list">
       <div className="seasons">
         <ul>
-          {seasons?.map((season) => (
-            <>
-              {season?.air_date !== null && (
+          {seasons?.map(
+            (season) =>
+              season?.air_date !== null && (
                 <li
+                  key={season?.season_number}
                   className={`${
                     season?.season_number === curSeason && "active"
                   }`}
@@ -29,9 +30,8 @@ const SeasonList = ({ tmdbID, seasons }) => {
                 >
                   {season?.name}
                 </li>
-              )}
-            </>
-          ))}
+              )
+          )}
         </ul>
       </div>
 

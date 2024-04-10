@@ -7,7 +7,7 @@ import Newsletter from "./components/newsletter/Newsletter";
 
 const Layout = () => {
   const location = useLocation();
-  console.log("Current page component:", location.pathname);
+
   return (
     <>
       <BackToTop />

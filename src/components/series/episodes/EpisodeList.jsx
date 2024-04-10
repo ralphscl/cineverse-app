@@ -17,6 +17,7 @@ const EpisodeList = ({ containerID, tmdbID, season }) => {
       <div key={containerID} className="episode-list">
         {seasonDetails?.episodes?.map((episode) => (
           <EpisodeCard
+            key={episode?.episode_number}
             episode={episode}
             defaultImage={seasonDetails?.poster_path}
           />

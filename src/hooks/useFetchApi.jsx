@@ -10,6 +10,10 @@ export const useFetchApi = (url) => {
     setIsLoading(true);
 
     const fetchData = async () => {
+      if (!url) {
+        return;
+      }
+
       try {
         const res = await instance.get(url);
         const data = await res?.data;
