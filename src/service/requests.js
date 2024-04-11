@@ -3,12 +3,11 @@ import instance from './tmdb.js';
 
 export const requests = {
   'getTrending': `/trending/tv/week?language=en-US`,
-  'getPopular': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=popularity.desc`,
   'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
 };
 
 // Series
-export const getSeriesList = ( page = 1, network='netflix', sortBy='vote_average', sortOrder='desc' ) => {
+export const getSeriesList = ( page = 1, network='netflix', sortBy, sortOrder, genre ) => {
   const includeAdult = false;
   const includeNullFirstAirDates = false;
   const language = 'en-US';
@@ -19,11 +18,20 @@ export const getSeriesList = ( page = 1, network='netflix', sortBy='vote_average
     params += `&sort_by=${sortBy}.${sortOrder}`
   }
 
+  if (genre) {
+    params += `&with_genres=${genre}`
+  }
+
   if (network) {
     params += `&with_networks=${networks[network]}`;
   }
 
+  console.log(params)
   return params;
+}
+
+export const getSeriesPopular = (network='netflix') => {
+  return `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=popularity.desc`;
 }
 
 export const getSeriesDetails = (id) => {

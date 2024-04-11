@@ -7,12 +7,13 @@ import { useFetchApi } from "../../hooks/useFetchApi";
 // Components
 import ShowBanner from "../../components/banner/ShowBanner";
 import ShowDetails from "../../components/showDetails/ShowDetails";
-import Row from "../../components/containers/Row";
+import ScrollableRow from "../../components/containers/ScrollableRow";
 // CSS
 import "./SeriesList.css";
 
 const SeriesList = () => {
-  const [network, setNetwork] = useState("netflix");
+  const [network, setNetwork] = useState("disney+");
+  const [genre, setGenre] = useState({ id: 80, name: "Crime" });
   const [bannerShow, setBannerShow] = useState(null);
 
   const {
@@ -40,19 +41,27 @@ const SeriesList = () => {
       <ShowDetails show={bannerShow} allowLinkTitle={true} />
 
       <div className="listing">
-        <Row
+        <ScrollableRow
           title={`${capitalizeFirstLetter(network)} TV Shows`}
-          reqUrl={getSeriesList(2, network)}
+          reqUrl={getSeriesList(1, network, "popular", "desc")}
           cardType="poster"
         />
-        <Row
-          title="Trending Now"
-          reqUrl={requests.getTrending}
-          cardType="backdrop"
+
+        <ScrollableRow
+          title={`${capitalizeFirstLetter(genre.name)}`}
+          reqUrl={getSeriesList(1, network, null, null, genre.id)}
+          cardType="poster"
         />
-        <Row
+
+        <ScrollableRow
           title="Top Rated"
           reqUrl={requests.getTopRated}
+          cardType="backdrop"
+        />
+
+        <ScrollableRow
+          title="Trending Now"
+          reqUrl={requests.getTrending}
           cardType="backdrop"
         />
       </div>

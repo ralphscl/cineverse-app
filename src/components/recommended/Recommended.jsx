@@ -1,12 +1,12 @@
 import React from "react";
-import Row from "../containers/Row";
+import ScrollableRow from "../containers/ScrollableRow";
 import { getRecommended } from "../../service/requests";
 import "./Recommended.css";
 
 const Recommended = ({ type, tmbdID, hasApiResult = null }) => {
   return (
     <section className="recommended">
-      <Row
+      <ScrollableRow
         title="More like this"
         reqUrl={getRecommended(type, tmbdID)}
         cardType="poster"

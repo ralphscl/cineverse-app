@@ -3,9 +3,9 @@ import ShowCard from "../cards/showCard/ShowCard.jsx";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi.jsx";
 // CSS
-import "./Row.css";
+import "./ScrollableRow.css";
 
-const Row = ({ title, reqUrl, cardType, hasApiResult }) => {
+const ScrollableRow = ({ title, reqUrl, cardType, hasApiResult, children }) => {
   const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl);
 
   useEffect(() => {
@@ -21,12 +21,12 @@ const Row = ({ title, reqUrl, cardType, hasApiResult }) => {
       <div className={`row ${cardType === "poster" ? "poster" : "backdrop"}`}>
         {isLoading && <section className="loading">Loading.....</section>}
         {hasError && <p>Error fetching data. Please try again later</p>}
-        {shows?.results?.map((show) => {
-          return <ShowCard key={show.id} show={show} cardType={cardType} />;
-        })}
+        {shows?.results?.map((show) => (
+          <ShowCard key={show.id} show={show} cardType={cardType} />
+        ))}
       </div>
     </div>
   );
 };
 
-export default Row;
+export default ScrollableRow;
