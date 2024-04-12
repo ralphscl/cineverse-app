@@ -23,6 +23,7 @@ a {
 .series-list .row,
 .series-list section,
 .series-page section,
+.network,
 .footer section .wrapper {
   width: 96%;
 }
@@ -52,6 +53,7 @@ a {
   .series-list .row,
   .series-list section,
   .series-page section,
+  .network,
   .footer section .wrapper  {
       width: 90%;
   }
@@ -61,6 +63,7 @@ a {
   .series-list .row,
   .series-list section,
   .series-page section,
+  .network,
   .footer section .wrapper  {
       width: 80%;
   }

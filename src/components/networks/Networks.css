@@ -1,0 +1,28 @@
+.network {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5rem auto 0;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    z-index: 10;
+}
+
+.network .network-item {
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.network .network-item.active {
+    background-color: #ce3824;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.network .network-item img {
+    aspect-ratio: 16/9;
+    width: 8rem;
+    height: auto;
+    display: block;
+    cursor: pointer;
+}

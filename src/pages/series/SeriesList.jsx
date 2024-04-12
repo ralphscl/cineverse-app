@@ -7,12 +7,13 @@ import { useFetchApi } from "../../hooks/useFetchApi";
 // Components
 import ShowBanner from "../../components/banner/ShowBanner";
 import ShowDetails from "../../components/showDetails/ShowDetails";
+import Networks from "../../components/networks/Networks";
 import ScrollableRow from "../../components/containers/ScrollableRow";
 // CSS
 import "./SeriesList.css";
 
 const SeriesList = () => {
-  const [network, setNetwork] = useState("disney+");
+  const [network, setNetwork] = useState("Netflix");
   const [genre, setGenre] = useState({ id: 80, name: "Crime" });
   const [bannerShow, setBannerShow] = useState(null);
 
@@ -39,6 +40,8 @@ const SeriesList = () => {
       />
 
       <ShowDetails show={bannerShow} allowLinkTitle={true} />
+
+      <Networks currentNetwork={network} setNetwork={setNetwork} />
 
       <div className="listing">
         <ScrollableRow

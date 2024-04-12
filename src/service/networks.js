@@ -1,11 +1,13 @@
 const networks = {
-  "netflix": 213,
-  "disney+": 2739,
-  "hbo_max": 3186,
-  "peacock": 3353,
-  "hulu": 453,
-  // "prime_video": 1024,
-  // "national_geographic": 6031
+  "Netflix": 213,
+  "Disney+": 2739,
+  "Paramount+":4330,
+  "HBO Max": 3186,
+  "Peacock": 3353,
+  "Hulu": 453,
+  "Prime Video": 1024,
+  "Max":6783,
+  // "Crunchyroll":1112,
 };
 
 export default networks;

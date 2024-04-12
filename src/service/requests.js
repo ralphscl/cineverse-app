@@ -26,7 +26,6 @@ export const getSeriesList = ( page = 1, network='netflix', sortBy, sortOrder, g
     params += `&with_networks=${networks[network]}`;
   }
 
-  console.log(params)
   return params;
 }
 
@@ -42,7 +41,7 @@ export const getSeriesTrailers = (id) => {
   return `/tv/${id}/videos?language=en-US`;
 }
 
-export const getSeriesSeasons = ( id, season, episode = null ) => {
+export const getSeriesSeasons = (id, season, episode = null) => {
   let params = `/tv/${id}/season/${season}`;
 
   if(episode !== null) {
@@ -51,8 +50,6 @@ export const getSeriesSeasons = ( id, season, episode = null ) => {
   
   return params += `?language=en-US`
 }
-
-// Others
 
 export const getCredits = (id) => {
   return `/tv/${id}/aggregate_credits?language=en-US`;
@@ -69,6 +66,9 @@ export const getNetworkDetails = (id) => {
 export const getRecommended = (type, id) => {
   return `/${type}/${id}/recommendations?language=en-US&page=1`;
 }
+
+
+// Other Queries
 
 export const getContentRating = async (id) => {
 
