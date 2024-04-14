@@ -6,23 +6,29 @@
     margin: 5rem auto 0;
     overflow-y: hidden;
     overflow-x: scroll;
-    z-index: 10;
+    
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+}
+
+.network::-webkit-scrollbar { 
+    display: none;  /* Safari and Chrome */
 }
 
 .network .network-item {
-    padding: 1rem;
-    border-radius: 8px;
+    /* padding: 1rem; */
+    cursor: pointer;
 }
 
 .network .network-item.active {
-    background-color: #ce3824;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 2px solid #ce3824;
 }
 
 .network .network-item img {
     aspect-ratio: 16/9;
-    width: 8rem;
-    height: auto;
+    height: 3rem;
     display: block;
     cursor: pointer;
+    -webkit-filter: drop-shadow(5px 5px 5px #1b1b1b);
+    filter: drop-shadow(5px 5px 5px #1b1b1b); 
 }

@@ -45,7 +45,7 @@ const SeriesList = () => {
 
       <div className="listing">
         <ScrollableRow
-          title={`${capitalizeFirstLetter(network)} TV Shows`}
+          title={""}
           reqUrl={getSeriesList(1, network, "popular", "desc")}
           cardType="poster"
         />

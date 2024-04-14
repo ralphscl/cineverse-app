@@ -37,10 +37,11 @@ const NetworkItem = ({ id, currentNetwork, setNetwork }) => {
       }`}
       onClick={() => setNetwork(networkDetails?.name)}
     >
-      <img
+      {/* <img
         src={TMDB_ASSET_BASEURL + networkDetails?.logo_path}
         alt={networkDetails?.name + "logo"}
-      />
+      /> */}
+      <h3>{networkDetails?.name}</h3>
     </div>
   );
 };
