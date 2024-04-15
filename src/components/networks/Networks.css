@@ -2,7 +2,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 2rem;
     margin: 5rem auto 0;
     overflow-y: hidden;
     overflow-x: scroll;
@@ -16,12 +16,15 @@
 }
 
 .network .network-item {
-    /* padding: 1rem; */
     cursor: pointer;
 }
 
 .network .network-item.active {
     border-bottom: 2px solid #ce3824;
+}
+
+.network .network-item  h3 {
+    white-space: nowrap;
 }
 
 .network .network-item img {
