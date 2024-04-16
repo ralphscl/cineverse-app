@@ -25,11 +25,14 @@ const ScrollableRow = ({
       {!hideTitle && <h2 className="row-title">{title}</h2>}
 
       <div className={`row ${cardType === "poster" ? "poster" : "backdrop"}`}>
-        {isLoading && <section className="loading">Loading.....</section>}
         {hasError && <p>Error fetching data. Please try again later</p>}
-        {shows?.results?.map((show) => (
-          <ShowCard key={show.id} show={show} cardType={cardType} />
-        ))}
+        {isLoading ? (
+          <section className="loading">Loading.....</section>
+        ) : (
+          shows?.results?.map((show) => (
+            <ShowCard key={show.id} show={show} cardType={cardType} />
+          ))
+        )}
       </div>
     </div>
   );

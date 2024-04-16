@@ -30,24 +30,32 @@ const SeriesPage = () => {
 
   return (
     <div className="series-page">
-      {isLoading && <p className="loading">Loading.....</p>}
       {hasError && <p>Error fetching data. Please try again later</p>}
+      {isLoading ? (
+        <p className="loading">Loading.....</p>
+      ) : (
+        <>
+          <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
 
-      <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
+          <ShowDetails show={show} />
 
-      <ShowDetails show={show} />
+          <SeasonList tmdbID={id} seasons={show?.seasons} />
 
-      <SeasonList tmdbID={id} seasons={show?.seasons} />
+          <div style={{ backgroundColor: "rgba(255,255,255,3%)" }}>
+            <Credits tmdbID={id} />
+          </div>
 
-      <div style={{ backgroundColor: "rgba(255,255,255,3%)" }}>
-        <Credits tmdbID={id} />
-      </div>
+          {recommended && (
+            <Recommended
+              tmbdID={id}
+              type={"tv"}
+              hasApiResult={hasRecommended}
+            />
+          )}
 
-      {recommended && (
-        <Recommended tmbdID={id} type={"tv"} hasApiResult={hasRecommended} />
+          <Comments tmbdID={id} />
+        </>
       )}
-
-      <Comments tmbdID={id} />
     </div>
   );
 };
