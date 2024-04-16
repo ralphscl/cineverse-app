@@ -14,17 +14,19 @@ const EpisodeList = ({ containerID, tmdbID, season }) => {
   } = useFetchApi(getSeriesSeasons(tmdbID, season));
 
   return (
-    <Suspense fallback={<div>Loading Components...</div>}>
-      <div key={containerID} className="episode-list">
-        {seasonDetails?.episodes?.map((episode) => (
-          <EpisodeCard
-            key={episode?.episode_number}
-            episode={episode}
-            defaultImage={seasonDetails?.poster_path}
-          />
-        ))}
-      </div>
-    </Suspense>
+    <>
+      <Suspense fallback={<div>Loading Components...</div>}>
+        <div key={containerID} className="episode-list">
+          {seasonDetails?.episodes?.map((episode) => (
+            <EpisodeCard
+              key={episode?.episode_number}
+              episode={episode}
+              defaultImage={seasonDetails?.poster_path}
+            />
+          ))}
+        </div>
+      </Suspense>
+    </>
   );
 };
 

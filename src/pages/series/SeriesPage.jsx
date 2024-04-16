@@ -47,7 +47,7 @@ const SeriesPage = () => {
         <Recommended tmbdID={id} type={"tv"} hasApiResult={hasRecommended} />
       )}
 
-      {/* <Comments tmbdID={id} /> */}
+      <Comments tmbdID={id} />
     </div>
   );
 };

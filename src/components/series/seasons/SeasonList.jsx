@@ -3,7 +3,7 @@ import EpisodeList from "../episodes/EpisodeList";
 import "./SeasonList.css";
 
 const SeasonList = ({ tmdbID, seasons }) => {
-  const [curSeason, setCurSeason] = useState(0);
+  const [curSeason, setCurSeason] = useState(1);
 
   useEffect(() => {
     // Update the current season when seasons is not empty
@@ -12,7 +12,7 @@ const SeasonList = ({ tmdbID, seasons }) => {
     }
   }, [seasons]);
 
-  useEffect(() => setCurSeason(0), [tmdbID]);
+  // useEffect(() => setCurSeason(0), [tmdbID]);
 
   return (
     <section className="season-list">
@@ -35,13 +35,11 @@ const SeasonList = ({ tmdbID, seasons }) => {
         </ul>
       </div>
 
-      {curSeason && (
-        <EpisodeList
-          containerID={"episodes"}
-          tmdbID={tmdbID}
-          season={curSeason}
-        />
-      )}
+      <EpisodeList
+        containerID={"episodes"}
+        tmdbID={tmdbID}
+        season={curSeason}
+      />
     </section>
   );
 };

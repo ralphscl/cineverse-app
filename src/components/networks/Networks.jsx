@@ -4,11 +4,11 @@ import { useFetchApi } from "../../hooks/useFetchApi";
 import { getNetworkDetails } from "../../service/requests";
 import "./Networks.css";
 
-const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
+// const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
 const Networks = ({ currentNetwork, setNetwork }) => {
   return (
-    <section className="network">
+    <section className="networks">
       {Object.entries(networks).map(([network, value]) => (
         <NetworkItem
           key={network}
@@ -28,8 +28,6 @@ const NetworkItem = ({ id, currentNetwork, setNetwork }) => {
     apiData: networkDetails,
   } = useFetchApi(getNetworkDetails(id));
 
-  console.log(networkDetails);
-
   return (
     <div
       className={`network-item ${
@@ -41,6 +39,7 @@ const NetworkItem = ({ id, currentNetwork, setNetwork }) => {
         src={TMDB_ASSET_BASEURL + networkDetails?.logo_path}
         alt={networkDetails?.name + "logo"}
       /> */}
+
       <h3>{networkDetails?.name}</h3>
     </div>
   );

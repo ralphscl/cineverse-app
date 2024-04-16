@@ -8,6 +8,7 @@ import { useFetchApi } from "../../hooks/useFetchApi";
 import ShowBanner from "../../components/banner/ShowBanner";
 import ShowDetails from "../../components/showDetails/ShowDetails";
 import Networks from "../../components/networks/Networks";
+import Genres from "../../components/genres/Genres";
 import ScrollableRow from "../../components/containers/ScrollableRow";
 // CSS
 import "./SeriesList.css";
@@ -41,18 +42,20 @@ const SeriesList = () => {
 
       <ShowDetails show={bannerShow} allowLinkTitle={true} />
 
-      <Networks currentNetwork={network} setNetwork={setNetwork} />
-
       <div className="listing">
+        <Networks currentNetwork={network} setNetwork={setNetwork} />
         <ScrollableRow
-          title={""}
+          title={`${network} Shows`}
           reqUrl={getSeriesList(1, network, "popular", "desc")}
+          hideTitle={true}
           cardType="poster"
         />
 
+        <Genres currentGenre={genre} setGenre={setGenre} showType={"tv"} />
         <ScrollableRow
           title={`${capitalizeFirstLetter(genre.name)}`}
           reqUrl={getSeriesList(1, network, null, null, genre.id)}
+          hideTitle={true}
           cardType="poster"
         />
 

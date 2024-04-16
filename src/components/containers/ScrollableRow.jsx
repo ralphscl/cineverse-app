@@ -5,7 +5,13 @@ import { useFetchApi } from "../../hooks/useFetchApi.jsx";
 // CSS
 import "./ScrollableRow.css";
 
-const ScrollableRow = ({ title, reqUrl, cardType, hasApiResult, children }) => {
+const ScrollableRow = ({
+  title,
+  reqUrl,
+  hideTitle = false,
+  cardType,
+  hasApiResult,
+}) => {
   const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl);
 
   useEffect(() => {
@@ -16,7 +22,7 @@ const ScrollableRow = ({ title, reqUrl, cardType, hasApiResult, children }) => {
 
   return (
     <div>
-      <h2 className="row-title">{title}</h2>
+      {!hideTitle && <h2 className="row-title">{title}</h2>}
 
       <div className={`row ${cardType === "poster" ? "poster" : "backdrop"}`}>
         {isLoading && <section className="loading">Loading.....</section>}

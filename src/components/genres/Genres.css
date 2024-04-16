@@ -1,37 +1,31 @@
-.networks {
+.genres {
     position: relative;
     display: flex;
     align-items: center;
     gap: 2rem;
     margin: 5rem auto 0;
+    white-space: nowrap;
+
+
     overflow-y: hidden;
     overflow-x: scroll;
-    
     -ms-overflow-style: none; 
     scrollbar-width: none; 
 }
 
-.networks::-webkit-scrollbar { 
+
+.genres::-webkit-scrollbar { 
     display: none;  /* Safari and Chrome */
 }
 
-.networks .network-item {
+.genres .genre-item {
     cursor: pointer;
 }
 
-.networks .network-item.active {
+.genres .genre-item.active {
     border-bottom: 2px solid #ce3824;
 }
 
-.networks .network-item  h3 {
+.genres .genre-item  h3 {
     white-space: nowrap;
-}
-
-.networks .network-item img {
-    aspect-ratio: 16/9;
-    height: 3rem;
-    display: block;
-    cursor: pointer;
-    -webkit-filter: drop-shadow(5px 5px 5px #1b1b1b);
-    filter: drop-shadow(5px 5px 5px #1b1b1b); 
 }

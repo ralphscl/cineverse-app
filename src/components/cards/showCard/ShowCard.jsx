@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import { convertToSlug } from "../../../utils/StringUtils.js";
-import Genre from "../../genre/Genre.jsx";
+import Genre from "../../genres/Genres.jsx";
 import "./ShowCard.css";
+import useGenreName from "../../../hooks/useGenreName.jsx";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
 const ShowCard = ({ show, cardType }) => {
+  const genre = useGenreName(show, "tv");
   return (
     <Link
       to={`/series/${show.id}-${convertToSlug(
@@ -30,7 +32,7 @@ const ShowCard = ({ show, cardType }) => {
               {show.title || show.name || show.original_name}
             </h4>
             <p className="summary">{show.overview}</p>
-            <Genre show={show} showType="tv" />
+            {/* <p className="genre">{genre}</p> */}
           </div>
         </div>
       </div>

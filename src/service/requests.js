@@ -67,6 +67,10 @@ export const getRecommended = (type, id) => {
   return `/${type}/${id}/recommendations?language=en-US&page=1`;
 }
 
+export const getGenres = (type) => {
+  return `genre/${type}/list?language=en`;
+}
+
 
 // Other Queries
 
