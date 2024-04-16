@@ -51,7 +51,12 @@ const SeriesList = () => {
           cardType="poster"
         />
 
-        <Genres currentGenre={genre} setGenre={setGenre} showType={"tv"} />
+        <Genres
+          currentNetwork={network}
+          currentGenre={genre}
+          setGenre={setGenre}
+          showType={"tv"}
+        />
         <ScrollableRow
           title={`${capitalizeFirstLetter(genre.name)}`}
           reqUrl={getSeriesList(1, network, null, null, genre.id)}
