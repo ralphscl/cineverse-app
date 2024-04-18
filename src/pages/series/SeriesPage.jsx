@@ -53,7 +53,7 @@ const SeriesPage = () => {
             />
           )}
 
-          <Comments tmbdID={id} />
+          {/* <Comments tmbdID={id} /> */}
         </>
       )}
     </div>

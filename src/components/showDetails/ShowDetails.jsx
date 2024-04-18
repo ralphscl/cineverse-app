@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import YoutubeTrailer from "../youtubeTrailer/YoutubeTrailer";
+import YoutubeTrailer from "../../components/youtubeTrailer/YoutubeTrailer";
 import { getContentRating } from "../../service/requests";
 // Utils
 import { splitSlug, convertToSlug } from "../../utils/StringUtils";
@@ -8,7 +8,7 @@ import "./ShowDetails.css";
 
 const ShowDetails = ({ show, allowLinkTitle = null }) => {
   const [contentRating, setContentRating] = useState(null);
-
+  console.log(show);
   const showTitle = show?.title || show?.name || show?.original_name;
 
   useEffect(() => {
@@ -19,13 +19,18 @@ const ShowDetails = ({ show, allowLinkTitle = null }) => {
 
     fetchContentRating();
   }, [show]);
+
   // console.log(contentRating);
 
   return (
     <section className="show-details">
-      <Link to={`/series/${show?.id}-${convertToSlug(showTitle)}`}>
+      {allowLinkTitle ? (
+        <Link to={`/series/${show?.id}-${convertToSlug(showTitle)}`}>
+          <h1>{showTitle}</h1>
+        </Link>
+      ) : (
         <h1>{showTitle}</h1>
-      </Link>
+      )}
 
       <a
         className="btn visit"

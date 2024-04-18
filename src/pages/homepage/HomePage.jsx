@@ -1,16 +1,14 @@
 import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import PreviewSlider from "./previewSlider/PreviewSlider";
 // CSS
 import "./HomePage.css";
 
 const HomePage = () => {
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    navigate("/series");
-  }, [navigate]);
-
-  return null;
+  return (
+    <div className="homepage">
+      <PreviewSlider />
+    </div>
+  );
 };
 
 export default HomePage;

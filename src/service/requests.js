@@ -29,7 +29,7 @@ export const getSeriesList = ( page = 1, network='netflix', sortBy, sortOrder, g
   return params;
 }
 
-export const getSeriesPopular = (network='netflix') => {
+export const getSeriesPopular = () => {
   return `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=popularity.desc`;
 }
 
