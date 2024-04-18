@@ -1,14 +1,21 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import YoutubeTrailer from "../../components/youtubeTrailer/YoutubeTrailer";
-import { getContentRating } from "../../service/requests";
+import { useFetchApi } from "../../hooks/useFetchApi";
+import { getContentRating, getSeriesDetails } from "../../service/requests";
 // Utils
 import { splitSlug, convertToSlug } from "../../utils/StringUtils";
 import "./ShowDetails.css";
 
-const ShowDetails = ({ show, allowLinkTitle = null }) => {
+const ShowDetails = ({ tmdbID, allowLinkTitle = null }) => {
   const [contentRating, setContentRating] = useState(null);
-  console.log(show);
+
+  const {
+    isLoading,
+    hasError,
+    apiData: show,
+  } = useFetchApi(getSeriesDetails(tmdbID));
+
   const showTitle = show?.title || show?.name || show?.original_name;
 
   useEffect(() => {

@@ -31,7 +31,7 @@ const Slider = ({ slideData, delay = 5000 }) => {
         >
           <div className="container">
             <div className="wrapper">
-              <ShowDetails show={data} allowLinkTitle={true} />
+              <ShowDetails tmdbID={data.id} allowLinkTitle={true} />
             </div>
           </div>
         </div>

@@ -24,6 +24,7 @@ const SeriesPage = () => {
     hasError,
     apiData: show,
   } = useFetchApi(getSeriesDetails(id));
+
   const [recommended, hasRecommended] = useState(true);
 
   useEffect(() => window.scrollTo({ top: 0, behavior: "smooth" }), [id]);
@@ -37,7 +38,7 @@ const SeriesPage = () => {
         <>
           <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
 
-          <ShowDetails show={show} />
+          <ShowDetails tmdbID={id} />
 
           <SeasonList tmdbID={id} seasons={show?.seasons} />
 

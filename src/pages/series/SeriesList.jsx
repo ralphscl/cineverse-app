@@ -40,7 +40,9 @@ const SeriesList = () => {
         allowLinkTitle={true}
       />
 
-      <ShowDetails show={bannerShow} allowLinkTitle={true} />
+      {bannerShow?.id && (
+        <ShowDetails tmdbID={bannerShow?.id} allowLinkTitle={true} />
+      )}
 
       <div className="listing">
         <Networks currentNetwork={network} setNetwork={setNetwork} />

@@ -29,7 +29,7 @@ const GenreItem = ({ genre, currentNetwork, currentGenre, setGenre }) => {
   const { apiData: shows } = useFetchApi(
     getSeriesList(1, currentNetwork, null, null, genre.id)
   );
-  console.log(shows?.results.length);
+
   return (
     <>
       {shows?.results.length > 0 && (
