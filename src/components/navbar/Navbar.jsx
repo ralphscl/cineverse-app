@@ -27,6 +27,26 @@ const Navbar = () => {
       <Link to={"/"}>
         <img className="logo" src={CineverseLogo} alt="cineverse_logo" />
       </Link>
+
+      <div className="links">
+        <Link to={"/#"}>
+          <h4>Home</h4>
+        </Link>
+        <Link to={"/#"}>
+          <h4>Movies</h4>
+        </Link>
+        <Link to={"/series"}>
+          <h4>Series</h4>
+        </Link>
+        <Link to={"/#"}>
+          <h4>Blog</h4>
+        </Link>
+        <Link to={"/#"}>
+          <h4>News</h4>
+        </Link>
+      </div>
+
+      <div></div>
     </nav>
   );
 };
