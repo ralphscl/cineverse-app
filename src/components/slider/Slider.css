@@ -6,39 +6,48 @@
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-}
+    cursor: grab;
 
-.slider::-webkit-scrollbar {
+    scroll-behavior: smooth; /* Smooth scrolling */
+    transition: scroll 0.5s ease-in-out; /* Add transition for smooth scrolling */
+  
+  }
+  
+  .slider.active {
+    cursor: grabbing;
+  }
+  
+  .slider::-webkit-scrollbar {
     display: none;
-}
-
-.slider > div {
+  }
+  
+  .slider > div {
     position: sticky;
     left: 0;
     flex: 0 0 100%;
     height: 100%;
     scroll-snap-align: start;
-}
-
-.slider > div::after {
+  }
+  
+  .slider > div::after {
     content: "";
     width: 100%;
     height: 100%;
-    background: url(http://digiflex.themezinho.net/wp-content/themes/digiflex/images/bg-noise.gif);
+    background: url(../../assets/gif/bg-noise.gif);
     background-size: 200px auto;
     position: absolute;
     left: 0;
     top: 0;
-    opacity: 0.1;
-}
-
-.slider > div .container {
+    opacity: 0.2;
+  }
+  
+  .slider > div .container {
     position: relative;
     display: flex;
     justify-content: center;
-}
-
-.slider > div .container .wrapper {
+  }
+  
+  .slider > div .container .wrapper {
     position: relative;
     padding-top: 20rem;
-}
+  }
