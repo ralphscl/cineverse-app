@@ -72,14 +72,19 @@
 
 
 /* Custom page uses */
-.series-page .show-details,
+
+
 .series-list .show-details {
+    margin: -24rem auto 0rem;
+}
+
+.series-page .show-details{
     margin: -40rem auto 0rem;
 }
 
 @media (min-width: 640px) { 
-    .series-page .show-details,
-    .series-list .show-details {
+    .series-list .show-details, 
+    .series-page .show-details{
         margin: -24rem auto 1rem;
     }
 }
@@ -89,9 +94,8 @@
 }
 
 @media (min-width: 1024px) { 
-    
-    .series-page .show-details,
-    .series-list .show-details {
+    .series-list .show-details,
+    .series-page .show-details {
         margin: -26rem auto 1rem;
     }
 }
