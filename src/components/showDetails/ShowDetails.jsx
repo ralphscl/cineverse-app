@@ -7,8 +7,11 @@ import { getContentRating, getSeriesDetails } from "../../service/requests";
 import { splitSlug, convertToSlug } from "../../utils/StringUtils";
 import "./ShowDetails.css";
 
+const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
+
 const ShowDetails = ({ tmdbID, allowLinkTitle = null }) => {
   const [contentRating, setContentRating] = useState(null);
+  const [network, setNetwork] = useState(null);
 
   const {
     isLoading,
@@ -17,6 +20,7 @@ const ShowDetails = ({ tmdbID, allowLinkTitle = null }) => {
   } = useFetchApi(getSeriesDetails(tmdbID));
 
   const showTitle = show?.title || show?.name || show?.original_name;
+  const networkLength = show?.networks.length - 1;
 
   useEffect(() => {
     const fetchContentRating = async () => {
@@ -27,7 +31,9 @@ const ShowDetails = ({ tmdbID, allowLinkTitle = null }) => {
     fetchContentRating();
   }, [show]);
 
-  // console.log(contentRating);
+  useEffect(() => {
+    setNetwork(show?.networks[networkLength]);
+  }, [show]);
 
   return (
     <section className="show-details">
@@ -37,6 +43,14 @@ const ShowDetails = ({ tmdbID, allowLinkTitle = null }) => {
         </Link>
       ) : (
         <h1>{showTitle}</h1>
+      )}
+
+      {network && (
+        <img
+          src={`${TMDB_ASSET_BASEURL}${network.logo_path}`}
+          alt=""
+          className="network"
+        />
       )}
 
       <a
@@ -55,7 +69,6 @@ const ShowDetails = ({ tmdbID, allowLinkTitle = null }) => {
           title={show?.name || show?.original_name}
         />
       )}
-
       <ul>
         {contentRating && (
           <li>
@@ -73,9 +86,7 @@ const ShowDetails = ({ tmdbID, allowLinkTitle = null }) => {
           </a>
         </li>
       </ul>
-
       <p className="overview">{show?.overview}</p>
-
       <p className="genre">
         {show?.genres?.map((genre, index) => {
           return (

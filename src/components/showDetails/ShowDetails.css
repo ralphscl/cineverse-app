@@ -5,7 +5,7 @@
     padding: .5rem;
     text-align: left;
     height: auto;
-    z-index: 100;
+    z-index: 5;
 }
 
 .show-details h1 {
@@ -61,6 +61,13 @@
 .show-details .genre {
     font-size: var(--fs-default);
     line-height: 1.8em;
+}
+
+.show-details img {
+    position: absolute;
+    top: -2rem;
+    left: 0;
+    width: 10rem;
 }
 
 
