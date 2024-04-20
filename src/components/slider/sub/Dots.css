@@ -1,0 +1,27 @@
+.dots {
+    content: "";
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: absolute;
+    top: 25%;
+    right: 0;
+    padding: 1rem;
+    margin: 0 2rem 0 auto;
+
+    z-index: 10;
+}
+
+.dots .circle {
+    padding: .2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    border: solid 2px white;
+}
+
+.dots .circle .dot {
+    background-color: white;
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+}

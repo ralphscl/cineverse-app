@@ -1,0 +1,20 @@
+.arrows {
+    position: relative;
+}
+
+.arrows .left-arrow,
+.arrows .right-arrow {
+    position: absolute;
+    top: -8rem;
+    font-size: 4rem;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.arrows .right-arrow {
+    right: 30%;
+}
+
+.arrows .left-arrow {
+    left: 30%;
+}
