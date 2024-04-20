@@ -12,7 +12,7 @@ const EpisodeList = ({ containerID, tmdbID, season }) => {
     hasError,
     apiData: seasonDetails,
   } = useFetchApi(getSeriesSeasons(tmdbID, season));
-
+  console.log(seasonDetails);
   return (
     <>
       <Suspense fallback={<div>Loading Components...</div>}>

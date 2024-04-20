@@ -12,8 +12,6 @@ const SeasonList = ({ tmdbID, seasons }) => {
     }
   }, [seasons]);
 
-  // useEffect(() => setCurSeason(0), [tmdbID]);
-
   return (
     <section className="season-list">
       <div className="seasons">

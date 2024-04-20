@@ -65,8 +65,8 @@
 
 .show-details img {
     position: absolute;
-    top: -2rem;
-    left: 0;
+    top: -12rem;
+    left: 4px;
     width: 10rem;
 }
 
