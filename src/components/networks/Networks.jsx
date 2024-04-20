@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import networks from "../../service/networks";
 import { useFetchApi } from "../../hooks/useFetchApi";
-import { getNetworkDetails } from "../../service/requests";
+import { getNetworkDetails } from "../../service/tmdb/requests";
 import "./Networks.css";
 
 // const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;

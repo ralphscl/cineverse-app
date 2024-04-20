@@ -1,6 +1,6 @@
 import React from "react";
 import { useFetchApi } from "../../../hooks/useFetchApi";
-import { getCast } from "../../../service/requests";
+import { getCast } from "../../../service/tmdb/requests";
 import NoImagePlaceholder from "../../../assets/png/no_image_placeholder.png";
 import "./CastCard.css";
 

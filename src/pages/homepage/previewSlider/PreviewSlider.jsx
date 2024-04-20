@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Slider from "../../../components/slider/Slider";
 import Newsletter from "../../../components/newsletter/Newsletter";
 import networks from "../../../service/networks";
-import instance from "../../../service/tmdb";
+import instance from "../../../service/tmdb/tmdb";
 import "./PreviewSlider.css";
 
 const PreviewSlider = () => {

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // Utils
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
 // Service
-import { requests, getSeriesList } from "../../service/requests";
+import { requests, getSeriesList } from "../../service/tmdb/requests";
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Components
 import ShowBanner from "../../components/banner/ShowBanner";

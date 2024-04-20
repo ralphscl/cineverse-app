@@ -2,7 +2,7 @@ import { useState } from "react";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
-import { getSeriesTrailers } from "../../service/requests";
+import { getSeriesTrailers } from "../../service/tmdb/requests";
 // CSS
 import "./YoutubeTrailer.css";
 

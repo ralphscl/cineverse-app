@@ -1,4 +1,4 @@
-import networks from './networks.js';
+import networks from '../networks.js';
 import instance from './tmdb.js';
 
 export const requests = {

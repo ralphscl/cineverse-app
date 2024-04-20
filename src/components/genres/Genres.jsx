@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getGenres, getSeriesList } from "../../service/requests";
+import { getGenres, getSeriesList } from "../../service/tmdb/requests";
 import { useFetchApi } from "../../hooks/useFetchApi";
 import "./Genres.css";
 

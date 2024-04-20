@@ -1,6 +1,6 @@
 import React from "react";
 import ScrollableRow from "../containers/ScrollableRow";
-import { getRecommended } from "../../service/requests";
+import { getRecommended } from "../../service/tmdb/requests";
 import "./Recommended.css";
 
 const Recommended = ({ type, tmbdID, hasApiResult = null }) => {

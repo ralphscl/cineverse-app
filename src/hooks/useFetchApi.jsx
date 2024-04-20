@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import instance from "../service/tmdb";
+import instance from "../service/tmdb/tmdb";
 
 export const useFetchApi = (url) => {
   const [isLoading, setIsLoading] = useState(false);

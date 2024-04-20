@@ -9,7 +9,7 @@ import Comments from "../../components/comments/Comments";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
-import { getSeriesDetails } from "../../service/requests";
+import { getSeriesDetails } from "../../service/tmdb/requests";
 // Utils
 import { splitSlug } from "../../utils/StringUtils";
 // CSS

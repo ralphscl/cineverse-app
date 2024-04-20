@@ -2,7 +2,7 @@ import React from "react";
 import CastCard from "../cards/castCard/CastCard";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
-import { getCredits } from "../../service/requests";
+import { getCredits } from "../../service/tmdb/requests";
 import "./Credits.css";
 
 const Credits = ({ tmdbID }) => {

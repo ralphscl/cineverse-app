@@ -1,5 +1,5 @@
 import React, { Suspense, lazy, useEffect } from "react";
-import { getSeriesSeasons } from "../../../service/requests";
+import { getSeriesSeasons } from "../../../service/tmdb/requests";
 // Hooks
 import { useFetchApi } from "../../../hooks/useFetchApi";
 import "./EpisodeList.css";

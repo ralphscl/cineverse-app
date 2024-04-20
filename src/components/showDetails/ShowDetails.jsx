@@ -2,7 +2,10 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import YoutubeTrailer from "../../components/youtubeTrailer/YoutubeTrailer";
 import { useFetchApi } from "../../hooks/useFetchApi";
-import { getContentRating, getSeriesDetails } from "../../service/requests";
+import {
+  getContentRating,
+  getSeriesDetails,
+} from "../../service/tmdb/requests";
 // Utils
 import { splitSlug, convertToSlug } from "../../utils/StringUtils";
 import "./ShowDetails.css";
