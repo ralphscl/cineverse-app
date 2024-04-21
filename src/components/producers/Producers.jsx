@@ -24,10 +24,10 @@ const Producers = ({ tmdbId }) => {
           directors
             .slice(directorsLength - 4, directorsLength)
             .reverse()
-            .map((directors, index) => (
-              <span key={directors?.id}>
+            .map((director, index) => (
+              <span key={director?.id}>
                 {" "}
-                {directors?.name}
+                {director?.name}
                 {index !== directorsLength - 1 ? ", " : ""}
               </span>
             ))}

@@ -27,7 +27,8 @@ const Genres = ({ currentNetwork, currentGenre, setGenre, showType }) => {
 
 const GenreItem = ({ genre, currentNetwork, currentGenre, setGenre }) => {
   const { apiData: shows } = useFetchApi(
-    getSeriesList(1, currentNetwork, null, null, genre.id)
+    getSeriesList(1, currentNetwork, null, null, genre.id),
+    "tmdb"
   );
 
   return (

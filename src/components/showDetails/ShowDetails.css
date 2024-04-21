@@ -63,9 +63,17 @@
     line-height: 1.8em;
 }
 
-.show-details img {
+.homepage .show-details img,
+.series-list .show-details img {
     position: absolute;
     top: -12rem;
+    left: 4px;
+    width: 10rem;
+}
+
+.series-page .show-details img {
+    position: absolute;
+    top: -24rem;
     left: 4px;
     width: 10rem;
 }
@@ -96,7 +104,7 @@
 @media (min-width: 1024px) { 
     .series-list .show-details,
     .series-page .show-details {
-        margin: -26rem auto 1rem;
+        margin: -24rem auto 1rem;
     }
 }
 
