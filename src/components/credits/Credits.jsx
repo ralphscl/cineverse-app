@@ -6,7 +6,10 @@ import { getCredits } from "../../service/tmdb/requests";
 import "./Credits.css";
 
 const Credits = ({ tmdbID }) => {
-  const { isLoading, hasError, apiData } = useFetchApi(getCredits(tmdbID));
+  const { isLoading, hasError, apiData } = useFetchApi(
+    getCredits("tv", tmdbID),
+    "tmdb"
+  );
 
   return (
     <section className="credits">

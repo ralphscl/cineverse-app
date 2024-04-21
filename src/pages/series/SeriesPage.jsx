@@ -23,7 +23,7 @@ const SeriesPage = () => {
     isLoading,
     hasError,
     apiData: show,
-  } = useFetchApi(getSeriesDetails(id));
+  } = useFetchApi(getSeriesDetails(id), "tmdb");
 
   const [recommended, hasRecommended] = useState(true);
 
@@ -38,7 +38,7 @@ const SeriesPage = () => {
         <>
           <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
 
-          <ShowDetails tmdbID={id} />
+          <ShowDetails tmdbID={id} showPlot={true} showProducers={true} />
 
           <SeasonList tmdbID={id} seasons={show?.seasons} />
 

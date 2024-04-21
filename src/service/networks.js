@@ -6,7 +6,7 @@ const networks = {
   "Peacock": 3353,
   "Hulu": 453,
   "Prime Video": 1024,
-  "Max":6783,
+  // "Max":6783,
 };
 
 export default networks;

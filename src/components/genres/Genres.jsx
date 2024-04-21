@@ -8,7 +8,7 @@ const Genres = ({ currentNetwork, currentGenre, setGenre, showType }) => {
     isLoading,
     hasError,
     apiData: genreList,
-  } = useFetchApi(getGenres(showType));
+  } = useFetchApi(getGenres(showType), "tmdb");
 
   return (
     <div className="genres">

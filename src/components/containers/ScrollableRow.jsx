@@ -12,7 +12,7 @@ const ScrollableRow = ({
   cardType,
   hasApiResult,
 }) => {
-  const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl);
+  const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl, "tmdb");
 
   useEffect(() => {
     if (hasApiResult && shows?.results.length === 0) {

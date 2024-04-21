@@ -13,7 +13,7 @@ const YoutubeTrailer = ({ containerID, tmdbID, title }) => {
     isLoading,
     hasError,
     apiData: trailer,
-  } = useFetchApi(getSeriesTrailers(tmdbID));
+  } = useFetchApi(getSeriesTrailers(tmdbID), "tmdb");
 
   const getTrailer = () => {
     const trailerVideo = trailer?.results.find(

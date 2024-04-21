@@ -22,7 +22,7 @@ const SeriesList = () => {
     isLoading,
     hasError,
     apiData: trendingData,
-  } = useFetchApi(getSeriesList(1, network, "popularity", "desc"));
+  } = useFetchApi(getSeriesList(1, network, "popularity", "desc"), "tmdb");
 
   useEffect(() => {
     setBannerShow(

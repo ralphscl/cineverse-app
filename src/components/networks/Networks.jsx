@@ -26,7 +26,7 @@ const NetworkItem = ({ id, currentNetwork, setNetwork }) => {
     isLoading,
     hasError,
     apiData: networkDetails,
-  } = useFetchApi(getNetworkDetails(id));
+  } = useFetchApi(getNetworkDetails(id), "tmdb");
 
   return (
     <div

@@ -15,14 +15,13 @@
     margin: 0;
 }
 
-
 .newsletter input {
     background-color: white;
     color: #161616;
     margin: 1rem 0;
     padding: 0rem 0.6rem;
-    height: 2.2rem;
-    width: 40%;
+    height: 2.8rem;
+    width: 20rem;
     border-radius: 2px;
     border: none;
     outline: none;

@@ -7,7 +7,11 @@ import "./CastCard.css";
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
 const CastCard = ({ tmdbID, castCharacter }) => {
-  const { isLaoding, hasError, apiData: cast } = useFetchApi(getCast(tmdbID));
+  const {
+    isLaoding,
+    hasError,
+    apiData: cast,
+  } = useFetchApi(getCast(tmdbID), "tmdb");
 
   return (
     <div key={tmdbID} className="cast">

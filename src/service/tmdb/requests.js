@@ -51,26 +51,33 @@ export const getSeriesSeasons = (id, season, episode = null) => {
   return params += `?language=en-US`
 }
 
-export const getCredits = (id) => {
-  return `/tv/${id}/aggregate_credits?language=en-US`;
-}
-
-export const getCast = (id) => {
-  return `/person/${id}?language=en-US'`;
-}
-
 export const getNetworkDetails = (id) => {
   return `/network/${id}`;
+}
+
+// Movies and Series
+
+export const getExternalIds = (type, id) => {
+  return `/${type}/${id}/external_ids`;
 }
 
 export const getRecommended = (type, id) => {
   return `/${type}/${id}/recommendations?language=en-US&page=1`;
 }
 
+export const getCredits = (type,id) => {
+  return `/${type}/${id}/aggregate_credits?language=en-US`;
+}
+
 export const getGenres = (type) => {
   return `genre/${type}/list?language=en`;
 }
 
+// Person
+
+export const getCast = (id) => {
+  return `/person/${id}?language=en-US'`;
+}
 
 // Other Queries
 
