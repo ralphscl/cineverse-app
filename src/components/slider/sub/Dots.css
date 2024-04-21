@@ -25,3 +25,7 @@
     width: 10px;
     border-radius: 50%;
 }
+
+.dots .circle:is(:hover) {
+    border: solid 2px #ce3824;
+}

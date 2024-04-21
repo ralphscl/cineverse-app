@@ -18,3 +18,8 @@
 .arrows .left-arrow {
     left: 30%;
 }
+
+.arrows .right-arrow:is(:hover),
+.arrows .left-arrow:is(:hover) {
+    color: #ce3824;
+}
