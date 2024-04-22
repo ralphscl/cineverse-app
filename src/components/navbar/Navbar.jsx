@@ -29,19 +29,19 @@ const Navbar = () => {
       </Link>
 
       <div className="links">
-        <Link to={"/#"}>
+        <Link to={"/"}>
           <h4>Home</h4>
         </Link>
-        <Link to={"/#"}>
+        <Link to={"/movies"}>
           <h4>Movies</h4>
         </Link>
         <Link to={"/series"}>
           <h4>Series</h4>
         </Link>
-        <Link to={"/#"}>
-          <h4>Blog</h4>
+        <Link to={"/blogs"}>
+          <h4>Blogs</h4>
         </Link>
-        <Link to={"/#"}>
+        <Link to={"/news"}>
           <h4>News</h4>
         </Link>
       </div>

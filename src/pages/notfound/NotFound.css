@@ -1,0 +1,15 @@
+.notfound {
+    height: calc(100vh - (364px + 16rem));
+    margin: 8rem auto;
+}
+
+.notfound img {
+    width: 26rem;
+    padding: 0;
+    margin: -4rem 0 0 0;
+    object-fit: cover;
+}
+
+.notfound h4 {
+    margin-top: -4rem;
+}

@@ -7,6 +7,7 @@ import Layout from "../../Layout";
 const SeriesList = lazy(() => import("../../pages/series/SeriesList"));
 const SeriesPage = lazy(() => import("../../pages/series/SeriesPage"));
 const HomePage = lazy(() => import("../../pages/homepage/HomePage"));
+const NotFound = lazy(() => import("../../pages/notfound/NotFound"));
 
 const Router = () => {
   return (
@@ -17,6 +18,8 @@ const Router = () => {
             <Route index element={<HomePage />} />
             <Route path="/series" element={<SeriesList />} />
             <Route path="/series/:slug" element={<SeriesPage />} />
+            {/* 404 */}
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Suspense>
