@@ -1,21 +1,22 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import YoutubeTrailer from "../../components/youtubeTrailer/YoutubeTrailer";
+import Producers from "../producers/Producers";
 import { useFetchApi } from "../../hooks/useFetchApi";
 import {
   getContentRating,
   getExternalIds,
-  getSeriesDetails,
+  getShowDetails,
 } from "../../service/tmdb/requests";
+import { getSeriesMoreInfo } from "../../service/omdb/requests";
 // Utils
 import { splitSlug, convertToSlug } from "../../utils/StringUtils";
 import "./ShowDetails.css";
-import { getSeriesMoreInfo } from "../../service/omdb/requests";
-import Producers from "../producers/Producers";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
 const ShowDetails = ({
+  showType,
   tmdbID,
   allowLinkTitle = false,
   showPlot = false,
@@ -28,10 +29,10 @@ const ShowDetails = ({
     isLoading,
     hasError,
     apiData: show,
-  } = useFetchApi(getSeriesDetails(tmdbID), "tmdb");
+  } = useFetchApi(getShowDetails(showType, tmdbID), "tmdb");
 
   const { apiData: showIds } = useFetchApi(
-    getExternalIds("tv", show?.id),
+    getExternalIds(showType, show?.id),
     "tmdb"
   );
 
@@ -41,7 +42,7 @@ const ShowDetails = ({
   );
 
   const showTitle = show?.title || show?.name || show?.original_name;
-  const networkLength = show?.networks.length - 1;
+  const networkLength = show?.networks?.length - 1;
 
   useEffect(() => {
     const fetchContentRating = async () => {
@@ -49,11 +50,11 @@ const ShowDetails = ({
       setContentRating(fetchedContentRating);
     };
 
-    fetchContentRating();
+    if (showType === "tv") fetchContentRating();
   }, [show]);
 
   useEffect(() => {
-    setNetwork(show?.networks[networkLength]);
+    if (show?.network) setNetwork(show?.networks[networkLength]);
   }, [show]);
 
   return (
@@ -86,37 +87,40 @@ const ShowDetails = ({
         Visit
       </a>
 
+      {/* Trailer */}
       {show && (
         <YoutubeTrailer
-          containerID="trailer"
+          showType={showType}
           tmdbID={show?.id}
           title={show?.name || show?.original_name}
         />
       )}
 
-      {/* Information 1 */}
       <ul>
+        {/* Content Rating */}
         {contentRating && (
           <li>
             <span>{contentRating}</span>
           </li>
         )}
+        {/* Date Aired */}
         <li>{splitSlug(show?.first_air_date)[0]}</li>
-        <li>
-          {show?.seasons?.length} Season
-          {show?.seasons?.length > 1 && "s"}
-        </li>
-        <li>
-          <a href="#leave-a-review" className="review">
-            Leave a Review
-          </a>
-        </li>
+        {/* Season Number */}
+        {showType === "tv" && (
+          <li>
+            {show?.seasons?.length} Season
+            {show?.seasons?.length > 1 && "s"}
+          </li>
+        )}
       </ul>
 
-      {/* Information 2 */}
+      {/* Summary */}
       <p className="overview">{show?.overview}</p>
+
+      {/* Plot */}
       {showPlot && <p className="plot">{otherDetails?.Plot}</p>}
 
+      {/* Genre */}
       <p className="genre">
         {show?.genres?.map((genre, index) => {
           return (
@@ -128,9 +132,10 @@ const ShowDetails = ({
         })}
       </p>
 
-      {/* Information 3 */}
+      {/* Language */}
       <p className="language">Language: {otherDetails?.Language}</p>
 
+      {/* Producers */}
       {showProducers && <Producers tmdbId={show?.id} />}
     </section>
   );

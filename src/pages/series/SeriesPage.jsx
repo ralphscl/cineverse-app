@@ -9,7 +9,7 @@ import Comments from "../../components/comments/Comments";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
-import { getSeriesDetails } from "../../service/tmdb/requests";
+import { getShowDetails } from "../../service/tmdb/requests";
 // Utils
 import { splitSlug } from "../../utils/StringUtils";
 // CSS
@@ -23,7 +23,7 @@ const SeriesPage = () => {
     isLoading,
     hasError,
     apiData: show,
-  } = useFetchApi(getSeriesDetails(id), "tmdb");
+  } = useFetchApi(getShowDetails("tv", id), "tmdb");
 
   const [recommended, hasRecommended] = useState(true);
 
@@ -38,7 +38,12 @@ const SeriesPage = () => {
         <>
           <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
 
-          <ShowDetails tmdbID={id} showPlot={true} showProducers={true} />
+          <ShowDetails
+            showType="tv"
+            tmdbID={id}
+            showPlot={true}
+            showProducers={true}
+          />
 
           <SeasonList tmdbID={id} seasons={show?.seasons} />
 

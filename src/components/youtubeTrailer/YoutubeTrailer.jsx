@@ -6,14 +6,14 @@ import { getSeriesTrailers } from "../../service/tmdb/requests";
 // CSS
 import "./YoutubeTrailer.css";
 
-const YoutubeTrailer = ({ containerID, tmdbID, title }) => {
+const YoutubeTrailer = ({ showType, tmdbID, title }) => {
   const [showTrailer, setShowTrailer] = useState(false);
 
   const {
     isLoading,
     hasError,
     apiData: trailer,
-  } = useFetchApi(getSeriesTrailers(tmdbID), "tmdb");
+  } = useFetchApi(getSeriesTrailers(showType, tmdbID), "tmdb");
 
   const getTrailer = () => {
     const trailerVideo = trailer?.results.find(
@@ -32,11 +32,7 @@ const YoutubeTrailer = ({ containerID, tmdbID, title }) => {
       </a>
 
       {showTrailer && (
-        <div
-          id={containerID}
-          className="trailer"
-          onClick={() => setShowTrailer(false)}
-        >
+        <div className="trailer" onClick={() => setShowTrailer(false)}>
           <div className="container">
             {trailer?.results && (
               <iframe

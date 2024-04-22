@@ -54,7 +54,7 @@ const Slider = ({ slideData, delay = 5000 }) => {
         onDragEnd={onDragEnd}
       >
         {slideData?.map((data, index) => (
-          <SlideItem key={data?.id} data={data} />
+          <SlideItem showType="tv" key={data?.id} data={data} />
         ))}
       </motion.section>
 

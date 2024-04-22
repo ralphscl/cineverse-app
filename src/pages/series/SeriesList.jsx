@@ -41,7 +41,11 @@ const SeriesList = () => {
       />
 
       {bannerShow?.id && (
-        <ShowDetails tmdbID={bannerShow?.id} allowLinkTitle={true} />
+        <ShowDetails
+          showType="tv"
+          tmdbID={bannerShow?.id}
+          allowLinkTitle={true}
+        />
       )}
 
       <div className="listing">

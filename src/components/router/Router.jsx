@@ -1,12 +1,14 @@
 import { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 // Components
 import Layout from "../../Layout";
 
 // Lazy-load your pages/components
+const HomePage = lazy(() => import("../../pages/homepage/HomePage"));
+const MovieList = lazy(() => import("../../pages/movie/MovieList"));
 const SeriesList = lazy(() => import("../../pages/series/SeriesList"));
 const SeriesPage = lazy(() => import("../../pages/series/SeriesPage"));
-const HomePage = lazy(() => import("../../pages/homepage/HomePage"));
 const NotFound = lazy(() => import("../../pages/notfound/NotFound"));
 
 const Router = () => {
@@ -16,6 +18,7 @@ const Router = () => {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<HomePage />} />
+            <Route path="/movies" element={<MovieList />} />
             <Route path="/series" element={<SeriesList />} />
             <Route path="/series/:slug" element={<SeriesPage />} />
             {/* 404 */}

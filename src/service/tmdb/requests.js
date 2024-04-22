@@ -6,6 +6,15 @@ export const requests = {
   'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
 };
 
+// Movies
+export const getMovieList = (page = 1) => {
+  const includeAdult = false;
+  const includeVideo = true;
+  const language = 'en-US';
+
+  return `/discover/movie?include_adult=${includeAdult}&include_video=${includeVideo}&language=${language}&page=${page}&sort_by=popularity.desc`
+}
+
 // Series
 export const getSeriesList = ( page = 1, network='netflix', sortBy, sortOrder, genre ) => {
   const includeAdult = false;
@@ -33,14 +42,6 @@ export const getSeriesPopular = () => {
   return `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=popularity.desc`;
 }
 
-export const getSeriesDetails = (id) => {
-  return `/tv/${id}?language=en-US`;
-}
-
-export const getSeriesTrailers = (id) => {
-  return `/tv/${id}/videos?language=en-US`;
-}
-
 export const getSeriesSeasons = (id, season, episode = null) => {
   let params = `/tv/${id}/season/${season}`;
 
@@ -56,6 +57,13 @@ export const getNetworkDetails = (id) => {
 }
 
 // Movies and Series
+export const getSeriesTrailers = (type, id) => {
+  return `/${type}/${id}/videos?language=en-US`;
+}
+
+export const getShowDetails = (type, id) => {
+  return `/${type}/${id}?language=en-US`;
+}
 
 export const getExternalIds = (type, id) => {
   return `/${type}/${id}/external_ids`;

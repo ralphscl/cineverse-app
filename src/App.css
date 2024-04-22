@@ -44,6 +44,7 @@ a {
 
 /* Page sections */
 .slider > div .container .wrapper,
+.movie-list section,
 .series-list .row,
 .series-list section,
 .series-page section,
@@ -54,6 +55,7 @@ a {
 
 @media (min-width: 640px) { 
   .slider > div .container .wrapper,
+  .movie-list section,
   .series-list .row,
   .series-list section,
   .series-page section,
@@ -65,6 +67,7 @@ a {
 
 @media (min-width: 768px) { 
   .slider > div .container .wrapper,
+  .movie-list section,
   .series-list .row,
   .series-list section,
   .series-page section,

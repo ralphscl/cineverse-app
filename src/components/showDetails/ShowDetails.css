@@ -64,6 +64,7 @@
 }
 
 .homepage .show-details img,
+.movie-list .show-details img
 .series-list .show-details img {
     position: absolute;
     top: -12rem;
@@ -82,6 +83,7 @@
 /* Custom page uses */
 
 
+.movie-list .show-details,
 .series-list .show-details {
     margin: -24rem auto 0rem;
 }
@@ -91,6 +93,7 @@
 }
 
 @media (min-width: 640px) { 
+    .movie-list .show-details
     .series-list .show-details, 
     .series-page .show-details{
         margin: -24rem auto 1rem;
@@ -102,6 +105,7 @@
 }
 
 @media (min-width: 1024px) { 
+    .movie-list .show-details
     .series-list .show-details,
     .series-page .show-details {
         margin: -24rem auto 1rem;
