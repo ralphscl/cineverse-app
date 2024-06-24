@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ShowBanner from "../../components/banner/ShowBanner";
+import Banner from "../../components/banner/Banner";
 import ShowDetails from "../../components/showDetails/ShowDetails";
 import SeasonList from "../../components/series/seasons/SeasonList";
 import Credits from "../../components/credits/Credits";
@@ -36,7 +36,7 @@ const SeriesPage = () => {
         <p className="loading">Loading.....</p>
       ) : (
         <>
-          <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
+          <Banner imageUrl={show?.backdrop_path} size="lg" />
 
           <ShowDetails
             showType="tv"

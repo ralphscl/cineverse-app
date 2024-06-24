@@ -12,6 +12,7 @@ import { getSeriesMoreInfo } from "../../service/omdb/requests";
 // Utils
 import { splitSlug, convertToSlug } from "../../utils/StringUtils";
 import "./ShowDetails.css";
+import { formatDate } from "../../utils/DateUtils";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
@@ -25,6 +26,7 @@ const ShowDetails = ({
   const [contentRating, setContentRating] = useState(null);
   const [network, setNetwork] = useState(null);
 
+  console.log(showType)
   const {
     isLoading,
     hasError,
@@ -35,7 +37,6 @@ const ShowDetails = ({
     getExternalIds(showType, show?.id),
     "tmdb"
   );
-
   const { apiData: otherDetails } = useFetchApi(
     getSeriesMoreInfo(showIds?.imdb_id),
     "omdb"
@@ -46,7 +47,7 @@ const ShowDetails = ({
 
   useEffect(() => {
     const fetchContentRating = async () => {
-      const fetchedContentRating = await getContentRating(show?.id);
+      const fetchedContentRating = await getContentRating(showType, show?.id);
       setContentRating(fetchedContentRating);
     };
 
@@ -61,7 +62,7 @@ const ShowDetails = ({
     <section className="show-details">
       {/* Title */}
       {allowLinkTitle ? (
-        <Link to={`/series/${show?.id}-${convertToSlug(showTitle)}`}>
+        <Link to={`/${showType === "tv" ? "series" : "movie"}/${show?.id}-${convertToSlug(showTitle)}`}>
           <h1>{showTitle}</h1>
         </Link>
       ) : (
@@ -98,20 +99,32 @@ const ShowDetails = ({
 
       <ul>
         {/* Content Rating */}
-        {contentRating && (
+        {(contentRating || otherDetails) && (
           <li>
-            <span>{contentRating}</span>
+            <span>{contentRating || otherDetails?.Rated}</span>
           </li>
+        )}
+
+        {/* Movie */}
+        {showType === "movie" && (
+          <>
+            <li>{show?.status}</li>
+            <li>{show?.runtime} Runtime</li>
+          </>
+        )}
+        {/* Series */}
+        {showType === "tv" && (
+          <>
+            <li>
+              {show?.seasons?.length} Season
+              {show?.seasons?.length > 1 && "s"}
+            </li>
+          </>
         )}
         {/* Date Aired */}
-        <li>{splitSlug(show?.first_air_date)[0]}</li>
-        {/* Season Number */}
-        {showType === "tv" && (
-          <li>
-            {show?.seasons?.length} Season
-            {show?.seasons?.length > 1 && "s"}
-          </li>
-        )}
+        <li>
+          {splitSlug(show?.first_air_date)[0] || formatDate(show?.release_date)}
+        </li>
       </ul>
 
       {/* Summary */}

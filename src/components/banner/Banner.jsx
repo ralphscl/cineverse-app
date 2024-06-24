@@ -1,6 +1,6 @@
 import React from "react";
 import Overlay from "../overlay/Overlay";
-import "./ShowBanner.css";
+import "./Banner.css";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 

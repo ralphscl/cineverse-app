@@ -1,16 +1,15 @@
 import { Link } from "react-router-dom";
 import { convertToSlug } from "../../../utils/StringUtils.js";
+import useGenreName from "../../../hooks/useGenreName.jsx";
 import Genre from "../../genres/Genres.jsx";
 import "./ShowCard.css";
-import useGenreName from "../../../hooks/useGenreName.jsx";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
-const ShowCard = ({ show, cardType }) => {
-  const genre = useGenreName(show, "tv");
+const ShowCard = ({ show, cardType, showType }) => {
   return (
     <Link
-      to={`/series/${show.id}-${convertToSlug(
+      to={`/${showType === "tv" ? "series" : "movie"}/${show.id}-${convertToSlug(
         show.title || show.name || show.original_name
       )}`}
     >
@@ -19,8 +18,7 @@ const ShowCard = ({ show, cardType }) => {
         style={{
           backgroundImage:
             show &&
-            `url(${TMDB_ASSET_BASEURL}${
-              cardType === "poster" ? show.poster_path : show.backdrop_path
+            `url(${TMDB_ASSET_BASEURL}${cardType === "poster" ? show.poster_path : show.backdrop_path
             })`,
           backgroundSize: "cover",
           backgroundPosition: "center center",

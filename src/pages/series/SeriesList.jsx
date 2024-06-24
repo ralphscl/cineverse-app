@@ -5,11 +5,11 @@ import { capitalizeFirstLetter } from "../../utils/StringUtils";
 import { requests, getSeriesList } from "../../service/tmdb/requests";
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Components
-import ShowBanner from "../../components/banner/ShowBanner";
+import Banner from "../../components/banner/Banner";
 import ShowDetails from "../../components/showDetails/ShowDetails";
 import Networks from "../../components/networks/Networks";
 import Genres from "../../components/genres/Genres";
-import ScrollableRow from "../../components/containers/ScrollableRow";
+import RowContainer from "../../components/containers/RowContainer";
 // CSS
 import "./SeriesList.css";
 
@@ -18,7 +18,7 @@ const SeriesList = () => {
   const [genre, setGenre] = useState({ id: 80, name: "Crime" });
   const [bannerShow, setBannerShow] = useState(null);
 
-  const {
+  const { // Banner
     isLoading,
     hasError,
     apiData: trendingData,
@@ -27,14 +27,14 @@ const SeriesList = () => {
   useEffect(() => {
     setBannerShow(
       trendingData?.results[
-        Math.floor(Math.random() * trendingData?.results.length)
+      Math.floor(Math.random() * trendingData?.results.length)
       ]
     );
   }, [trendingData]);
 
   return (
     <div className="series-list">
-      <ShowBanner
+      <Banner
         imageUrl={bannerShow?.backdrop_path}
         size="sm"
         allowLinkTitle={true}
@@ -50,11 +50,12 @@ const SeriesList = () => {
 
       <div className="listing">
         <Networks currentNetwork={network} setNetwork={setNetwork} />
-        <ScrollableRow
+        <RowContainer
           title={`${network} Shows`}
           reqUrl={getSeriesList(1, network, "popular", "desc")}
           hideTitle={true}
           cardType="poster"
+          showType="tv"
         />
 
         <Genres
@@ -63,23 +64,26 @@ const SeriesList = () => {
           setGenre={setGenre}
           showType={"tv"}
         />
-        <ScrollableRow
+        <RowContainer
           title={`${capitalizeFirstLetter(genre.name)}`}
           reqUrl={getSeriesList(1, network, null, null, genre.id)}
           hideTitle={true}
           cardType="poster"
+          showType="tv"
         />
 
-        <ScrollableRow
+        <RowContainer
           title="Top Rated"
           reqUrl={requests.getTopRated}
           cardType="backdrop"
+          showType="tv"
         />
 
-        <ScrollableRow
+        <RowContainer
           title="Trending Now"
           reqUrl={requests.getTrending}
           cardType="backdrop"
+          showType="tv"
         />
       </div>
     </div>

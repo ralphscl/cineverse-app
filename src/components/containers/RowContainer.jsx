@@ -3,13 +3,14 @@ import ShowCard from "../cards/showCard/ShowCard.jsx";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi.jsx";
 // CSS
-import "./ScrollableRow.css";
+import "./RowContainer.css";
 
 const ScrollableRow = ({
   title,
   reqUrl,
   hideTitle = false,
   cardType,
+  showType,
   hasApiResult,
 }) => {
   const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl, "tmdb");
@@ -30,7 +31,7 @@ const ScrollableRow = ({
           <section className="loading">Loading.....</section>
         ) : (
           shows?.results?.map((show) => (
-            <ShowCard key={show.id} show={show} cardType={cardType} />
+            <ShowCard key={show.id} show={show} cardType={cardType} showType={showType} />
           ))
         )}
       </div>
