@@ -6,8 +6,22 @@ export const requests = {
   'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
 };
 
+// Movies
+export const getMovieList = (page = 1, sortBy, sortOrder, genre) => {
+  const includeAdult = false;
+  const includeVideo = true;
+  const language = 'en-US';
+
+  let params = `/discover/movie?include_adult=${includeAdult}&include_video=${includeVideo}&language=${language}&page=${page}&sort_by=popularity.desc`;
+  if (genre) {
+    params += `&with_genres=${genre}`
+  }
+
+  return params;
+}
+
 // Series
-export const getSeriesList = ( page = 1, network='netflix', sortBy, sortOrder, genre ) => {
+export const getSeriesList = (page = 1, network = 'netflix', sortBy, sortOrder, genre) => {
   const includeAdult = false;
   const includeNullFirstAirDates = false;
   const language = 'en-US';
@@ -33,21 +47,13 @@ export const getSeriesPopular = () => {
   return `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=popularity.desc`;
 }
 
-export const getSeriesDetails = (id) => {
-  return `/tv/${id}?language=en-US`;
-}
-
-export const getSeriesTrailers = (id) => {
-  return `/tv/${id}/videos?language=en-US`;
-}
-
 export const getSeriesSeasons = (id, season, episode = null) => {
   let params = `/tv/${id}/season/${season}`;
 
-  if(episode !== null) {
+  if (episode !== null) {
     params += `/episode/${episode}`;
   }
-  
+
   return params += `?language=en-US`
 }
 
@@ -56,6 +62,13 @@ export const getNetworkDetails = (id) => {
 }
 
 // Movies and Series
+export const getSeriesTrailers = (type, id) => {
+  return `/${type}/${id}/videos?language=en-US`;
+}
+
+export const getShowDetails = (type, id) => {
+  return `/${type}/${id}?language=en-US`;
+}
 
 export const getExternalIds = (type, id) => {
   return `/${type}/${id}/external_ids`;
@@ -65,7 +78,7 @@ export const getRecommended = (type, id) => {
   return `/${type}/${id}/recommendations?language=en-US&page=1`;
 }
 
-export const getCredits = (type,id) => {
+export const getCredits = (type, id) => {
   return `/${type}/${id}/aggregate_credits?language=en-US`;
 }
 
@@ -74,21 +87,19 @@ export const getGenres = (type) => {
 }
 
 // Person
-
 export const getCast = (id) => {
   return `/person/${id}?language=en-US'`;
 }
 
 // Other Queries
+export const getContentRating = async (type, id) => {
 
-export const getContentRating = async (id) => {
-
-  if(!id) {
+  if (!id) {
     return;
   }
 
-  const parameters = `https://api.themoviedb.org/3/tv/${id}/content_ratings`;
-  
+  const parameters = `https://api.themoviedb.org/3/${type}/${id}/content_ratings`;
+
   try {
     const response = await instance.get(parameters);
     const usIso = response.data.results.find(rating => rating.iso_3166_1 === "US");
@@ -101,12 +112,12 @@ export const getContentRating = async (id) => {
 
 export const getGenreNames = async (type, id) => {
 
-  if(!id) {
+  if (!id) {
     return;
   }
 
   const parameters = `https://api.themoviedb.org/3/genre/${type}/list?language=en`;
-  
+
   try {
     const response = await instance.get(parameters);
     const genre = response.data.genres.find(genre => genre.id === id);

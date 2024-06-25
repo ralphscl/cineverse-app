@@ -3,13 +3,14 @@ import ShowCard from "../cards/showCard/ShowCard.jsx";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi.jsx";
 // CSS
-import "./ScrollableRow.css";
+import "./RowContainer.css";
 
 const ScrollableRow = ({
   title,
   reqUrl,
   hideTitle = false,
   cardType,
+  showType,
   hasApiResult,
 }) => {
   const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl, "tmdb");
@@ -23,14 +24,19 @@ const ScrollableRow = ({
   return (
     <div>
       {!hideTitle && <h2 className="row-title">{title}</h2>}
-
-      <div className={`row ${cardType === "poster" ? "poster" : "backdrop"}`}>
+      <div className={`row ${cardType}`}>
         {hasError && <p>Error fetching data. Please try again later</p>}
-        {isLoading ? (
-          <section className="loading">Loading.....</section>
+        {shows?.total_results === 0 ? (
+          <div className="empty-rows">
+            <p>{`Currently, there are no shows available in the "${title}" category on this network. Please check back later or explore other categories.`}</p>
+          </div>
+        ) : isLoading ? (
+          <div>
+            <p>Loading...</p>
+          </div>
         ) : (
           shows?.results?.map((show) => (
-            <ShowCard key={show.id} show={show} cardType={cardType} />
+            <ShowCard key={show.id} show={show} cardType={cardType} showType={showType} />
           ))
         )}
       </div>

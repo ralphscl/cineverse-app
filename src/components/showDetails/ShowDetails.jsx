@@ -1,21 +1,23 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import YoutubeTrailer from "../../components/youtubeTrailer/YoutubeTrailer";
+import Producers from "../producers/Producers";
 import { useFetchApi } from "../../hooks/useFetchApi";
 import {
   getContentRating,
   getExternalIds,
-  getSeriesDetails,
+  getShowDetails,
 } from "../../service/tmdb/requests";
+import { getSeriesMoreInfo } from "../../service/omdb/requests";
 // Utils
 import { splitSlug, convertToSlug } from "../../utils/StringUtils";
 import "./ShowDetails.css";
-import { getSeriesMoreInfo } from "../../service/omdb/requests";
-import Producers from "../producers/Producers";
+import { formatDate } from "../../utils/DateUtils";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
 const ShowDetails = ({
+  showType,
   tmdbID,
   allowLinkTitle = false,
   showPlot = false,
@@ -28,39 +30,38 @@ const ShowDetails = ({
     isLoading,
     hasError,
     apiData: show,
-  } = useFetchApi(getSeriesDetails(tmdbID), "tmdb");
+  } = useFetchApi(getShowDetails(showType, tmdbID), "tmdb");
 
   const { apiData: showIds } = useFetchApi(
-    getExternalIds("tv", show?.id),
+    getExternalIds(showType, show?.id),
     "tmdb"
   );
-
   const { apiData: otherDetails } = useFetchApi(
     getSeriesMoreInfo(showIds?.imdb_id),
     "omdb"
   );
 
   const showTitle = show?.title || show?.name || show?.original_name;
-  const networkLength = show?.networks.length - 1;
+  const networkLength = show?.networks?.length - 1;
 
   useEffect(() => {
     const fetchContentRating = async () => {
-      const fetchedContentRating = await getContentRating(show?.id);
+      const fetchedContentRating = await getContentRating(showType, show?.id);
       setContentRating(fetchedContentRating);
     };
 
-    fetchContentRating();
+    if (showType === "tv") fetchContentRating();
   }, [show]);
 
   useEffect(() => {
-    setNetwork(show?.networks[networkLength]);
+    if (show?.network) setNetwork(show?.networks[networkLength]);
   }, [show]);
 
   return (
     <section className="show-details">
       {/* Title */}
       {allowLinkTitle ? (
-        <Link to={`/series/${show?.id}-${convertToSlug(showTitle)}`}>
+        <Link to={`/${showType === "tv" ? "series" : "movie"}/${show?.id}-${convertToSlug(showTitle)}`}>
           <h1>{showTitle}</h1>
         </Link>
       ) : (
@@ -86,37 +87,52 @@ const ShowDetails = ({
         Visit
       </a>
 
+      {/* Trailer */}
       {show && (
         <YoutubeTrailer
-          containerID="trailer"
+          showType={showType}
           tmdbID={show?.id}
           title={show?.name || show?.original_name}
         />
       )}
 
-      {/* Information 1 */}
       <ul>
-        {contentRating && (
+        {/* Content Rating */}
+        {(contentRating || otherDetails) && (
           <li>
-            <span>{contentRating}</span>
+            <span>{contentRating || otherDetails?.Rated}</span>
           </li>
         )}
-        <li>{splitSlug(show?.first_air_date)[0]}</li>
+
+        {/* Movie */}
+        {showType === "movie" && (
+          <>
+            <li>{show?.status}</li>
+            <li>{show?.runtime} Runtime</li>
+          </>
+        )}
+        {/* Series */}
+        {showType === "tv" && (
+          <>
+            <li>
+              {show?.seasons?.length} Season
+              {show?.seasons?.length > 1 && "s"}
+            </li>
+          </>
+        )}
+        {/* Date Aired */}
         <li>
-          {show?.seasons?.length} Season
-          {show?.seasons?.length > 1 && "s"}
-        </li>
-        <li>
-          <a href="#leave-a-review" className="review">
-            Leave a Review
-          </a>
+          {splitSlug(show?.first_air_date)[0] || formatDate(show?.release_date)}
         </li>
       </ul>
 
-      {/* Information 2 */}
+      {/* Summary */}
       <p className="overview">{show?.overview}</p>
+
+      {/* Plot */}
       {showPlot && <p className="plot">{otherDetails?.Plot}</p>}
 
+      {/* Genre */}
       <p className="genre">
         {show?.genres?.map((genre, index) => {
           return (
@@ -128,9 +144,10 @@ const ShowDetails = ({
         })}
       </p>
 
-      {/* Information 3 */}
+      {/* Language */}
       <p className="language">Language: {otherDetails?.Language}</p>
 
+      {/* Producers */}
       {showProducers && <Producers tmdbId={show?.id} />}
     </section>
   );

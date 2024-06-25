@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import ShowBanner from "../../components/banner/ShowBanner";
+import Banner from "../../components/banner/Banner";
 import ShowDetails from "../../components/showDetails/ShowDetails";
 import SeasonList from "../../components/series/seasons/SeasonList";
 import Credits from "../../components/credits/Credits";
@@ -9,7 +9,7 @@ import Comments from "../../components/comments/Comments";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Service
-import { getSeriesDetails } from "../../service/tmdb/requests";
+import { getShowDetails } from "../../service/tmdb/requests";
 // Utils
 import { splitSlug } from "../../utils/StringUtils";
 // CSS
@@ -23,7 +23,7 @@ const SeriesPage = () => {
     isLoading,
     hasError,
     apiData: show,
-  } = useFetchApi(getSeriesDetails(id), "tmdb");
+  } = useFetchApi(getShowDetails("tv", id), "tmdb");
 
   const [recommended, hasRecommended] = useState(true);
 
@@ -36,9 +36,14 @@ const SeriesPage = () => {
         <p className="loading">Loading.....</p>
       ) : (
         <>
-          <ShowBanner imageUrl={show?.backdrop_path} size="lg" />
+          <Banner imageUrl={show?.backdrop_path} size="lg" />
 
-          <ShowDetails tmdbID={id} showPlot={true} showProducers={true} />
+          <ShowDetails
+            showType="tv"
+            tmdbID={id}
+            showPlot={true}
+            showProducers={true}
+          />
 
           <SeasonList tmdbID={id} seasons={show?.seasons} />
 

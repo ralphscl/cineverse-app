@@ -3,7 +3,7 @@ import ShowDetails from "../../showDetails/ShowDetails";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
-const SlideItem = ({ data }) => {
+const SlideItem = ({ showType, data }) => {
   return (
     <>
       {data && (
@@ -19,7 +19,11 @@ const SlideItem = ({ data }) => {
         >
           <div className="container">
             <div className="wrapper">
-              <ShowDetails tmdbID={data.id} allowLinkTitle={false} />
+              <ShowDetails
+                showType={showType}
+                tmdbID={data.id}
+                allowLinkTitle={false}
+              />
             </div>
           </div>
         </div>
