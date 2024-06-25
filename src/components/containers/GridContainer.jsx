@@ -13,11 +13,11 @@ const ScrollableCollumn = ({
 
   console.log(shows)
   return (
-    <>
+    <div>
       {shows?.results?.map((show) => (
         <ShowCard key={show.id} show={show} cardType={cardType} showType={showType} />
       ))}
-    </>
+    </div>
   )
 }
 

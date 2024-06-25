@@ -26,7 +26,6 @@ const ShowDetails = ({
   const [contentRating, setContentRating] = useState(null);
   const [network, setNetwork] = useState(null);
 
-  console.log(showType)
   const {
     isLoading,
     hasError,

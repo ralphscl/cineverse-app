@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 // Utils
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
 // Service
-import { requests, getSeriesList } from "../../service/tmdb/requests";
+import { requests, getSeriesList, getGenres } from "../../service/tmdb/requests";
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Components
 import Banner from "../../components/banner/Banner";
@@ -12,17 +12,22 @@ import Genres from "../../components/genres/Genres";
 import RowContainer from "../../components/containers/RowContainer";
 // CSS
 import "./SeriesList.css";
+import Dropdown from "../../components/dropdown/Dropdown";
 
 const SeriesList = () => {
+  const [bannerShow, setBannerShow] = useState(null);
   const [network, setNetwork] = useState("Netflix");
   const [genre, setGenre] = useState({ id: 80, name: "Crime" });
-  const [bannerShow, setBannerShow] = useState(null);
 
   const { // Banner
     isLoading,
     hasError,
     apiData: trendingData,
   } = useFetchApi(getSeriesList(1, network, "popularity", "desc"), "tmdb");
+
+  const { // Genre options
+    apiData: genreList,
+  } = useFetchApi(getGenres("tv"), "tmdb");
 
   useEffect(() => {
     setBannerShow(
@@ -58,11 +63,10 @@ const SeriesList = () => {
           showType="tv"
         />
 
-        <Genres
-          currentNetwork={network}
-          currentGenre={genre}
-          setGenre={setGenre}
-          showType={"tv"}
+        <Dropdown
+          options={genreList?.genres}
+          selectedOption={genre}
+          onChangeOption={setGenre}
         />
         <RowContainer
           title={`${capitalizeFirstLetter(genre.name)}`}

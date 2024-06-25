@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { convertToSlug } from "../../../utils/StringUtils.js";
-import useGenreName from "../../../hooks/useGenreName.jsx";
 import Genre from "../../genres/Genres.jsx";
 import "./ShowCard.css";
 

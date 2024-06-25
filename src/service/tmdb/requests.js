@@ -13,7 +13,6 @@ export const getMovieList = (page = 1, sortBy, sortOrder, genre) => {
   const language = 'en-US';
 
   let params = `/discover/movie?include_adult=${includeAdult}&include_video=${includeVideo}&language=${language}&page=${page}&sort_by=popularity.desc`;
-  console.log(genre)
   if (genre) {
     params += `&with_genres=${genre}`
   }
