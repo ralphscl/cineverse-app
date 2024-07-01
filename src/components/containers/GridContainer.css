@@ -1,0 +1,27 @@
+.grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    padding: 0.4rem;
+    margin: 1rem auto;
+    height: auto;
+    justify-content: center;
+}
+
+.grid .wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    width: auto;
+}
+
+.grid>.wrapper>.card {
+    flex: 1 0 20%;
+    max-width: 20%;
+    background-color: #f0f0f0;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}

@@ -11,13 +11,23 @@ const ScrollableCollumn = ({
 }) => {
   const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl, "tmdb");
 
-  console.log(shows)
   return (
-    <div>
-      {shows?.results?.map((show) => (
-        <ShowCard key={show.id} show={show} cardType={cardType} showType={showType} />
-      ))}
-    </div>
+    <>
+      {!hideTitle && <h2 className="row-title">{title}</h2>}
+      <div className='grid'>
+        {hasError && <p>Error fetching data. Please try again later</p>}
+        {
+          isLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <div className='wrapper'>
+              {shows?.results?.map((show) => (
+                <ShowCard key={show.id} show={show} cardType={cardType} showType={showType} />
+              ))}
+            </div>
+          )}
+      </div>
+    </>
   )
 }
 

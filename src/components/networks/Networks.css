@@ -3,16 +3,17 @@
     display: flex;
     align-items: center;
     gap: 2rem;
-    margin: 5rem auto 0;
+    margin: 1rem auto 0;
     overflow-y: hidden;
     overflow-x: scroll;
-    
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
-.networks::-webkit-scrollbar { 
-    display: none;  /* Safari and Chrome */
+.networks::-webkit-scrollbar {
+    display: none;
+    /* Safari and Chrome */
 }
 
 .networks .network-item {
@@ -23,7 +24,7 @@
     border-bottom: 2px solid #ce3824;
 }
 
-.networks .network-item  h3 {
+.networks .network-item h3 {
     white-space: nowrap;
 }
 
@@ -33,5 +34,5 @@
     display: block;
     cursor: pointer;
     -webkit-filter: drop-shadow(5px 5px 5px #1b1b1b);
-    filter: drop-shadow(5px 5px 5px #1b1b1b); 
+    filter: drop-shadow(5px 5px 5px #1b1b1b);
 }
