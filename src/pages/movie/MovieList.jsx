@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useFetchApi } from "../../hooks/useFetchApi";
-import { getGenres, getMovieList } from "../../service/tmdb/requests";
+import { topMovies, getMovieList, getGenres } from "../../service/tmdb/requests";
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
 import Banner from "../../components/banner/Banner";
+import RowContainer from "../../components/containers/RowContainer";
 import GridContainer from "../../components/containers/GridContainer";
 import ShowDetails from "../../components/showDetails/ShowDetails";
 import Dropdown from "../../components/dropdown/Dropdown";
@@ -48,6 +49,20 @@ const MovieList = () => {
       )}
 
       <div className="listing">
+        <RowContainer
+          title="Top Rated"
+          reqUrl={topMovies.getTopRated}
+          cardType="backdrop"
+          showType="movie"
+        />
+
+        <RowContainer
+          title="Trending Now"
+          reqUrl={topMovies.getTrending}
+          cardType="backdrop"
+          showType="movie"
+        />
+
         <Dropdown
           options={genreList?.genres}
           selectedOption={genre}

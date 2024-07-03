@@ -74,10 +74,10 @@ a {
 
   .slider>div .container .wrapper,
   .movie-list section,
-  .movie-list .grid,
-  .series-list .row,
   .series-list section,
   .series-page section,
+  .listing .grid,
+  .listing .row,
   .networks,
   .genres,
   .footer section .wrapper {

@@ -1,10 +1,15 @@
 import networks from '../networks.js';
 import instance from './tmdb.js';
 
-export const requests = {
+export const topSeries = {
   'getTrending': `/trending/tv/week?language=en-US`,
-  'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`,
+  'getTopRated': `/discover/tv?include_adult=false&language=en-US&page=1&sort_by=vote_average.desc&vote_count.gte=200`
 };
+
+export const topMovies = {
+  'getTrending': `/trending/movie/day?language=en-US`,
+  'getTopRated': `/discover/movie?include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc`
+}
 
 // Movies
 export const getMovieList = (page = 1, sortBy, sortOrder, genre) => {

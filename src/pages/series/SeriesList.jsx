@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react";
 // Utils
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
 // Service
-import { requests, getSeriesList, getGenres } from "../../service/tmdb/requests";
+import { topSeries, getSeriesList, getGenres } from "../../service/tmdb/requests";
 import { useFetchApi } from "../../hooks/useFetchApi";
 // Components
 import Banner from "../../components/banner/Banner";
 import ShowDetails from "../../components/showDetails/ShowDetails";
 import Networks from "../../components/networks/Networks";
-import Genres from "../../components/genres/Genres";
 import RowContainer from "../../components/containers/RowContainer";
 // CSS
 import "./SeriesList.css";
@@ -78,14 +77,14 @@ const SeriesList = () => {
 
         <RowContainer
           title="Top Rated"
-          reqUrl={requests.getTopRated}
+          reqUrl={topSeries.getTopRated}
           cardType="backdrop"
           showType="tv"
         />
 
         <RowContainer
           title="Trending Now"
-          reqUrl={requests.getTrending}
+          reqUrl={topSeries.getTrending}
           cardType="backdrop"
           showType="tv"
         />
