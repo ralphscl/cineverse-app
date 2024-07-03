@@ -22,9 +22,9 @@ const ScrollableRow = ({
   }, [shows]);
 
   return (
-    <div>
+    <>
       {!hideTitle && <h2 className="row-title">{title}</h2>}
-      <div className={`row ${cardType}`}>
+      <div className="row" >
         {hasError && <p>Error fetching data. Please try again later</p>}
         {shows?.total_results === 0 ? (
           <div className="empty-rows">
@@ -40,7 +40,7 @@ const ScrollableRow = ({
           ))
         )}
       </div>
-    </div>
+    </>
   );
 };
 

@@ -4,19 +4,12 @@
     gap: 1rem;
     padding: .4rem;
     margin: 1rem auto;
+    height: auto;
 
     overflow-y: hidden;
     overflow-x: scroll;
     overscroll-behavior-x: contain;
     scroll-snap-type: x mandatory;
-}
-
-.row.poster {
-    height: 380px;
-}
-
-.row.backdrop {
-    height: 240px;
 }
 
 .row::-webkit-scrollbar {

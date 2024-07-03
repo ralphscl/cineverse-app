@@ -1,5 +1,6 @@
 .card {
     position: relative;
+    margin: 1rem 0;
     flex-shrink: 0;
     text-align: left;
     border-radius: .6rem;
@@ -13,23 +14,19 @@
     height: 14rem;
     width: 100%;
     border-radius: .4rem;
-    background-image: linear-gradient(
-        180deg, 
-        transparent,
-        rgba(37,37,37, 0.60), 
-        rgb(22, 22, 22)
-    );
+    background-image: linear-gradient(180deg,
+            transparent,
+            rgba(37, 37, 37, 0.60),
+            rgb(22, 22, 22));
 }
 
 .card:hover .overlay {
     height: 100%;
     overflow: hidden;
     border-radius: .4rem;
-    background-image: linear-gradient(
-        180deg, 
-        rgba(19, 19, 19, 0.4), 
-        #000000
-    );
+    background-image: linear-gradient(180deg,
+            rgba(19, 19, 19, 0.4),
+            #000000);
 }
 
 .card .overlay .description {
@@ -40,7 +37,7 @@
 
 .card.poster,
 .card:hover.poster .overlay {
-    height: 22rem;
+    height: 24rem;
     width: 14rem;
 }
 
@@ -51,13 +48,14 @@
 }
 
 /* ----- START POSTER CARDS ----- */
-.card.poster .overlay .description{
+.card.poster .overlay .description {
     display: none;
 }
 
 .card:hover.poster .overlay .description {
     display: block;
 }
+
 /* ----- END POSTER CARDS ----- */
 
 /* ----- START BACKDROP CARD ----- */
@@ -76,6 +74,7 @@
 .card:hover.backdrop .overlay .description p {
     display: block;
 }
+
 /* ----- END BACKDROP CARD ----- */
 
 
@@ -93,7 +92,7 @@
 .card:hover .overlay .description p.summary {
     overflow: hidden;
     display: -webkit-box;
-    line-clamp: 3; 
+    line-clamp: 3;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
 }

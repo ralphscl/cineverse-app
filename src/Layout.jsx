@@ -15,7 +15,10 @@ const Layout = () => {
       <Navbar />
       <Outlet />
 
-      {location.pathname === "/series" && <Newsletter />}
+      {location.pathname === "/series" ||
+        location.pathname === "/movies" ?
+        <Newsletter /> : null
+      }
 
       <Footer />
     </>
