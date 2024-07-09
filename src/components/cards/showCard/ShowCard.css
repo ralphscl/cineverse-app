@@ -38,12 +38,12 @@
 .card.poster,
 .card:hover.poster .overlay {
     height: 24rem;
-    width: 14rem;
+    width: 16rem;
 }
 
 .card.backdrop,
 .card:hover.backdrop .overlay {
-    height: 14rem;
+    height: 16rem;
     width: 24rem;
 }
 

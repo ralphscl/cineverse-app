@@ -29,7 +29,7 @@ const BackToTop = () => {
   };
 
   return (
-    <div onClick={scrollToTop} className={`backToTop ${visible && "visible"}`}>
+    <div onClick={scrollToTop} className={`backToTop${visible ? " visible" : ""}`}>
       <ArrowUp />
     </div>
   );

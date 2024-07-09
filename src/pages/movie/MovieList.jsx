@@ -3,15 +3,18 @@ import { useFetchApi } from "../../hooks/useFetchApi";
 import { topMovies, getMovieList, getGenres } from "../../service/tmdb/requests";
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
 import Banner from "../../components/banner/Banner";
+import ShowDetails from "../../components/showDetails/ShowDetails";
 import RowContainer from "../../components/containers/RowContainer";
 import GridContainer from "../../components/containers/GridContainer";
-import ShowDetails from "../../components/showDetails/ShowDetails";
+import Pagination from "../../components/pagination/Pagination";
 import Dropdown from "../../components/dropdown/Dropdown";
 import "./MovieList.css";
 
 const MovieList = () => {
   const [genre, setGenre] = useState("");
   const [bannerShow, setBannerShow] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(0);
 
   const { // Banner
     isLoading,
@@ -71,8 +74,14 @@ const MovieList = () => {
         <GridContainer
           title={`${capitalizeFirstLetter(genre?.name)}`}
           hideTitle={true}
-          reqUrl={getMovieList(1, null, null, genre?.id)}
+          reqUrl={getMovieList(currentPage, null, null, genre?.id)}
           cardType="poster"
+          setTotalPages={setTotalPages}
+        />
+        <Pagination
+          currentPage={currentPage}
+          totalPages={totalPages}
+          setCurrentPage={setCurrentPage}
         />
       </div>
     </div>
