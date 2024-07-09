@@ -23,7 +23,7 @@ const Navbar = () => {
   });
 
   return (
-    <nav className={`nav ${navbarClass && "bg_black"}`}>
+    <nav className={`nav${navbarClass ? " bg_black" : ""}`}>
       <Link to={"/"}>
         <img className="logo" src={CineverseLogo} alt="cineverse_logo" />
       </Link>

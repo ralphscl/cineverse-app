@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useFetchApi } from '../../hooks/useFetchApi';
 import ShowCard from '../cards/showCard/ShowCard';
 import "./GridContainer.css";
@@ -7,9 +8,14 @@ const ScrollableCollumn = ({
   reqUrl,
   hideTitle = false,
   cardType,
-  showType
+  showType,
+  setTotalPages
 }) => {
   const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl, "tmdb");
+
+  useEffect(() => {
+    setTotalPages(shows?.total_pages);
+  }, [shows])
 
   return (
     <>
