@@ -51,7 +51,7 @@ const MovieList = () => {
         />
       )}
 
-      <div className="listing">
+      <div className="wrapper">
         <RowContainer
           title="Top Rated"
           reqUrl={topMovies.getTopRated}

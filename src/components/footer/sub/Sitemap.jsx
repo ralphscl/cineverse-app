@@ -32,7 +32,7 @@ const Sitemap = () => {
           <h3>Explore</h3>
           <ul>
             <li>
-              <Link>Movies</Link>
+              <Link to={"/movies"}>Movies</Link>
             </li>
             <li>
               <Link to={"/series"}>Series</Link>

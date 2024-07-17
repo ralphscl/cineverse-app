@@ -34,8 +34,6 @@ const PreviewSlider = () => {
   return (
     <div className="preview-slider">
       <Slider slideData={slideData} />
-
-      <Newsletter />
     </div>
   );
 };

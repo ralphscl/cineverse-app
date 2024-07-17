@@ -30,16 +30,10 @@ const NetworkItem = ({ id, currentNetwork, setNetwork }) => {
 
   return (
     <div
-      className={`network-item ${
-        networkDetails?.name === currentNetwork && "active"
-      }`}
+      className={`network-item ${networkDetails?.name === currentNetwork && "active"
+        }`}
       onClick={() => setNetwork(networkDetails?.name)}
     >
-      {/* <img
-        src={TMDB_ASSET_BASEURL + networkDetails?.logo_path}
-        alt={networkDetails?.name + "logo"}
-      /> */}
-
       <h3>{networkDetails?.name}</h3>
     </div>
   );

@@ -13,7 +13,6 @@
 
 .networks::-webkit-scrollbar {
     display: none;
-    /* Safari and Chrome */
 }
 
 .networks .network-item {

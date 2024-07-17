@@ -9,22 +9,20 @@ const Pagination = ({ currentPage, totalPages, setCurrentPage }) => {
 
   return (
     <div className='pagination'>
-      <button onClick={handlePrevPage}>
+      <a onClick={handlePrevPage}>
         Prev
-      </button>
+      </a>
 
       {renderPages(currentPage, totalPages, setCurrentPage)}
 
-      <button onClick={handleNextPage}>
+      <a onClick={handleNextPage}>
         Next
-      </button>
+      </a>
     </div>
   )
 }
 
-
 const renderPages = (currentPage, totalPages, setCurrentPage) => {
-
   const startPage = Math.max(currentPage - 2, 1);
   const endPage = Math.min(startPage + 4, totalPages);
   const pages = [];
@@ -32,12 +30,12 @@ const renderPages = (currentPage, totalPages, setCurrentPage) => {
   console.log(currentPage, startPage, endPage)
   for (let i = startPage; i <= endPage; i++) {
     pages.push(
-      <button
+      <a
         onClick={() => setCurrentPage(i)}
         disabled={currentPage === i}
       >
         {i}
-      </button>
+      </a>
     )
   }
   console.log("pages", pages)

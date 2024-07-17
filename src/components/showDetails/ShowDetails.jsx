@@ -11,8 +11,8 @@ import {
 import { getSeriesMoreInfo } from "../../service/omdb/requests";
 // Utils
 import { splitSlug, convertToSlug } from "../../utils/StringUtils";
-import "./ShowDetails.css";
 import { formatDate } from "../../utils/DateUtils";
+import "./ShowDetails.css";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 
@@ -59,96 +59,98 @@ const ShowDetails = ({
 
   return (
     <section className="show-details">
-      {/* Title */}
-      {allowLinkTitle ? (
-        <Link to={`/${showType === "tv" ? "series" : "movie"}/${show?.id}-${convertToSlug(showTitle)}`}>
+      <div className="wrapper">
+        {/* Title */}
+        {allowLinkTitle ? (
+          <Link to={`/${showType === "tv" ? "series" : "movie"}/${show?.id}-${convertToSlug(showTitle)}`}>
+            <h1>{showTitle}</h1>
+          </Link>
+        ) : (
           <h1>{showTitle}</h1>
-        </Link>
-      ) : (
-        <h1>{showTitle}</h1>
-      )}
-
-      {/* Network Logo */}
-      {network && (
-        <img
-          src={`${TMDB_ASSET_BASEURL}${network.logo_path}`}
-          alt={network?.name}
-          className="network"
-        />
-      )}
-
-      {/* Buttons */}
-      <a
-        className="btn visit"
-        href={show?.homepage}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Visit
-      </a>
-
-      {/* Trailer */}
-      {show && (
-        <YoutubeTrailer
-          showType={showType}
-          tmdbID={show?.id}
-          title={show?.name || show?.original_name}
-        />
-      )}
-
-      <ul>
-        {/* Content Rating */}
-        {(contentRating || otherDetails) && (
-          <li>
-            <span>{contentRating || otherDetails?.Rated}</span>
-          </li>
         )}
 
-        {/* Movie */}
-        {showType === "movie" && (
-          <>
-            <li>{show?.status}</li>
-            <li>{show?.runtime} Runtime</li>
-          </>
+        {/* Network Logo */}
+        {network && (
+          <img
+            src={`${TMDB_ASSET_BASEURL}${network.logo_path}`}
+            alt={network?.name}
+            className="network"
+          />
         )}
-        {/* Series */}
-        {showType === "tv" && (
-          <>
+
+        {/* Buttons */}
+        <a
+          className="btn visit"
+          href={show?.homepage}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Visit
+        </a>
+
+        {/* Trailer */}
+        {show && (
+          <YoutubeTrailer
+            showType={showType}
+            tmdbID={show?.id}
+            title={show?.name || show?.original_name}
+          />
+        )}
+
+        <ul>
+          {/* Content Rating */}
+          {(contentRating || otherDetails) && (
             <li>
-              {show?.seasons?.length} Season
-              {show?.seasons?.length > 1 && "s"}
+              <span>{contentRating || otherDetails?.Rated}</span>
             </li>
-          </>
-        )}
-        {/* Date Aired */}
-        <li>
-          {splitSlug(show?.first_air_date)[0] || formatDate(show?.release_date)}
-        </li>
-      </ul>
+          )}
 
-      {/* Summary */}
-      <p className="overview">{show?.overview}</p>
+          {/* Movie */}
+          {showType === "movie" && (
+            <>
+              <li>{show?.status}</li>
+              <li>{show?.runtime} Runtime</li>
+            </>
+          )}
+          {/* Series */}
+          {showType === "tv" && (
+            <>
+              <li>
+                {show?.seasons?.length} Season
+                {show?.seasons?.length > 1 && "s"}
+              </li>
+            </>
+          )}
+          {/* Date Aired */}
+          <li>
+            {splitSlug(show?.first_air_date)[0] || formatDate(show?.release_date)}
+          </li>
+        </ul>
 
-      {/* Plot */}
-      {showPlot && <p className="plot">{otherDetails?.Plot}</p>}
+        {/* Summary */}
+        <p className="overview">{show?.overview}</p>
 
-      {/* Genre */}
-      <p className="genre">
-        {show?.genres?.map((genre, index) => {
-          return (
-            <span key={genre.name}>
-              {genre.name}
-              {index < show?.genres.length - 1 && ", "}
-            </span>
-          );
-        })}
-      </p>
+        {/* Plot */}
+        {showPlot && <p className="plot">{otherDetails?.Plot}</p>}
 
-      {/* Language */}
-      <p className="language">Language: {otherDetails?.Language}</p>
+        {/* Genre */}
+        <p className="genre">
+          {show?.genres?.map((genre, index) => {
+            return (
+              <span key={genre.name}>
+                {genre.name}
+                {index < show?.genres.length - 1 && ", "}
+              </span>
+            );
+          })}
+        </p>
 
-      {/* Producers */}
-      {showProducers && <Producers tmdbId={show?.id} />}
+        {/* Language */}
+        <p className="language">Language: {otherDetails?.Language}</p>
+
+        {/* Producers */}
+        {showProducers && <Producers tmdbId={show?.id} />}
+      </div>
     </section>
   );
 };

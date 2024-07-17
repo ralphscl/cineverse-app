@@ -1,6 +1,11 @@
 .pagination {
-    display: flex;
-    justify-content: center;
-    gap: 1rem;
-    margin: 1rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 1rem;
+  background-color: blanchedalmond;
+}
+
+.pagination a {
+  cursor: pointer;
 }

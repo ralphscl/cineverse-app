@@ -52,7 +52,7 @@ const SeriesList = () => {
         />
       )}
 
-      <div className="listing">
+      <div className="wrapper">
         <Networks currentNetwork={network} setNetwork={setNetwork} />
         <RowContainer
           title={`${network} Shows`}

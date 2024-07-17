@@ -43,28 +43,19 @@ a {
 
 
 /* Page sections */
-.slider>div .container .wrapper,
-.movie-list section,
-.movie-list .grid,
-.series-list .row,
-.series-list section,
+.wrapper,
 .series-page section,
 .networks,
-.genres,
 .footer section .wrapper {
   width: 96%;
+  margin: 1rem auto;
 }
 
 @media (min-width: 640px) {
 
-  .slider>div .container .wrapper,
-  .movie-list section,
-  .movie-list .grid,
-  .series-list .row,
-  .series-list section,
+  .wrapper,
   .series-page section,
   .networks,
-  .genres,
   .footer section .wrapper {
     width: 90%;
   }
@@ -72,14 +63,9 @@ a {
 
 @media (min-width: 768px) {
 
-  .slider>div .container .wrapper,
-  .movie-list section,
-  .series-list section,
+  .wrapper,
   .series-page section,
-  .listing .grid,
-  .listing .row,
   .networks,
-  .genres,
   .footer section .wrapper {
     width: 80%;
   }
