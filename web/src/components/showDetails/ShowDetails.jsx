@@ -240,7 +240,7 @@ const ShowDetails = ({
     };
 
     if (showType === "tv") fetchContentRating();
-  }, [show]);
+  }, [show, showType]);
 
   useEffect(() => {
     if (show?.networks?.length) {

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import { useFetchApi } from "../../hooks/useFetchApi";
 import { getGenres, getMovieList, requests } from "../../service/tmdb/requests";
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
@@ -12,8 +13,8 @@ import "./MovieList.css";
 import "../ListingTransitions.css";
 
 const MovieList = () => {
-  const [genre, setGenre] = useState("");
-  const [page, setPage] = useState(1);
+  const [params, setParams] = useSearchParams();
+  const page = Math.min(500, Math.max(1, Math.floor(Number(params.get("page"))) || 1));
   const [bannerShow, setBannerShow] = useState(null);
   const genrePickerRef = useRef(null);
   const listingRef = useListingReveal();
@@ -33,16 +34,25 @@ const MovieList = () => {
     );
   }, [trendingData]);
 
+  const genre = genreList?.genres?.find((item) => String(item.id) === params.get("genre")) || null;
   const selectedGenreName = genre?.name || "Popular Movies";
 
   const handleGenreChange = (nextGenre) => {
-    setGenre(nextGenre);
-    setPage(1);
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      if (nextGenre?.id) next.set("genre", nextGenre.id); else next.delete("genre");
+      next.delete("page");
+      return next;
+    });
   };
 
   const handlePageChange = (nextPage) => {
     shouldScrollToGenreRef.current = true;
-    setPage(nextPage);
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      next.set("page", nextPage);
+      return next;
+    });
   };
 
   const scrollToGenrePicker = useCallback(() => {

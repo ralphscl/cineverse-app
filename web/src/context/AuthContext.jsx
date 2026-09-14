@@ -1,9 +1,9 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { supabase } from "../service/supabase/client";
 import { syncWatchlistForUser } from "../service/watchlist/watchlistSync";
-import { clearActiveWatchlistUser } from "../service/watchlist/watchlistStorage";
+import { clearActiveWatchlistUser, setActiveWatchlistUser } from "../service/watchlist/watchlistStorage";
 import { syncVideoProgressForUser } from "../service/videoProgress/videoProgressSync";
-import { clearActiveVideoProgressUser } from "../service/videoProgress/videoProgressStorage";
+import { clearActiveVideoProgressUser, setActiveVideoProgressUser } from "../service/videoProgress/videoProgressStorage";
 
 const AuthContext = createContext(null);
 const WATCHLIST_SYNC_INTERVAL_MS = 30 * 60 * 1000;
@@ -36,6 +36,8 @@ export const AuthProvider = ({ children }) => {
       return;
     }
 
+    setActiveWatchlistUser(profile.id);
+    setActiveVideoProgressUser(profile.id);
     setUser(profile);
 
     if (syncedUserIDRef.current === profile.id) {
@@ -105,17 +107,20 @@ export const AuthProvider = ({ children }) => {
       return undefined;
     }
 
-    const syncIntervalID = window.setInterval(() => {
+    const sync = () => {
       syncWatchlistForUser(user.id).catch((error) => {
         console.error("Failed to sync watchlist", error);
       });
       syncVideoProgressForUser(user.id).catch((error) => {
         console.error("Failed to sync video progress", error);
       });
-    }, WATCHLIST_SYNC_INTERVAL_MS);
+    };
+    const syncIntervalID = window.setInterval(sync, WATCHLIST_SYNC_INTERVAL_MS);
+    window.addEventListener("online", sync);
 
     return () => {
       window.clearInterval(syncIntervalID);
+      window.removeEventListener("online", sync);
     };
   }, [user?.id]);
 

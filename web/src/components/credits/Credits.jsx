@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 import CastCard from "../cards/castCard/CastCard";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";

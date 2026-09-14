@@ -23,7 +23,7 @@ export const getRemoteWatchlist = async (userID) => {
   return (data || []).map(fromWatchlistRow).filter(Boolean);
 };
 
-export const upsertRemoteWatchlistItem = async (userID, item) => {
+const upsertRemoteWatchlistItemImpl = async (userID, item) => {
   const remoteItem = toWatchlistRow(userID, item);
   if (!remoteItem) {
     return;
@@ -38,7 +38,7 @@ export const upsertRemoteWatchlistItem = async (userID, item) => {
   }
 };
 
-export const upsertRemoteWatchlist = async (userID, items) => {
+const upsertRemoteWatchlistImpl = async (userID, items) => {
   if (!userID || !Array.isArray(items) || !items.length) {
     return;
   }
@@ -54,7 +54,7 @@ export const upsertRemoteWatchlist = async (userID, items) => {
   }
 };
 
-export const deleteRemoteWatchlistItem = async (userID, id) => {
+const deleteRemoteWatchlistItemImpl = async (userID, id) => {
   const { mediaType, tmdbID } = parseWatchlistID(id);
   if (!userID || !mediaType || !tmdbID) {
     return;
@@ -69,5 +69,19 @@ export const deleteRemoteWatchlistItem = async (userID, id) => {
 
   if (error) {
     console.error("Failed to delete remote watchlist item", error);
+    return false;
   }
 };
+
+// Serialize writes so an older bulk sync cannot finish after a newer edit.
+const writes = new Map();
+const enqueueWrite = (userID, operation) => {
+  const previous = writes.get(userID) || Promise.resolve();
+  const next = previous.catch(() => {}).then(operation);
+  writes.set(userID, next);
+  next.finally(() => { if (writes.get(userID) === next) writes.delete(userID); }).catch(() => {});
+  return next;
+};
+export const upsertRemoteWatchlistItem = (userID, value) => enqueueWrite(userID, () => upsertRemoteWatchlistItemImpl(userID, value)).catch((error) => { console.error("Sync write failed", error); return false; });
+export const upsertRemoteWatchlist = (userID, value) => enqueueWrite(userID, () => upsertRemoteWatchlistImpl(userID, value));
+export const deleteRemoteWatchlistItem = (userID, value) => enqueueWrite(userID, () => deleteRemoteWatchlistItemImpl(userID, value)).catch((error) => { console.error("Sync write failed", error); return false; });

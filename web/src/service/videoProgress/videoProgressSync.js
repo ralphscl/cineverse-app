@@ -3,7 +3,7 @@ import { getRemoteVideoProgressEntries, upsertRemoteVideoProgressEntries } from 
 import {
   getVideoProgressEntries,
   replaceActiveVideoProgress,
-  setActiveVideoProgressUser,
+  getVideoProgressSession,
 } from "./videoProgressStorage";
 
 const getLatestEntry = (firstEntry, secondEntry) => {
@@ -28,25 +28,36 @@ const mergeProgressEntries = (localEntries, remoteEntries) => {
   return Array.from(entryMap.values());
 };
 
-export const syncVideoProgressForUser = async (userID) => {
+const syncForUser = async (userID) => {
   if (!userID) {
     return [];
   }
 
-  setActiveVideoProgressUser(userID);
+  const session = getVideoProgressSession();
 
-  const localEntries = getVideoProgressEntries();
+  const localEntries = getVideoProgressEntries(userID);
   const remoteEntries = await getRemoteVideoProgressEntries(userID);
+  if (session !== getVideoProgressSession()) return [];
   const mergedEntries = mergeProgressEntries(
     mergeProgressEntries(localEntries, remoteEntries),
-    getVideoProgressEntries()
+    getVideoProgressEntries(userID)
   );
 
   const replacedMap = replaceActiveVideoProgress(mergedEntries, {
     mergeCurrent: true,
+    userID,
   });
   const currentMergedEntries = Object.values(replacedMap);
   await upsertRemoteVideoProgressEntries(userID, currentMergedEntries);
 
   return currentMergedEntries;
+};
+
+const pendingSyncs = new Map();
+export const syncVideoProgressForUser = (userID) => {
+  const key = userID + ':' + getVideoProgressSession();
+  if (pendingSyncs.has(key)) return pendingSyncs.get(key);
+  const promise = syncForUser(userID).finally(() => pendingSyncs.delete(key));
+  pendingSyncs.set(key, promise);
+  return promise;
 };

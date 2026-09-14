@@ -6,6 +6,7 @@ import SeasonList from "../../components/series/seasons/SeasonList";
 import Credits from "../../components/credits/Credits";
 import Recommended from "../../components/recommended/Recommended";
 import { DetailPageSkeleton } from "../../components/loading/PageSkeleton";
+import RequestError from "../../components/loading/RequestError";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 import useDetailReveal from "../../hooks/useDetailReveal";
@@ -28,6 +29,7 @@ const SeriesPage = () => {
   const {
     isLoading,
     hasError,
+    retry,
     apiData: show,
   } = useFetchApi(getShowDetails("tv", id), "tmdb");
 
@@ -46,7 +48,7 @@ const SeriesPage = () => {
   return (
     <div className="series-page">
       {hasError ? (
-        <p>Error fetching data. Please try again later</p>
+        <RequestError retry={retry} />
       ) : isLoading || !show ? (
         <DetailPageSkeleton />
       ) : (

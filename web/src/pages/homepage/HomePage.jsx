@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import PreviewSlider from "./previewSlider/PreviewSlider";
 // CSS
 import "./HomePage.css";

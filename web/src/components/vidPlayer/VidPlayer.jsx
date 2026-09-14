@@ -5,10 +5,12 @@ import { getEmbedUrl as getVideasyEmbedUrl } from "../../service/videasy/request
 import { getEmbedUrl as getVidapiEmbedUrl } from "../../service/vidapi/requests";
 import {
   flushStoredVideoProgress,
+  getVideoProgressSession,
   getStoredVideoProgressEntry,
   setStoredVideoProgress,
 } from "../../service/videoProgress/videoProgressStorage";
 import { useAuth } from "../../context/AuthContext";
+import useDialogFocus from "../../hooks/useDialogFocus";
 import "./VidPlayer.css";
 
 const RESUME_BACKTRACK_SECONDS = 5;
@@ -122,7 +124,7 @@ const VidPlayer = ({
   }, [runtimeMinutes]);
   const progressKeySignature = progressKeys.join("|");
 
-  const sessionStartRef = useRef(null);
+  const progressSessionRef = useRef(null);
   const baseProgressRef = useRef(0);
   const progressIntervalRef = useRef(null);
   const visibilityHandlerRef = useRef(null);
@@ -130,6 +132,7 @@ const VidPlayer = ({
   const playerLoadTimeoutRef = useRef(null);
   const controlsIdleTimeoutRef = useRef(null);
   const iframeRef = useRef(null);
+  const dialogRef = useRef(null);
   const providerProgressRef = useRef({ seconds: null, duration: 0 });
   const isPlaybackPausedRef = useRef(false);
   const resumeAtRef = useRef(0);
@@ -152,6 +155,7 @@ const VidPlayer = ({
     showPlayer &&
     (!wasShowingPlayerRef.current || activeProgressKeyRef.current !== progressKeySignature)
   ) {
+    progressSessionRef.current = getVideoProgressSession();
     const storedEntry = getStoredVideoProgressEntry(progressKeys);
     const checkpoint = storedEntry?.seconds || 0;
     const storedDuration = Number(storedEntry?.metadata?.playbackDuration);
@@ -222,6 +226,7 @@ const VidPlayer = ({
     event?.stopPropagation?.();
     updateOpen(false);
   };
+  useDialogFocus(showPlayer, dialogRef, handleClose);
 
   const clearControlsIdleTimeout = useCallback(() => {
     if (controlsIdleTimeoutRef.current) {
@@ -266,15 +271,6 @@ const VidPlayer = ({
 
   const togglePlayback = useCallback(() => {
     const willPause = !isPlaybackPausedRef.current;
-    if (willPause && sessionStartRef.current) {
-      baseProgressRef.current += Math.floor(
-        (Date.now() - sessionStartRef.current) / 1000
-      );
-      sessionStartRef.current = null;
-    } else if (!willPause) {
-      sessionStartRef.current = Date.now();
-    }
-
     isPlaybackPausedRef.current = willPause;
     setIsPlaybackPaused(isPlaybackPausedRef.current);
     revealControls(isPlaybackPausedRef.current);
@@ -305,7 +301,7 @@ const VidPlayer = ({
     const handleWindowBlur = () => revealControls();
 
     const handleKeyDown = (event) => {
-      if (event.code !== "Space" || event.repeat) {
+      if (event.code !== "Space" || event.repeat || event.target.closest?.("button, input, select, textarea, a, [contenteditable]")) {
         return;
       }
 
@@ -334,19 +330,11 @@ const VidPlayer = ({
     setIsPlayerLoading(false);
   };
 
-  const getPlayedSeconds = useCallback(() => {
-    if (!sessionStartRef.current) {
-      return baseProgressRef.current;
-    }
-
-    return (
-      baseProgressRef.current +
-      Math.floor((Date.now() - sessionStartRef.current) / 1000)
-    );
-  }, []);
+  // Only confirmed provider timestamps count as watched time.
+  const getPlayedSeconds = useCallback(() => baseProgressRef.current, []);
 
   const saveProgress = useCallback((progressSeconds, flushLocal = false) => {
-    if (!showPlayer || !progressKeys.length) {
+    if (!showPlayer || !progressKeys.length || !hasProviderProgressRef.current || progressSessionRef.current !== getVideoProgressSession()) {
       return;
     }
 
@@ -365,7 +353,7 @@ const VidPlayer = ({
 
   const maybeMarkComplete = useCallback((progressSeconds, durationSeconds) => {
     if (
-      completionMarkedRef.current
+      completionMarkedRef.current || !hasProviderProgressRef.current || progressSessionRef.current !== getVideoProgressSession()
     ) {
       return;
     }
@@ -392,7 +380,7 @@ const VidPlayer = ({
 
   const saveProviderProgress = useCallback((seconds, duration, isSeek = false) => {
     const playedSeconds = Number(seconds);
-    if (!showPlayer || !progressKeys.length || !Number.isFinite(playedSeconds) || playedSeconds < 0) {
+    if (!showPlayer || !progressKeys.length || progressSessionRef.current !== getVideoProgressSession() || !Number.isFinite(playedSeconds) || playedSeconds < 0) {
       return;
     }
 
@@ -446,7 +434,6 @@ const VidPlayer = ({
     canonicalCheckpointRef.current = playedSeconds;
     knownDurationRef.current = durationSeconds;
     baseProgressRef.current = playedSeconds;
-    sessionStartRef.current = isPlaybackPausedRef.current ? null : Date.now();
 
     setStoredVideoProgress(progressKeys, playedSeconds, {
       ...(progressMetadataRef.current || {}),
@@ -477,7 +464,6 @@ const VidPlayer = ({
     lastProviderProgressRef.current = null;
     recentSeekRef.current = null;
     backwardCandidateRef.current = null;
-    sessionStartRef.current = isPlaybackPausedRef.current ? null : Date.now();
     setPlayerRevision((revision) => revision + 1);
   }, [activeProvider?.supportsResume, getPlayedSeconds, progressKeys, runtimeSeconds, saveProgress]);
 
@@ -582,7 +568,7 @@ const VidPlayer = ({
     setAreControlsVisible(true);
     setIsPlaybackPaused(false);
     isPlaybackPausedRef.current = false;
-  }, [clearControlsIdleTimeout, type, tmdbID, imdbID, season, episode, runtimeSeconds]);
+  }, [clearControlsIdleTimeout, type, tmdbID, imdbID, season, episode, runtimeSeconds, showPlayer]);
 
   useEffect(() => {
     if (!showPlayer) {
@@ -608,13 +594,6 @@ const VidPlayer = ({
 
       if (typeof progress.isPaused === "boolean") {
         const wasPlaybackPaused = isPlaybackPausedRef.current;
-
-        if (progress.isPaused && !wasPlaybackPaused && progress.seconds === null) {
-          baseProgressRef.current = getPlayedSeconds();
-          sessionStartRef.current = null;
-        } else if (!progress.isPaused && wasPlaybackPaused) {
-          sessionStartRef.current = Date.now();
-        }
 
         isPlaybackPausedRef.current = progress.isPaused;
         setIsPlaybackPaused(progress.isPaused);
@@ -712,10 +691,8 @@ const VidPlayer = ({
 
     if (activeProvider.supportsResume) {
       baseProgressRef.current = canonicalCheckpointRef.current;
-      sessionStartRef.current = isPlaybackPausedRef.current ? null : Date.now();
     } else {
       baseProgressRef.current = 0;
-      sessionStartRef.current = null;
     }
 
     progressIntervalRef.current = window.setInterval(() => {
@@ -779,7 +756,6 @@ const VidPlayer = ({
         getPlayedSeconds(),
         providerProgressRef.current.duration || undefined
       );
-      sessionStartRef.current = null;
     };
   }, [activeProvider, getPlayedSeconds, maybeMarkComplete, progressKeys, saveProgress, showPlayer]);
 
@@ -803,6 +779,12 @@ const VidPlayer = ({
         <div className="vid-player" onClick={handleClose}>
           <div
             className="vid-player__shell"
+            ref={dialogRef}
+            role="dialog"
+            aria-modal="true"
+            aria-label={title ? `Watch ${title}` : "Video player"}
+            tabIndex={-1}
+            onFocusCapture={() => revealControls(true)}
             onPointerMove={() => revealControls()}
             onPointerDown={(event) => event.stopPropagation()}
             onClick={(event) => event.stopPropagation()}

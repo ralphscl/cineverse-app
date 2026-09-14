@@ -5,6 +5,8 @@ export const VIDEO_PROGRESS_STORAGE_KEY = "cineverse-vid-progress";
 const VIDEO_PROGRESS_USER_KEY_PREFIX = `${VIDEO_PROGRESS_STORAGE_KEY}:`;
 const WRITE_THROTTLE_MS = 5000;
 let activeVideoProgressUserID = null;
+let sessionRevision = 0;
+export const getVideoProgressSession = () => activeVideoProgressUserID + ':' + sessionRevision;
 const pendingLocalMaps = new Map();
 const pendingRemoteEntries = new Map();
 let localFlushTimeout = null;
@@ -138,16 +140,17 @@ const normalizeProgressEntry = (value, fallbackKey) => {
   };
 };
 
-export const getVideoProgressMap = () => {
-  if (!activeVideoProgressUserID) {
+export const getVideoProgressMap = (userID = activeVideoProgressUserID) => {
+  if (!userID) {
     return {};
   }
 
-  const storageKey = getStorageKey();
+  const storageKey = getStorageKey(userID);
   return pendingLocalMaps.get(storageKey) || readVideoProgressMapFromKey(storageKey);
 };
 
 export const setActiveVideoProgressUser = (userID) => {
+  if (activeVideoProgressUserID !== (userID || null)) sessionRevision += 1;
   activeVideoProgressUserID = userID || null;
 
   if (!activeVideoProgressUserID || !isBrowser()) {
@@ -169,21 +172,22 @@ export const setActiveVideoProgressUser = (userID) => {
 };
 
 export const clearActiveVideoProgressUser = () => {
+  sessionRevision += 1;
   activeVideoProgressUserID = null;
 };
 
-export const getVideoProgressEntries = () => {
-  return Object.entries(getVideoProgressMap())
+export const getVideoProgressEntries = (userID = activeVideoProgressUserID) => {
+  return Object.entries(getVideoProgressMap(userID))
     .map(([key, value]) => normalizeProgressEntry(value, key))
     .filter(Boolean);
 };
 
-export const replaceActiveVideoProgress = (entries, { mergeCurrent = false } = {}) => {
-  if (!activeVideoProgressUserID || !Array.isArray(entries)) {
+export const replaceActiveVideoProgress = (entries, { mergeCurrent = false, userID = activeVideoProgressUserID } = {}) => {
+  if (!userID || !Array.isArray(entries)) {
     return {};
   }
 
-  const nextMap = mergeCurrent ? { ...getVideoProgressMap() } : {};
+  const nextMap = mergeCurrent ? { ...getVideoProgressMap(userID) } : {};
 
   entries.forEach((entry) => {
     const normalizedEntry = normalizeProgressEntry(entry, entry?.key);
@@ -204,12 +208,14 @@ export const replaceActiveVideoProgress = (entries, { mergeCurrent = false } = {
   });
 
   try {
-    const storageKey = getStorageKey();
+    const storageKey = getStorageKey(userID);
     writeVideoProgressMapToKey(storageKey, nextMap);
     pendingLocalMaps.delete(storageKey);
-    window.dispatchEvent(new CustomEvent("cineverse-video-progress", { detail: { entries } }));
+    if (userID === activeVideoProgressUserID) {
+      window.dispatchEvent(new CustomEvent("cineverse-video-progress", { detail: { entries } }));
+    }
   } catch {
-    return getVideoProgressMap();
+    return getVideoProgressMap(userID);
   }
 
   return nextMap;

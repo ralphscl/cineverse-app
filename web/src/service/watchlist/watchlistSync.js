@@ -1,6 +1,6 @@
 // Syncs local and remote watchlist data, resolving conflicts by newest update time.
-import { getRemoteWatchlist, upsertRemoteWatchlist } from "./watchlistRemote";
-import { getWatchlist, replaceActiveWatchlist, setActiveWatchlistUser } from "./watchlistStorage";
+import { getRemoteWatchlist, upsertRemoteWatchlist, deleteRemoteWatchlistItem } from "./watchlistRemote";
+import { getWatchlist, replaceActiveWatchlist, getWatchlistSession, getWatchlistDeletions } from "./watchlistStorage";
 
 const WATCHLIST_SYNC_STATUS_KEY_PREFIX = "cineverse-watchlist-sync:";
 
@@ -55,21 +55,34 @@ const mergeWatchlistItems = (localItems, remoteItems) => {
   return Array.from(itemMap.values());
 };
 
-export const syncWatchlistForUser = async (userID) => {
+const syncForUser = async (userID) => {
   if (!userID) {
     return [];
   }
 
-  setActiveWatchlistUser(userID);
+  const session = getWatchlistSession();
   dispatchSyncStatus(userID, { state: "syncing", error: "" });
 
   try {
-    const localItems = getWatchlist();
+    const localItems = getWatchlist(userID);
     const remoteItems = await getRemoteWatchlist(userID);
-    const mergedItems = mergeWatchlistItems(localItems, remoteItems);
+    if (session !== getWatchlistSession()) return [];
+    const deletions = getWatchlistDeletions(userID);
+    const mergedItems = mergeWatchlistItems(
+      mergeWatchlistItems(localItems, remoteItems), getWatchlist(userID)
+    ).filter((item) => !deletions[item.id]);
 
-    replaceActiveWatchlist(mergedItems);
+    replaceActiveWatchlist(mergedItems, userID);
     await upsertRemoteWatchlist(userID, mergedItems);
+
+    for (const id of Object.keys(getWatchlistDeletions(userID))) {
+      if (session !== getWatchlistSession()) return [];
+      if (!getWatchlistDeletions(userID)[id]) continue;
+      if (await deleteRemoteWatchlistItem(userID, id) === false) {
+        throw new Error("Some removals could not sync. They will be retried.");
+      }
+    }
+    if (session !== getWatchlistSession()) return [];
 
     dispatchSyncStatus(userID, {
       state: "synced",
@@ -87,4 +100,13 @@ export const syncWatchlistForUser = async (userID) => {
     });
     throw error;
   }
+};
+
+const pendingSyncs = new Map();
+export const syncWatchlistForUser = (userID) => {
+  const key = userID + ':' + getWatchlistSession();
+  if (pendingSyncs.has(key)) return pendingSyncs.get(key);
+  const promise = syncForUser(userID).finally(() => pendingSyncs.delete(key));
+  pendingSyncs.set(key, promise);
+  return promise;
 };

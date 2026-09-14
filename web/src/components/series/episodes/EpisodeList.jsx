@@ -1,9 +1,10 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import { getSeriesSeasons } from "../../../service/tmdb/requests";
 import { CineverseLoader } from "../../loading/PageSkeleton";
 // Hooks
 import { useFetchApi } from "../../../hooks/useFetchApi";
 import "./EpisodeList.css";
+import RequestError from "../../loading/RequestError";
 
 const EpisodeCard = lazy(() => import("../../cards/episodeCard/EpisodeCard"));
 
@@ -20,8 +21,12 @@ const EpisodeList = ({
   const {
     isLoading,
     hasError,
+    retry,
     apiData: seasonDetails,
   } = useFetchApi(getSeriesSeasons(tmdbID, season), "tmdb");
+
+  if (hasError) return <RequestError retry={retry} />;
+  if (isLoading) return <CineverseLoader label="Loading episodes" />;
 
   return (
     <>

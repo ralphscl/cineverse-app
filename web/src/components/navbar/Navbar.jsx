@@ -13,6 +13,7 @@ import {
   removeFromWatchlist,
 } from "../../service/watchlist/watchlistStorage";
 import "./Navbar.css";
+import useDialogFocus from "../../hooks/useDialogFocus";
 
 const TMDB_ASSET_BASEURL = import.meta.env.VITE_TMDB_ASSET_BASEURL;
 const DEFAULT_SEARCH_RESULT_COUNT = 8;
@@ -55,6 +56,7 @@ const Navbar = ({ isRouteLoading = false }) => {
   const [watchlistIDs, setWatchlistIDs] = useState(() => new Set());
   const wasRouteLoadingRef = useRef(false);
   const searchInputRef = useRef(null);
+  const loginDialogRef = useRef(null);
   const searchToggleRef = useRef(null);
   const mobileMenuToggleRef = useRef(null);
   const mobileMenuPanelRef = useRef(null);
@@ -539,6 +541,8 @@ const Navbar = ({ isRouteLoading = false }) => {
     };
   }, []);
 
+  useDialogFocus(isLoginOpen, loginDialogRef, closeLogin);
+
   const getResultTitle = (result) => {
     return result.title || result.name || result.original_title || result.original_name;
   };
@@ -876,6 +880,8 @@ const Navbar = ({ isRouteLoading = false }) => {
           role="dialog"
           aria-modal="true"
           aria-labelledby="login-title"
+          ref={loginDialogRef}
+          tabIndex={-1}
           onMouseMove={handleLoginMouseMove}
           onClick={closeLogin}
         >

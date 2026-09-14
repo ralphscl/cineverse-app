@@ -1,4 +1,3 @@
-import React from "react";
 import RowContainer from "../containers/RowContainer";
 import { getRecommended } from "../../service/tmdb/requests";
 import "./Recommended.css";

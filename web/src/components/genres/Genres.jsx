@@ -1,12 +1,9 @@
-import { useEffect, useState } from "react";
 import { getGenres, getSeriesList } from "../../service/tmdb/requests";
 import { useFetchApi } from "../../hooks/useFetchApi";
 import "./Genres.css";
 
 const Genres = ({ currentNetwork, currentGenre, setGenre, showType }) => {
   const {
-    isLoading,
-    hasError,
     apiData: genreList,
   } = useFetchApi(getGenres(showType), "tmdb");
 

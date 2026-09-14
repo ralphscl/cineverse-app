@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import RequestError from "../loading/RequestError";
 import { useFetchApi } from '../../hooks/useFetchApi';
 import ShowCard from '../cards/showCard/ShowCard';
 import { CardSkeleton } from '../loading/PageSkeleton';
@@ -14,7 +15,7 @@ const ScrollableCollumn = ({
   onPageChange,
   onLoadComplete,
 }) => {
-  const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl, "tmdb");
+  const { isLoading, hasError, retry, apiData: shows } = useFetchApi(reqUrl, "tmdb");
   const currentPage = Number(page || shows?.page || 1);
   const totalPages = Math.min(Number(shows?.total_pages || 1), 500);
   const showPagination = typeof onPageChange === "function" && totalPages > 1;
@@ -39,7 +40,7 @@ const ScrollableCollumn = ({
     <>
       {!hideTitle && <h2 className="row-title">{title}</h2>}
       <div className='grid'>
-        {hasError && <p>Error fetching data. Please try again later</p>}
+        {hasError && <RequestError retry={retry} />}
         {
           isLoading ? (
             <CardSkeleton count={10} layout="grid" cardType={cardType} />

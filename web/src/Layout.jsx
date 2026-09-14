@@ -5,6 +5,7 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import BackToTop from "./components/backToTop/BackToTop";
 import ScrollToTop from "./components/router/ScrollToTop";
+import RouteErrorBoundary from "./components/router/RouteErrorBoundary";
 import { CineverseLoader } from "./components/loading/PageSkeleton";
 import "./Layout.css";
 
@@ -37,9 +38,11 @@ const Layout = () => {
           exit={{ opacity: 0, x: -22, filter: "blur(6px)" }}
           transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Suspense fallback={<RouteLoader onLoadingChange={setIsRouteLoading} />}>
-            {outlet}
-          </Suspense>
+          <RouteErrorBoundary key={location.pathname}>
+            <Suspense fallback={<RouteLoader onLoadingChange={setIsRouteLoading} />}>
+              {outlet}
+            </Suspense>
+          </RouteErrorBoundary>
         </motion.div>
       </AnimatePresence>
 

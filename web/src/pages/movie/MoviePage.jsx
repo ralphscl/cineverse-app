@@ -5,6 +5,7 @@ import ShowDetails from "../../components/showDetails/ShowDetails";
 import Credits from "../../components/credits/Credits";
 import Recommended from "../../components/recommended/Recommended";
 import { DetailPageSkeleton } from "../../components/loading/PageSkeleton";
+import RequestError from "../../components/loading/RequestError";
 // Hooks
 import { useFetchApi } from "../../hooks/useFetchApi";
 import useDetailReveal from "../../hooks/useDetailReveal";
@@ -25,6 +26,7 @@ const MoviePage = () => {
   const {
     isLoading,
     hasError,
+    retry,
     apiData: movie,
   } = useFetchApi(getShowDetails("movie", id), "tmdb");
 
@@ -38,7 +40,7 @@ const MoviePage = () => {
   return (
     <div className="movie-page">
       {hasError ? (
-        <p>Error fetching data. Please try again later</p>
+        <RequestError retry={retry} />
       ) : isLoading || !movie ? (
         <DetailPageSkeleton />
       ) : (

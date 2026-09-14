@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import networks from "../../service/networks";
 // Utils
 import { capitalizeFirstLetter } from "../../utils/StringUtils";
 // Service
@@ -17,8 +19,8 @@ import "../ListingTransitions.css";
 
 const SeriesList = () => {
   const [bannerShow, setBannerShow] = useState(null);
-  const [network, setNetwork] = useState("Netflix");
-  const [genre, setGenre] = useState({ id: 80, name: "Crime" });
+  const [params, setParams] = useSearchParams();
+  const network = Object.hasOwn(networks, params.get("network")) ? params.get("network") : "Netflix";
   const [networkPage, setNetworkPage] = useState(1);
   const [genrePage, setGenrePage] = useState(1);
   const listingRef = useListingReveal();
@@ -37,14 +39,27 @@ const SeriesList = () => {
     );
   }, [trendingData]);
 
+  const genreID = params.get("genre") ?? "80";
+  const genre = genreList?.genres?.find((item) => String(item.id) === genreID) || null;
+
+  useEffect(() => { setNetworkPage(1); setGenrePage(1); }, [network, genreID]);
+
   const handleNetworkChange = (nextNetwork) => {
-    setNetwork(nextNetwork);
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      next.set("network", nextNetwork);
+      return next;
+    });
     setNetworkPage(1);
     setGenrePage(1);
   };
 
   const handleGenreChange = (nextGenre) => {
-    setGenre(nextGenre);
+    setParams((current) => {
+      const next = new URLSearchParams(current);
+      next.set("genre", nextGenre?.id || "all");
+      return next;
+    });
     setGenrePage(1);
   };
 

@@ -23,7 +23,7 @@ export const getRemoteVideoProgressEntries = async (userID) => {
   return (data || []).map(fromVideoProgressRow).filter(Boolean);
 };
 
-export const upsertRemoteVideoProgressEntry = async (userID, entry) => {
+const upsertRemoteVideoProgressEntryImpl = async (userID, entry) => {
   const remoteProgress = toVideoProgressRow(userID, entry);
   if (!remoteProgress) {
     return true;
@@ -43,7 +43,7 @@ export const upsertRemoteVideoProgressEntry = async (userID, entry) => {
   return true;
 };
 
-export const upsertRemoteVideoProgressEntries = async (userID, entries) => {
+const upsertRemoteVideoProgressEntriesImpl = async (userID, entries) => {
   if (!userID || !Array.isArray(entries) || !entries.length) {
     return;
   }
@@ -64,3 +64,15 @@ export const upsertRemoteVideoProgressEntries = async (userID, entries) => {
     throw error;
   }
 };
+
+// Serialize writes so an older bulk sync cannot finish after a newer edit.
+const writes = new Map();
+const enqueueWrite = (userID, operation) => {
+  const previous = writes.get(userID) || Promise.resolve();
+  const next = previous.catch(() => {}).then(operation);
+  writes.set(userID, next);
+  next.finally(() => { if (writes.get(userID) === next) writes.delete(userID); }).catch(() => {});
+  return next;
+};
+export const upsertRemoteVideoProgressEntry = (userID, value) => enqueueWrite(userID, () => upsertRemoteVideoProgressEntryImpl(userID, value)).catch((error) => { console.error("Sync write failed", error); return false; });
+export const upsertRemoteVideoProgressEntries = (userID, value) => enqueueWrite(userID, () => upsertRemoteVideoProgressEntriesImpl(userID, value));

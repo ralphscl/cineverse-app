@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import RequestError from "../loading/RequestError";
 import ShowCard from "../cards/showCard/ShowCard.jsx";
 import { CardSkeleton } from "../loading/PageSkeleton.jsx";
 // Hooks
@@ -19,7 +20,7 @@ const ScrollableRow = ({
   resetKey,
 }) => {
   const rowRef = useRef(null);
-  const { isLoading, hasError, apiData: shows } = useFetchApi(reqUrl, "tmdb");
+  const { isLoading, hasError, retry, apiData: shows } = useFetchApi(reqUrl, "tmdb");
   const [loadedShows, setLoadedShows] = useState([]);
   const currentPage = Number(page || shows?.page || 1);
   const totalPages = Math.min(Number(shows?.total_pages || 1), 500);
@@ -39,7 +40,7 @@ const ScrollableRow = ({
     if (hasApiResult && shows?.results.length === 0) {
       hasApiResult(false);
     }
-  }, [shows]);
+  }, [hasApiResult, shows]);
 
   useEffect(() => {
     if (!infiniteScroll) {
@@ -88,7 +89,7 @@ const ScrollableRow = ({
     <>
       {!hideTitle && <h2 className="row-title">{title}</h2>}
       <div className="row" ref={rowRef} onScroll={handleScroll}>
-        {hasError && <p>Error fetching data. Please try again later</p>}
+        {hasError && <RequestError retry={retry} />}
         {shows?.total_results === 0 ? (
           <div className="empty-rows">
             <p>{`Currently, there are no shows available in the "${title}" category on this network. Please check back later or explore other categories.`}</p>
