@@ -1,10 +1,11 @@
+import CineverseLogo from "../../assets/png/cineverse-hd-logo-transparent.png";
 import "./PageSkeleton.css";
 
 export const CineverseLoader = ({ label = "Loading Cineverse", className = "" }) => {
   return (
     <div className={`cineverse-loader ${className}`} role="status" aria-live="polite">
       <div className="cineverse-loader__mark" aria-hidden="true">
-        <span className="cineverse-loader__logo">C</span>
+        <img className="cineverse-loader__logo" src={CineverseLogo} alt="" />
         <span className="cineverse-loader__ring first" />
         <span className="cineverse-loader__ring second" />
       </div>
@@ -61,14 +62,24 @@ export const ShowDetailsSkeleton = ({ variant = "detail" }) => {
       <section className="show-details show-details--hero show-details--loading" aria-label="Loading featured title">
         <div className="show-details__layout">
           <div className="show-details__body page-skeleton__hero-body">
-            <div className="page-skeleton__hero-eyebrow shimmer" />
-            <div className="page-skeleton__title shimmer" />
-            <div className="page-skeleton__actions">
-              <div className="page-skeleton__button shimmer" />
-              <div className="page-skeleton__button shimmer" />
+            <div className="show-details__eyebrow page-skeleton__hero-eyebrow shimmer" />
+            <div className="show-details__title-row">
+              <div className="page-skeleton__hero-title shimmer" />
             </div>
-            <div className="page-skeleton__meta shimmer" />
-            <div className="page-skeleton__line short shimmer" />
+            <div className="show-details__actions page-skeleton__hero-actions">
+              <div className="page-skeleton__hero-button primary shimmer" />
+              <div className="page-skeleton__hero-button shimmer" />
+            </div>
+            <ul className="page-skeleton__hero-meta" aria-hidden="true">
+              <li className="shimmer" />
+              <li className="shimmer" />
+              <li className="shimmer" />
+            </ul>
+            <div className="genre-pills page-skeleton__hero-genres" aria-hidden="true">
+              <span className="shimmer" />
+              <span className="shimmer" />
+              <span className="shimmer" />
+            </div>
           </div>
         </div>
       </section>

@@ -124,6 +124,30 @@
     transform-origin: center;
 }
 
+.nav-reveal.route-loading img {
+    opacity: 0;
+}
+
+.nav .nav-reveal.logo-arriving img {
+    animation: nav-logo-arrival 760ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes nav-logo-arrival {
+    from {
+        filter: drop-shadow(0 0 1.25rem rgb(206 56 36 / 0.72));
+        transform: translateY(calc(50svh - 36px)) scale(1);
+    }
+
+    72% {
+        filter: drop-shadow(0 0 0.8rem rgb(255 93 70 / 0.8));
+    }
+
+    to {
+        filter: drop-shadow(0 0 0.45rem rgb(206 56 36 / 0.6));
+        transform: translateY(0) scale(1);
+    }
+}
+
 .nav.expanded .nav-reveal img {
     animation: nav-logo-unfold 1200ms cubic-bezier(0.65, 0, 0.35, 1) 100ms both;
 }
@@ -255,16 +279,16 @@
     transition: color 160ms ease, text-shadow 160ms ease;
 }
 
-.nav.expanded .links > .nav-link {
+.nav.expanded .links > .nav-link h4 {
     animation: nav-label-bubble 650ms cubic-bezier(0.16, 1, 0.3, 1) both;
 }
 
-.nav.expanded .links > .nav-link:nth-child(1) { animation-delay: 700ms; }
-.nav.expanded .links > .nav-link:nth-child(2) { animation-delay: 820ms; }
-.nav.expanded .links > .nav-link:nth-child(3) { animation-delay: 940ms; }
-.nav.expanded .links > .nav-link:nth-child(4) { animation-delay: 1060ms; }
-.nav.expanded .links > .nav-link:nth-child(5) { animation-delay: 1180ms; }
-.nav.expanded .links > .nav-link:nth-child(6) { animation-delay: 1300ms; }
+.nav.expanded .links > .nav-link:nth-child(1) h4 { animation-delay: 700ms; }
+.nav.expanded .links > .nav-link:nth-child(2) h4 { animation-delay: 820ms; }
+.nav.expanded .links > .nav-link:nth-child(3) h4 { animation-delay: 940ms; }
+.nav.expanded .links > .nav-link:nth-child(4) h4 { animation-delay: 1060ms; }
+.nav.expanded .links > .nav-link:nth-child(5) h4 { animation-delay: 1180ms; }
+.nav.expanded .links > .nav-link:nth-child(6) h4 { animation-delay: 1300ms; }
 
 @keyframes nav-label-bubble {
     0% {
@@ -1528,11 +1552,12 @@
     .nav-drawer__panel,
     .nav.expanded .nav-reveal,
     .nav.expanded .nav-reveal img,
+    .nav .nav-reveal.logo-arriving img,
     .nav.projection-active .nav-reveal img,
     .nav.expanded .nav-auth > .nav-auth__login,
     .nav.expanded .nav-auth > .nav-account__trigger,
     .nav.expanded .nav-search-toggle,
-    .nav.expanded .links > .nav-link,
+    .nav.expanded .links > .nav-link h4,
     .nav.expanded .links .nav-link__count,
     .nav.expanded .links .nav-link__count::before,
     .login-mockup,

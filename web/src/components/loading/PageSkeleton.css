@@ -33,6 +33,19 @@
     backdrop-filter: blur(0.55rem);
 }
 
+.cineverse-loader.route-loader {
+    position: fixed;
+    inset: 0;
+    z-index: 99;
+    min-height: 100svh;
+    background: #080909;
+}
+
+.cineverse-loader.route-loader > span:last-child {
+    position: absolute;
+    top: calc(50% + 4rem);
+}
+
 .card-skeletons {
     width: 100%;
     box-sizing: border-box;
@@ -142,18 +155,12 @@
 }
 
 .cineverse-loader__logo {
-    display: grid;
+    display: block;
     width: 3.35rem;
     height: 3.35rem;
-    place-items: center;
-    border: 1px solid rgba(206, 56, 36, 0.48);
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 28%, rgba(255, 179, 168, 0.22), rgba(206, 56, 36, 0.16) 42%, rgba(12, 12, 12, 0.98));
-    color: #ffffff;
-    font-size: 1.65rem;
-    font-weight: 950;
-    text-shadow: 0 0 1rem rgba(206, 56, 36, 0.9);
-    box-shadow: 0 0 2.5rem rgba(206, 56, 36, 0.28), inset 0 0 1.2rem rgba(255, 255, 255, 0.08);
+    filter: drop-shadow(0 0 1.25rem rgba(206, 56, 36, 0.72));
+    object-fit: contain;
 }
 
 .cineverse-loader__ring {
@@ -259,13 +266,50 @@
 }
 
 .page-skeleton__hero-body {
-    width: min(calc(100vw - 2rem), 68rem);
+    width: 100%;
 }
 
 .page-skeleton__hero-eyebrow {
     width: 9rem;
-    height: 0.75rem;
-    border-radius: 999px;
+    height: 0.94rem;
+}
+
+.page-skeleton__hero-title {
+    width: min(100%, 96rem);
+    height: calc(clamp(2.4rem, 7vw, 5.2rem) * 0.95);
+}
+
+.show-details--hero .page-skeleton__hero-actions {
+    align-items: stretch;
+}
+
+.page-skeleton__hero-button {
+    width: 9.1rem;
+    height: 3.1rem;
+}
+
+.page-skeleton__hero-button.primary {
+    width: 11.75rem;
+}
+
+.show-details--hero .page-skeleton__hero-meta li {
+    width: 7rem;
+    height: 1.2rem;
+}
+
+.show-details--hero .page-skeleton__hero-meta li:nth-child(2) {
+    width: 8.5rem;
+}
+
+.show-details--hero .page-skeleton__hero-meta li:nth-child(3) {
+    width: 10rem;
+}
+
+.show-details .page-skeleton__hero-genres span {
+    width: 4.6rem;
+    height: 2rem;
+    border: 0;
+    padding: 0;
 }
 
 .page-skeleton__pill,
@@ -324,6 +368,15 @@
     background-size: 240% 100%;
     animation: skeletonGlow 1.45s linear infinite;
     box-shadow: 0 0 1.8rem rgba(206, 56, 36, 0.08);
+}
+
+.show-details--hero.show-details--loading .shimmer {
+    border-radius: 0.2rem;
+    background:
+        linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.1) 46%, rgba(206, 56, 36, 0.18) 52%, transparent 68%),
+        #242424;
+    background-size: 240% 100%;
+    box-shadow: 0 0.6rem 1.4rem rgba(0, 0, 0, 0.18);
 }
 
 @keyframes skeletonGlow {

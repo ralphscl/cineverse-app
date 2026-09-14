@@ -25,7 +25,7 @@ const NAV_ITEMS = [
   { key: "news", label: "News", to: "/news" },
 ];
 
-const Navbar = () => {
+const Navbar = ({ isRouteLoading = false }) => {
   const { isLoggedIn, login, logout, user } = useAuth();
   const location = useLocation();
   const [navbarClass, setNavbarClass] = useState(false);
@@ -51,7 +51,9 @@ const Navbar = () => {
   const [isPlayerOpen, setIsPlayerOpen] = useState(false);
   const [isTrailerProjectionOpen, setIsTrailerProjectionOpen] = useState(false);
   const [chargedNav, setChargedNav] = useState("");
+  const [isLogoArriving, setIsLogoArriving] = useState(false);
   const [watchlistIDs, setWatchlistIDs] = useState(() => new Set());
+  const wasRouteLoadingRef = useRef(false);
   const searchInputRef = useRef(null);
   const searchToggleRef = useRef(null);
   const mobileMenuToggleRef = useRef(null);
@@ -68,6 +70,20 @@ const Navbar = () => {
   const loginStateRef = useRef({ isOpen: false, isClosing: false });
   const navCollapseTimeoutRef = useRef(null);
   loginStateRef.current = { isOpen: isLoginOpen, isClosing: isLoginClosing };
+
+  useEffect(() => {
+    let arrivalTimeout;
+
+    if (wasRouteLoadingRef.current && !isRouteLoading) {
+      setIsLogoArriving(true);
+      arrivalTimeout = window.setTimeout(() => setIsLogoArriving(false), 760);
+    } else if (isRouteLoading) {
+      setIsLogoArriving(false);
+    }
+
+    wasRouteLoadingRef.current = isRouteLoading;
+    return () => window.clearTimeout(arrivalTimeout);
+  }, [isRouteLoading]);
 
   const closeSearch = useCallback(() => {
     if (searchCloseTimeoutRef.current) {
@@ -141,7 +157,7 @@ const Navbar = () => {
     navCollapseTimeoutRef.current = window.setTimeout(() => {
       setIsNavHovered(false);
       navCollapseTimeoutRef.current = null;
-    }, 3000);
+    }, 1800);
   };
 
   const handleSearchPointerEnter = (event) => {
@@ -626,7 +642,7 @@ const Navbar = () => {
   }
 
   const isProjectionActive = isLoginOpen || isTrailerProjectionOpen;
-  const isNavExpanded = !isProjectionActive && Boolean(
+  const isNavExpanded = !isRouteLoading && !isLogoArriving && !isProjectionActive && Boolean(
     navbarClass ||
     isNavHovered ||
     isNavPinned ||
@@ -665,7 +681,7 @@ const Navbar = () => {
       >
         <button
           type="button"
-          className="nav-reveal"
+          className={`nav-reveal ${isRouteLoading ? "route-loading" : ""} ${isLogoArriving ? "logo-arriving" : ""}`}
           aria-label={isNavPinned ? "Allow navigation to collapse" : isNavExpanded ? "Keep navigation open" : "Open navigation"}
           aria-expanded={isNavExpanded}
           onPointerEnter={() => setIsNavHovered(true)}

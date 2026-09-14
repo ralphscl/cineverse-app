@@ -1,3 +1,4 @@
+import { LayoutGroup, MotionConfig, motion } from "framer-motion";
 import networks from "../../service/networks";
 import { useFetchApi } from "../../hooks/useFetchApi";
 import { getNetworkDetails } from "../../service/tmdb/requests";
@@ -24,18 +25,22 @@ const Networks = ({ currentNetwork, setNetwork }) => {
         </div>
       </div>
 
-      <div className="network-picker__rail">
-        {networkEntries.map(([network, id], index) => (
-          <NetworkButton
-            key={network}
-            id={id}
-            index={index}
-            name={network}
-            isActive={network === currentNetwork}
-            onSelect={setNetwork}
-          />
-        ))}
-      </div>
+      <MotionConfig reducedMotion="user">
+        <LayoutGroup>
+          <div className="network-picker__rail">
+            {networkEntries.map(([network, id], index) => (
+              <NetworkButton
+                key={network}
+                id={id}
+                index={index}
+                name={network}
+                isActive={network === currentNetwork}
+                onSelect={setNetwork}
+              />
+            ))}
+          </div>
+        </LayoutGroup>
+      </MotionConfig>
     </section>
   );
 };
@@ -54,6 +59,13 @@ const NetworkButton = ({ id, index, name, isActive, onSelect }) => {
       onClick={() => onSelect(name)}
       aria-pressed={isActive}
     >
+      {isActive && (
+        <motion.span
+          className="network-picker__active-indicator"
+          layoutId="active-network"
+          transition={{ type: "spring", stiffness: 360, damping: 34, mass: 0.8 }}
+        />
+      )}
       <span className="network-picker__index" aria-hidden="true">{String(index + 1).padStart(2, "0")}</span>
       <span className="network-picker__logo-wrap">
         {logoUrl ? (

@@ -1,4 +1,4 @@
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useLocation, useOutlet } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
@@ -8,16 +8,26 @@ import ScrollToTop from "./components/router/ScrollToTop";
 import { CineverseLoader } from "./components/loading/PageSkeleton";
 import "./Layout.css";
 
+const RouteLoader = ({ onLoadingChange }) => {
+  useEffect(() => {
+    onLoadingChange(true);
+    return () => onLoadingChange(false);
+  }, [onLoadingChange]);
+
+  return <CineverseLoader className="route-loader" label="Preparing the next reel" />;
+};
+
 const Layout = () => {
   const location = useLocation();
   const outlet = useOutlet();
+  const [isRouteLoading, setIsRouteLoading] = useState(false);
 
   return (
     <>
       <BackToTop />
       <ScrollToTop />
 
-      <Navbar />
+      <Navbar isRouteLoading={isRouteLoading} />
       <AnimatePresence mode="wait" initial={false}>
         <motion.div
           key={location.pathname}
@@ -27,7 +37,7 @@ const Layout = () => {
           exit={{ opacity: 0, x: -22, filter: "blur(6px)" }}
           transition={{ duration: 0.42, ease: [0.16, 1, 0.3, 1] }}
         >
-          <Suspense fallback={<CineverseLoader label="Preparing the next reel" />}>
+          <Suspense fallback={<RouteLoader onLoadingChange={setIsRouteLoading} />}>
             {outlet}
           </Suspense>
         </motion.div>
